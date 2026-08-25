@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+title: "Toolkit de collabs: framework de aplicação"
+message: "Se você utilizar este material, por favor cite-o conforme abaixo."
+type: software
+authors:
+  - family-names: "Bocalão"
+    given-names: "Douglas R."
+    affiliation: "FGV EAESP"
+abstract: >-
+  Versão navegável do framework integrativo de gestão de collabs entre marcas,
+  desenvolvido na dissertação "Collab de dentro para fora: uma investigação
+  qualitativa sobre como são construídas as collabs entre grandes marcas no
+  Brasil" (Mestrado Profissional em Administração, FGV EAESP, 2026). Organiza
+  em cinco etapas o processo observado em dez casos, com áreas envolvidas,
+  ferramentas, materiais de apoio, critérios de passagem e checklists.
+keywords:
+  - collab
+  - co-branding
+  - market orientation
+  - dynamic capabilities
+  - estratégia de marca
+  - colaboração entre marcas
+url: "https://USUARIO.github.io/REPO/"
+repository-code: "https://github.com/USUARIO/REPO"
+version: "1.0"
+date-released: "2026-08-23"
+license: CC-BY-4.0
