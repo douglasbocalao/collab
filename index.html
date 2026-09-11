@@ -2,372 +2,305 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%235B4BE3%27/%3E%3Ccircle cx=%2738%27 cy=%2750%27 r=%2718%27 fill=%27none%27 stroke=%27white%27 stroke-width=%278%27/%3E%3Ccircle cx=%2762%27 cy=%2750%27 r=%2718%27 fill=%27none%27 stroke=%27white%27 stroke-width=%278%27/%3E%3C/svg%3E">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Toolkit de collabs · framework de aplicação">
-<meta property="og:description" content="Framework de aplicação para a gestão de collabs entre marcas: cinco etapas, áreas envolvidas, ferramentas, critérios de passagem e checklists. Material de apoio da dissertação de Douglas R. Bocalão (MPA FGV EAESP).">
-<meta name="author" content="Douglas R. Bocalão">
-<title>Toolkit de collabs · framework de aplicação</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Toolkit interativo de aplicação do framework de collabs: cinco etapas, áreas, ferramentas, critérios de passagem e checklists.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%235B4BE3%27/%3E%3Ccircle cx=%2738%27 cy=%2750%27 r=%2718%27 fill=%27none%27 stroke=%27white%27 stroke-width=%278%27/%3E%3Ccircle cx=%2762%27 cy=%2750%27 r=%2718%27 fill=%27none%27 stroke=%27white%27 stroke-width=%278%27/%3E%3C/svg%3E">
+<title>Toolkit de collabs</title>
+<meta name="description" content="Framework de aplicação para collabs entre marcas: cinco etapas, áreas envolvidas, ferramentas, critérios de passagem e checklists.">
+<meta name="author" content="Douglas R. Bocalão">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Toolkit de collabs">
+<meta property="og:description" content="Framework de aplicação para collabs entre marcas: cinco etapas, áreas envolvidas, ferramentas, critérios de passagem e checklists.">
 
 <!--
   TOOLKIT DE COLLABS · framework de aplicação
   Douglas R. Bocalão · MPA FGV EAESP · orientador Prof. Dr. Felipe Zambaldi
+  Conteúdo das etapas: Quadro 5 da dissertação.
 
-  Conteúdo das etapas: Quadro 5 da dissertação. Citações: Capítulo 4.
   Arquivo único, sem dependência externa. Abre com duplo clique.
-
-  DOIS TIPOS DE LINK, PROPOSITALMENTE SEPARADOS:
-    "exemplos de mercado" em cada ferramenta  -> acréscimo de apoio, NÃO citado na pesquisa
-    "materiais"                               -> seus documentos internos (slots vazios)
-
-  PARA ADICIONAR SEUS LINKS: procure  "#"  na lista "mats" de cada etapa, na
-  constante DATA abaixo. Os slots que continuarem com "#" aparecem como pendentes.
+  Para adicionar materiais: procure "#" na lista "mats" de cada etapa em DATA.
+  Os "exemplos de mercado" das ferramentas são acréscimo de apoio, não citados na pesquisa.
 -->
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-  :root {
-    color-scheme: light dark;
-    --s1:#5B4BE3; --s2:#4E63E6; --s3:#2E7FE6; --s4:#0E9BC9; --s5:#0FAF9E;
-    --mo:#6C4FE0; --dc:#0E9BC9;
-    --ink:#12162a; --ink2:#4c5474; --ink3:#767ea0;
-    --bg:#f4f5fb; --card:#ffffff; --soft:#eceffa; --line:#e0e4f2; --hair:#edf0f9;
-    --hd1:#171a2f; --hd2:#2a2350;
-    --sh: 0 1px 2px rgba(18,22,42,.05), 0 8px 24px rgba(18,22,42,.07);
-    --a: var(--s1);
-    --r: 12px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --s1:#8578F5; --s2:#7189F5; --s3:#4E9BF0; --s4:#26B4DE; --s5:#1FC9B4;
-      --mo:#9A85F2; --dc:#26B4DE;
-      --ink:#eaedf9; --ink2:#a9b1d0; --ink3:#7f88ab;
-      --bg:#0a0d1a; --card:#131728; --soft:#1a1f36; --line:#252b45; --hair:#1e2338;
-      --hd1:#0f1223; --hd2:#1d1938;
-      --sh: 0 1px 2px rgba(0,0,0,.45), 0 10px 28px rgba(0,0,0,.3);
-    }
-  }
-  :root[data-theme="dark"] {
+:root{
+  color-scheme:light dark;
+  --s1:#5B4BE3; --s2:#4E63E6; --s3:#2E7FE6; --s4:#0E9BC9; --s5:#0FAF9E;
+  --mo:#6C4FE0; --dc:#0E9BC9;
+  --ink:#101329; --ink2:#545c7d; --ink3:#7b83a4;
+  --bg:#f6f7fb; --card:#ffffff; --soft:#eef1f9; --line:#e3e7f3; --hair:#edf0f8;
+  --a:var(--s1);
+  --r:16px; --r2:12px; --r3:9px;
+  --sh:0 1px 2px rgba(16,19,42,.04), 0 10px 26px -18px rgba(16,19,42,.3);
+  --shl:0 2px 6px rgba(16,19,42,.06), 0 24px 48px -28px rgba(16,19,42,.45);
+  --top:57px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
     --s1:#8578F5; --s2:#7189F5; --s3:#4E9BF0; --s4:#26B4DE; --s5:#1FC9B4;
     --mo:#9A85F2; --dc:#26B4DE;
-    --ink:#eaedf9; --ink2:#a9b1d0; --ink3:#7f88ab;
-    --bg:#0a0d1a; --card:#131728; --soft:#1a1f36; --line:#252b45; --hair:#1e2338;
-    --hd1:#0f1223; --hd2:#1d1938;
-    --sh: 0 1px 2px rgba(0,0,0,.45), 0 10px 28px rgba(0,0,0,.3);
+    --ink:#e9ecf9; --ink2:#a7aecc; --ink3:#7d85a8;
+    --bg:#0a0d18; --card:#131727; --soft:#1a1f33; --line:#242942; --hair:#1d2236;
+    --sh:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -18px rgba(0,0,0,.8);
+    --shl:0 2px 6px rgba(0,0,0,.4), 0 24px 48px -28px rgba(0,0,0,.9);
   }
-  :root[data-theme="light"] {
-    --s1:#5B4BE3; --s2:#4E63E6; --s3:#2E7FE6; --s4:#0E9BC9; --s5:#0FAF9E;
-    --mo:#6C4FE0; --dc:#0E9BC9;
-    --ink:#12162a; --ink2:#4c5474; --ink3:#767ea0;
-    --bg:#f4f5fb; --card:#ffffff; --soft:#eceffa; --line:#e0e4f2; --hair:#edf0f9;
-    --hd1:#171a2f; --hd2:#2a2350;
-    --sh: 0 1px 2px rgba(18,22,42,.05), 0 8px 24px rgba(18,22,42,.07);
-  }
+}
+:root[data-theme="dark"]{
+  --s1:#8578F5; --s2:#7189F5; --s3:#4E9BF0; --s4:#26B4DE; --s5:#1FC9B4;
+  --mo:#9A85F2; --dc:#26B4DE;
+  --ink:#e9ecf9; --ink2:#a7aecc; --ink3:#7d85a8;
+  --bg:#0a0d18; --card:#131727; --soft:#1a1f33; --line:#242942; --hair:#1d2236;
+  --sh:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -18px rgba(0,0,0,.8);
+  --shl:0 2px 6px rgba(0,0,0,.4), 0 24px 48px -28px rgba(0,0,0,.9);
+}
 
-  body { font: 400 15px/1.5 "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; }
-  a { color: inherit; }
-  ::selection { background: color-mix(in srgb, var(--a) 30%, transparent); }
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 26px; }
+html{scroll-behavior:smooth}
+body{
+  font:400 15px/1.55 "Helvetica Neue",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  color:var(--ink); background:var(--bg); -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:color-mix(in srgb,var(--a) 28%,transparent)}
+:focus-visible{outline:2px solid var(--a);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-  /* ================================================================== header */
-  .hd { background: linear-gradient(104deg, var(--hd1), var(--hd2)); color: #fff; }
-  .hd .wrap { display: flex; align-items: center; gap: 14px; height: 66px; }
-  .mark { width: 30px; height: 30px; border-radius: 9px; flex: 0 0 auto;
-    background: linear-gradient(135deg, #7C5CFF, #12C8CB); box-shadow: 0 4px 14px rgba(70,60,220,.45); }
-  .hd h1 { font-size: 19.5px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
-  .hd h1 s { text-decoration: none; font-size: 12px; font-weight: 500; color: #a9aede; letter-spacing: 0; }
-  .sp { flex: 1; }
-  .hprog { display: flex; align-items: center; gap: 9px; font-size: 11.5px; color: #a9aede; }
-  .hprog b { color: #fff; font-variant-numeric: tabular-nums; }
-  .hbar { width: 92px; height: 5px; border-radius: 99px; background: rgba(255,255,255,.16); overflow: hidden; }
-  .hbar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #7C5CFF, #12C8CB); transition: width .35s; }
-  .hb { font: inherit; font-size: 12px; font-weight: 600; color: #d6d9f5; background: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,255,255,.16); border-radius: 8px; padding: 6px 11px; cursor: pointer; transition: .15s; }
-  .hb:hover { background: rgba(255,255,255,.16); color: #fff; }
-  .hb:focus-visible, .seg:focus-visible, summary:focus-visible, .cl input:focus-visible,
-  .pg button:focus-visible, .card5:focus-visible { outline: 2px solid #12C8CB; outline-offset: 2px; }
+/* ============================================================ topbar */
+.hd{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
+.hd .wrap{display:flex;align-items:center;gap:14px;height:56px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em;font-size:15.5px}
+.brand i{width:26px;height:26px;border-radius:8px;flex:0 0 auto;
+  background:linear-gradient(135deg,#7C5CFF,#12C8CB)}
+.sp{flex:1}
+.gp{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--ink2)}
+.gp b{color:var(--ink);font-variant-numeric:tabular-nums;font-weight:600}
+.gbar{width:84px;height:5px;border-radius:99px;background:var(--line);overflow:hidden}
+.gbar i{display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--s1),var(--s5));transition:width .3s}
+.ib{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:var(--ink2);
+  border:1px solid var(--line);background:var(--card);border-radius:9px;padding:7px 11px;transition:.15s}
+.ib:hover{color:var(--ink);border-color:color-mix(in srgb,var(--a) 45%,var(--line))}
+@media (max-width:760px){.gp{display:none}}
+@media (max-width:520px){.ib.opt{display:none}}
 
-  /* ==================================================================== flow */
-  .flowbar { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--bg) 92%, transparent);
-    backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid var(--line); }
-  .flow { display: flex; align-items: stretch; gap: 7px; padding: 9px 0; }
-  .seg { position: relative; flex: 1 1 0; min-width: 0; text-align: left; font: inherit; cursor: pointer;
-    border: 1px solid color-mix(in srgb, var(--c) 26%, var(--line));
-    background: color-mix(in srgb, var(--c) 7%, var(--card)); border-radius: 10px; padding: 8px 26px 9px 10px;
-    display: grid; grid-template-columns: 22px 1fr; gap: 9px; align-items: center; transition: .16s; overflow: hidden; }
-  .seg:hover { background: color-mix(in srgb, var(--c) 14%, var(--card)); transform: translateY(-1px); }
-  .seg[aria-current="true"] { background: color-mix(in srgb, var(--c) 15%, var(--card));
-    border-color: var(--c); box-shadow: 0 0 0 2px color-mix(in srgb, var(--c) 22%, transparent); }
-  .seg .n { width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center; color: #fff;
-    font-size: 11px; font-weight: 800; background: var(--c); }
-  .seg > span { min-width: 0; }
-  .seg .nm { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-    font-size: 11.5px; font-weight: 700; line-height: 1.22; color: var(--ink); }
-  .seg .cp { display: block; font-size: 10px; font-weight: 600; margin-top: 1px;
-    color: color-mix(in srgb, var(--c) 78%, var(--ink3)); }
-  .seg .tick { position: absolute; right: 7px; top: 7px; width: 15px; height: 15px; border-radius: 50%;
-    background: var(--c); display: none; }
-  .seg .tick::after { content:""; position:absolute; left:5px; top:3.5px; width:4px; height:7px;
-    border:1.8px solid #fff; border-top:0; border-left:0; transform: rotate(40deg); }
-  .seg.done .tick { display: block; }
-  .seg .fill { position: absolute; left: 0; bottom: 0; height: 3px; width: 0; background: var(--c); transition: width .35s; }
-  .seg.home { flex: 0 0 96px; grid-template-columns: 1fr; --c: var(--ink3); padding-right: 10px; }
-  .seg.home .nm { white-space: normal; }
+/* ============================================================ stepper */
+.stepbar{position:sticky;top:var(--top);z-index:40;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
+.steps{display:flex;gap:6px;padding:8px 0;overflow-x:auto;scrollbar-width:none}
+.steps::-webkit-scrollbar{display:none}
+.seg{position:relative;flex:1 1 0;min-width:132px;text-align:left;border-radius:var(--r3);
+  border:1px solid var(--line);background:var(--card);padding:7px 9px;overflow:hidden;transition:.15s;
+  display:grid;grid-template-columns:20px 1fr;gap:8px;align-items:center}
+.seg:hover{border-color:color-mix(in srgb,var(--c) 55%,var(--line))}
+.seg .n{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;
+  font-size:11px;font-weight:700;color:#fff;background:var(--c)}
+.seg .nm{display:block;font-size:11.5px;font-weight:600;line-height:1.2;color:var(--ink);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.seg[aria-current="true"]{background:color-mix(in srgb,var(--c) 10%,var(--card));border-color:var(--c)}
+.seg .fill{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--c);transition:width .3s}
+.seg.done .n::after{content:"";position:absolute;inset:auto auto auto auto;width:0;height:0}
+.seg.done .n{background:var(--c);font-size:0}
+.seg.done .n::before{content:"✓";font-size:12px;font-weight:700}
+.seg.home{flex:0 0 84px;min-width:84px;grid-template-columns:1fr;--c:var(--ink3)}
 
-  /* ==================================================================== view */
-  main { padding: 26px 0 70px; }
-  .view { display: none; }
-  .view.on { display: block; }
+/* ============================================================ views */
+.view{display:none;padding:38px 0 96px;animation:fade .25s ease both}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 
-  /* ------------------------------------------------------------------ home */
-  .lede { font-size: 17px; line-height: 1.55; color: var(--ink2); max-width: 74ch; }
-  .h2 { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--ink3); }
-  h2.big { font-size: 27px; font-weight: 800; letter-spacing: -.022em; line-height: 1.14; max-width: 30ch; }
-  h2.big em { font-style: normal; background: linear-gradient(96deg, var(--mo), var(--dc));
-    -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .block { margin-top: 30px; }
-  .defbox { margin-top: 20px; border-radius: var(--r); padding: 18px 20px; color: #fff;
-    background: linear-gradient(104deg, var(--hd1), var(--hd2)); font-size: 14.5px; line-height: 1.55; box-shadow: var(--sh); }
-  .defbox b { color: #b9b1ff; }
+h2.t{font-size:clamp(26px,3.4vw,34px);line-height:1.1;letter-spacing:-.03em;font-weight:700}
+p.sub{color:var(--ink2);font-size:16px;margin-top:8px;max-width:58ch}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
 
-  .steps3 { margin-top: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .u { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 15px 16px; }
-  .u .i { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; color: #fff;
-    font-size: 11.5px; font-weight: 800; background: linear-gradient(135deg, var(--mo), var(--dc)); }
-  .u p { margin-top: 9px; font-size: 13.5px; line-height: 1.5; color: var(--ink2); }
+/* home: ações */
+.cta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px}
+.pri{background:var(--a);color:#fff;font-size:14px;font-weight:600;border-radius:10px;padding:11px 18px;
+  box-shadow:0 8px 20px -12px color-mix(in srgb,var(--a) 90%,transparent);transition:.15s}
+.pri:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.gh{font-size:13px;color:var(--ink3)}
+.gh b{color:var(--ink2);font-variant-numeric:tabular-nums}
+.lnk{font-size:12.5px;color:var(--ink3);text-decoration:underline;text-underline-offset:3px}
+.lnk:hover{color:var(--ink)}
 
-  .cards5 { margin-top: 14px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-  .card5 { position: relative; text-align: left; font: inherit; cursor: pointer; background: var(--card);
-    border: 1px solid var(--line); border-radius: var(--r); padding: 16px 15px 15px; transition: .18s;
-    box-shadow: var(--sh); overflow: hidden; }
-  .card5::before { content:""; position: absolute; inset: 0 0 auto 0; height: 4px;
-    background: linear-gradient(90deg, var(--c), color-mix(in srgb, var(--c) 45%, #ffffff)); }
-  .card5:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--c) 55%, var(--line)); }
-  .card5 .n { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; color: #fff;
-    font-size: 12.5px; font-weight: 800; background: var(--c); }
-  .card5 h3 { margin-top: 11px; font-size: 14px; font-weight: 750; line-height: 1.22; }
-  .card5 .cp { margin-top: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .04em;
-    text-transform: uppercase; color: var(--c); }
-  .card5 p { margin-top: 8px; font-size: 12.5px; line-height: 1.45; color: var(--ink2); }
-  .card5 .mini { margin-top: 12px; height: 3px; border-radius: 99px; background: var(--soft); overflow: hidden; }
-  .card5 .mini i { display: block; height: 100%; width: 0; background: var(--c); transition: width .35s; }
+/* home: cards de etapa */
+.cards{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:14px}
+.cards>li{display:flex}
+@media (max-width:1000px){.cards{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:700px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:460px){.cards{grid-template-columns:1fr}}
+.card{--c:var(--s1);position:relative;width:100%;height:100%;text-align:left;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r);padding:16px 16px 14px;box-shadow:var(--sh);
+  display:flex;flex-direction:column;gap:7px;transition:.18s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shl);border-color:color-mix(in srgb,var(--c) 45%,var(--line))}
+.card .n{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;
+  font-size:12.5px;font-weight:700;color:#fff;background:var(--c)}
+.card h3{font-size:15.5px;line-height:1.25;letter-spacing:-.015em;font-weight:650}
+.card p{font-size:13px;color:var(--ink2);line-height:1.45;flex:1}
+.card .pb{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--ink3);
+  font-variant-numeric:tabular-nums;margin-top:4px}
+.card .pb span{flex:1;height:4px;border-radius:99px;background:var(--soft);overflow:hidden}
+.card .pb i{display:block;height:100%;width:0;background:var(--c);transition:width .3s}
 
-  .lens { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .lensbox { background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--c);
-    border-radius: var(--r); padding: 17px 18px; }
-  .lensbox .k { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--c); }
-  .lensbox h3 { margin-top: 7px; font-size: 16px; font-weight: 750; }
-  .lensbox p { margin-top: 8px; font-size: 13.5px; line-height: 1.5; color: var(--ink2); }
-  .refs { margin-top: 12px; display: grid; gap: 6px; }
-  .refs a { display: flex; gap: 8px; align-items: baseline; font-size: 12.5px; line-height: 1.4;
-    text-decoration: none; color: var(--ink2); padding: 8px 10px; border-radius: 8px;
-    background: color-mix(in srgb, var(--c) 8%, transparent);
-    border: 1px solid color-mix(in srgb, var(--c) 20%, transparent); transition: .15s; }
-  .refs a:hover { background: color-mix(in srgb, var(--c) 16%, transparent); color: var(--ink); }
-  .refs a b { color: var(--c); font-weight: 750; white-space: nowrap; }
-  .refs a .ex { margin-left: auto; padding-left: 6px; font-size: 10px; color: var(--ink3); white-space: nowrap; }
+/* referência (acordeões da home) */
+.ref{margin-top:40px}
+details.d{border:1px solid var(--line);background:var(--card);border-radius:var(--r2);margin-bottom:8px;overflow:hidden}
+details.d[open]{box-shadow:var(--sh)}
+details.d>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:10px;
+  font-size:14px;font-weight:600;transition:.15s}
+details.d>summary::-webkit-details-marker{display:none}
+details.d>summary:hover{background:var(--hair)}
+details.d>summary .cv{margin-left:auto;color:var(--ink3);font-size:14px;line-height:1;transition:transform .2s}
+details.d[open]>summary .cv{transform:rotate(180deg)}
+details.d .bd{padding:2px 16px 18px;border-top:1px solid var(--hair)}
+details.d .bd>*+*{margin-top:12px}
+.p{font-size:14px;color:var(--ink2);line-height:1.6;max-width:76ch}
+.p b,.p strong{color:var(--ink);font-weight:600}
 
-  .csf3 { margin-top: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .csf3 .u { border-left: 3px solid var(--c); }
-  .csf3 h3 { font-size: 14.5px; font-weight: 750; }
+/* trios (fatores, lentes) */
+.tri{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.tri .u{border:1px solid var(--line);border-radius:var(--r2);padding:13px 14px;background:var(--bg)}
+.tri .u h4{font-size:13.5px;font-weight:650;margin-bottom:5px}
+.tri .u p{font-size:12.5px;color:var(--ink2);line-height:1.5}
+.lensgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.lb{--c:var(--mo);border:1px solid var(--line);border-left:3px solid var(--c);border-radius:var(--r2);
+  padding:14px 16px;background:var(--bg)}
+.lb .k{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--c);margin-bottom:6px}
+.lb h4{font-size:14.5px;font-weight:650;margin-bottom:8px}
+.lb .it{font-size:12.5px;color:var(--ink2);line-height:1.5}
+.lb .it+.it{margin-top:6px}
+.lb .it b{color:var(--ink);font-weight:600}
+.refs{display:flex;flex-direction:column;gap:5px;margin-top:10px}
+.refs a{font-size:11.5px;color:var(--ink3);text-decoration:none;line-height:1.4}
+.refs a b{color:var(--ink2);font-weight:600}
+.refs a:hover{color:var(--ink)}
 
-  .trio { margin-top: 11px; display: grid; gap: 5px; }
-  .trio div { position: relative; padding-left: 13px; font-size: 12.5px; line-height: 1.4; color: var(--ink2); }
-  .trio div::before { content:""; position:absolute; left:0; top:6px; width:6px; height:6px; border-radius:2px; background: var(--c); }
-  .trio b { color: var(--ink); font-weight: 750; }
+/* matriz */
+.mxwrap{overflow-x:auto}
+.mx{border-collapse:collapse;width:100%;min-width:560px;font-size:12.5px}
+.mx th,.mx td{border-bottom:1px solid var(--hair);padding:9px 8px;text-align:center}
+.mx thead th{--c:var(--s1);font-size:11px;font-weight:600;color:var(--ink2);vertical-align:bottom;line-height:1.25}
+.mx thead th b{display:block;color:var(--c);font-size:12.5px}
+.mx .rh{text-align:left;font-weight:600;color:var(--ink);white-space:nowrap;padding-right:14px}
+.mx .rh::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px}
+.mx .rh.mo::before{background:var(--mo)} .mx .rh.dc::before{background:var(--dc)}
+.mx i{display:inline-block;border-radius:50%}
+.mx i.d2{width:11px;height:11px} .mx i.d1{width:11px;height:11px;opacity:.32}
+.mxleg{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px;font-size:11.5px;color:var(--ink3);align-items:center}
+.mxleg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;background:var(--ink3)}
+.mxleg i.d1{opacity:.32}
 
-  .note { margin-top: 8px; font-size: 13.5px; line-height: 1.5; color: var(--ink2); max-width: 80ch; }
-  .mxwrap { overflow-x: auto; margin-top: 13px; }
-  table.mx { border-collapse: separate; border-spacing: 4px; width: 100%; }
-  table.mx th.rh { text-align: left; white-space: nowrap; padding: 8px 11px; border-radius: 7px;
-    font-size: 11.5px; font-weight: 750; color: #fff; }
-  table.mx th.rh.mo { background: var(--mo); }
-  table.mx th.rh.dc { background: var(--dc); }
-  table.mx thead th { padding: 5px 8px 9px; text-align: center; min-width: 104px;
-    font-size: 10.5px; font-weight: 750; line-height: 1.25; color: var(--ink2); }
-  table.mx thead th b { display: block; font-size: 12px; color: var(--c); }
-  table.mx td { text-align: center; padding: 9px 6px; background: var(--card);
-    border: 1px solid var(--line); border-radius: 7px; }
-  table.mx td i, .mxleg i.dot { display: inline-block; border-radius: 50%; }
-  .d2 { width: 11px; height: 11px; }
-  .d1 { width: 8px; height: 8px; opacity: .42; }
-  .mxleg { margin-top: 11px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
-    font-size: 11.5px; color: var(--ink3); }
-  .mxleg span { display: flex; align-items: center; gap: 6px; }
-  .mxleg i.sw { width: 10px; height: 10px; border-radius: 3px; }
+/* ============================================================ etapa */
+.shead{border-bottom:1px solid var(--line);padding-bottom:20px}
+.kick{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11.5px;color:var(--ink3);margin-bottom:10px}
+.kick .e{font-weight:700;color:var(--a);letter-spacing:.08em;text-transform:uppercase}
+.cx{font-size:11px;font-weight:600;border-radius:99px;padding:3px 9px;border:1px solid;
+  color:var(--c);border-color:color-mix(in srgb,var(--c) 35%,transparent);
+  background:color-mix(in srgb,var(--c) 9%,transparent)}
+.cx.mo{--c:var(--mo)} .cx.dc{--c:var(--dc)}
+.shead h2{font-size:clamp(24px,3.2vw,32px);line-height:1.12;letter-spacing:-.03em;font-weight:700}
+.shead .foco{font-size:16px;color:var(--ink2);margin-top:8px;max-width:60ch}
 
-  .lensline { margin-top: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-    padding: 11px 14px; border-radius: 10px; background: var(--card); border: 1px solid var(--line);
-    font-size: 12.5px; color: var(--ink3); }
-  .lensline .lb { font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
-  .lensline .cx { font-weight: 750; padding: 2px 8px; border-radius: 6px; color: #fff; }
-  .lensline .cx.mo { background: var(--mo); }
-  .lensline .cx.dc { background: var(--dc); }
-  .lensline em { font-style: normal; color: var(--ink2); margin-right: 8px; }
-  .lensline .lk { margin-left: auto; font: inherit; font-size: 12px; font-weight: 650; color: var(--a);
-    background: transparent; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+.acc{margin-top:22px}
+.acc details{border:1px solid var(--line);background:var(--card);border-radius:var(--r2);margin-bottom:8px;overflow:hidden}
+.acc details[open]{box-shadow:var(--sh)}
+.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:11px;padding:14px 16px;
+  font-size:14.5px;font-weight:600;transition:.15s}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary:hover{background:var(--hair)}
+.acc .ic{width:22px;height:22px;flex:0 0 auto;border-radius:7px;display:grid;place-items:center;
+  font-size:11px;font-weight:700;color:var(--a);background:color-mix(in srgb,var(--a) 12%,transparent)}
+.acc .ct{margin-left:auto;font-size:11.5px;font-weight:500;color:var(--ink3);font-variant-numeric:tabular-nums}
+.acc .cv{color:var(--ink3);font-size:14px;line-height:1;margin-left:10px;transition:transform .2s}
+.acc details[open] .cv{transform:rotate(180deg)}
+.acc .bd{padding:4px 16px 18px;border-top:1px solid var(--hair)}
+.acc .bd>*+*{margin-top:12px}
 
-  .fine { margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--line);
-    font-size: 12px; line-height: 1.6; color: var(--ink3); }
-  .fine b { color: var(--ink2); }
+.note{border-left:3px solid color-mix(in srgb,var(--a) 60%,transparent);padding:2px 0 2px 12px;
+  font-size:13px;color:var(--ink2);line-height:1.5}
+ol.how{list-style:none;counter-reset:h;display:flex;flex-direction:column;gap:9px}
+ol.how li{counter-increment:h;padding-left:30px;position:relative;font-size:14px;color:var(--ink2);line-height:1.5}
+ol.how li::before{content:counter(h);position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:6px;
+  display:grid;place-items:center;font-size:10.5px;font-weight:700;color:var(--ink3);background:var(--soft)}
+.areas,.tools,.mats{display:grid;gap:9px}
+.areas{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.area{border:1px solid var(--line);border-radius:var(--r3);padding:11px 13px;background:var(--bg)}
+.area b{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:650;margin-bottom:3px}
+.area .ld{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;
+  background:var(--a);border-radius:99px;padding:2px 7px}
+.area span{font-size:12.5px;color:var(--ink2);line-height:1.45}
+.tools{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.tool{border:1px solid var(--line);border-radius:var(--r3);padding:11px 13px;background:var(--bg)}
+.tool b{display:block;font-size:13.5px;font-weight:650;margin-bottom:3px}
+.tool>span{display:block;font-size:12.5px;color:var(--ink2);line-height:1.45}
+.mk{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:9px;padding-top:9px;border-top:1px dashed var(--line)}
+.mk .k{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);width:100%}
+.mk a{font-size:11.5px;color:var(--ink2);text-decoration:none;border:1px solid var(--line);
+  border-radius:99px;padding:3px 9px;background:var(--card)}
+.mk a:hover{color:var(--ink);border-color:var(--a)}
+.mats{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.mats a,.mats .slot{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  border:1px solid var(--line);border-radius:var(--r3);padding:11px 13px;font-size:13px;text-decoration:none;background:var(--bg)}
+.mats a:hover{border-color:var(--a)}
+.mats .slot{border-style:dashed;color:var(--ink3)}
+.tagr{font-size:10.5px;font-weight:600;color:var(--ink3);white-space:nowrap}
+.mats a .tagr{color:var(--a)}
 
-  /* ----------------------------------------------------------------- stage */
-  .hero { position: relative; border-radius: 14px; padding: 20px 24px 22px 26px; overflow: hidden;
-    background: linear-gradient(100deg, color-mix(in srgb, var(--a) 14%, var(--card)),
-                                        color-mix(in srgb, var(--a) 4%, var(--card)));
-    border: 1px solid color-mix(in srgb, var(--a) 26%, var(--line)); }
-  .hero::before { content:""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--a); }
-  .hrow { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
-  .eta { font-size: 10.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #fff;
-    background: var(--a); padding: 3px 8px; border-radius: 6px; }
-  .tag { font-size: 10.5px; font-weight: 750; padding: 3px 8px; border-radius: 6px; color: #fff; }
-  .tag.mo { background: var(--mo); }
-  .tag.dc { background: var(--dc); }
-  .hero h2 { margin-top: 11px; font-size: 26px; font-weight: 800; letter-spacing: -.022em; line-height: 1.12; }
-  .hero .foco { margin-top: 9px; font-size: 16px; line-height: 1.4; font-weight: 650; max-width: 62ch; }
-  .hero .ten { margin-top: 9px; font-size: 13px; line-height: 1.5; color: var(--ink2); max-width: 72ch;
-    padding-left: 11px; border-left: 2px solid color-mix(in srgb, var(--a) 45%, transparent); }
+/* checklist */
+.clbar{height:4px;border-radius:99px;background:var(--soft);overflow:hidden;margin-bottom:12px}
+.clbar i{display:block;height:100%;width:0;background:var(--a);transition:width .3s}
+ul.cl{list-style:none;display:flex;flex-direction:column;gap:2px}
+ul.cl label{display:flex;gap:11px;align-items:flex-start;padding:9px 10px;border-radius:var(--r3);
+  cursor:pointer;font-size:14px;color:var(--ink2);line-height:1.45;transition:.12s}
+ul.cl label:hover{background:var(--hair)}
+ul.cl input{appearance:none;width:19px;height:19px;flex:0 0 auto;margin-top:1px;border:1.5px solid var(--line);
+  border-radius:6px;background:var(--card);cursor:pointer;transition:.15s;position:relative}
+ul.cl input:checked{background:var(--a);border-color:var(--a)}
+ul.cl input:checked::after{content:"";position:absolute;left:6px;top:2.5px;width:5px;height:9px;
+  border:2px solid #fff;border-top:0;border-left:0;transform:rotate(42deg)}
+ul.cl input:checked+span{color:var(--ink3);text-decoration:line-through;text-decoration-color:var(--line)}
+.clfoot{display:flex;justify-content:flex-end;margin-top:10px}
 
-  .acc { margin-top: 14px; display: grid; gap: 8px; }
-  details { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
-  details[open] { border-color: color-mix(in srgb, var(--a) 34%, var(--line)); box-shadow: var(--sh); }
-  summary { display: flex; align-items: center; gap: 11px; padding: 13px 15px; cursor: pointer;
-    list-style: none; transition: background .14s; }
-  summary::-webkit-details-marker { display: none; }
-  summary::marker { content: ""; }
-  summary:hover { background: color-mix(in srgb, var(--a) 5%, transparent); }
-  details[open] summary { background: color-mix(in srgb, var(--a) 8%, transparent);
-    border-bottom: 1px solid color-mix(in srgb, var(--a) 20%, var(--hair)); }
-  summary .ic { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; flex: 0 0 auto;
-    background: color-mix(in srgb, var(--a) 15%, transparent); color: var(--a); font-size: 11.5px; font-weight: 800; }
-  details[open] summary .ic { background: var(--a); color: #fff; }
-  summary .tt { font-size: 14.5px; font-weight: 700; }
-  summary .ct { font-size: 10.5px; font-weight: 750; color: var(--a); font-variant-numeric: tabular-nums;
-    background: color-mix(in srgb, var(--a) 12%, transparent); border-radius: 99px; padding: 2px 8px; }
-  summary .cv { margin-left: auto; display: grid; place-items: center; width: 24px; height: 24px; flex: 0 0 auto;
-    border-radius: 7px; font-size: 13px; line-height: 1; color: var(--ink3);
-    background: color-mix(in srgb, var(--a) 9%, transparent); transition: .18s; }
-  summary:hover .cv { background: color-mix(in srgb, var(--a) 18%, transparent); color: var(--a); }
-  details[open] summary .cv { transform: rotate(180deg); color: var(--a);
-    background: color-mix(in srgb, var(--a) 16%, transparent); }
-  .bd { padding: 16px 16px 18px 50px; }
-  @media (max-width: 700px) { .bd { padding-left: 16px; } }
-  .bd p { font-size: 14.5px; line-height: 1.6; color: var(--ink2); max-width: 70ch; }
-  .bd p + p { margin-top: 9px; }
-  .bd p strong { color: var(--ink); font-weight: 700; }
+/* gate + paginação */
+.gate{margin-top:22px;border:1px solid color-mix(in srgb,var(--a) 30%,var(--line));border-radius:var(--r);
+  background:color-mix(in srgb,var(--a) 6%,var(--card));padding:16px 18px}
+.gate .k{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--a);margin-bottom:6px}
+.gate .g{font-size:15px;font-weight:600;line-height:1.4}
+.gate .s{font-size:12px;color:var(--ink3);margin-top:7px;line-height:1.45}
+.pg{display:flex;align-items:center;gap:12px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.pg .of{flex:1;text-align:center;font-size:12px;color:var(--ink3)}
+.pg .nav{font-size:13.5px;font-weight:600;color:var(--ink2);border:1px solid var(--line);
+  background:var(--card);border-radius:10px;padding:10px 14px;transition:.15s}
+.pg .nav:hover{color:var(--ink);border-color:var(--a)}
 
-  ol.how { list-style: none; counter-reset: f; display: grid; gap: 9px; }
-  ol.how li { counter-increment: f; position: relative; padding-left: 30px; font-size: 14.5px; line-height: 1.5;
-    color: var(--ink2); max-width: 70ch; }
-  ol.how li::before { content: counter(f); position: absolute; left: 0; top: 1px; display: grid; place-items: center;
-    width: 20px; height: 20px; border-radius: 6px; background: var(--a); color: #fff; font-size: 11px; font-weight: 800; }
+.foot{margin-top:52px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:11.5px;color:var(--ink3);line-height:1.6;max-width:80ch}
+.kbd{font-size:11px;border:1px solid var(--line);border-radius:5px;padding:1px 5px;color:var(--ink3);background:var(--card)}
 
-  .areas { display: grid; gap: 9px; }
-  .area { display: grid; grid-template-columns: 190px 1fr; gap: 14px; align-items: baseline;
-    padding: 9px 12px; border-radius: 9px; background: var(--soft); }
-  .area b { font-size: 13.5px; font-weight: 750; }
-  .area .ld { display: inline-block; margin-left: 6px; font-size: 9px; font-weight: 800; letter-spacing: .05em;
-    text-transform: uppercase; color: #fff; background: var(--a); border-radius: 4px; padding: 2px 5px; vertical-align: 1.5px; }
-  .area span { font-size: 13px; line-height: 1.45; color: var(--ink2); }
-  @media (max-width: 700px) { .area { grid-template-columns: 1fr; gap: 3px; } }
-
-  .tools { display: grid; gap: 11px; }
-  .tool { padding: 12px 14px; border-radius: 10px; background: var(--soft); border-left: 3px solid var(--a); }
-  .tool b { font-size: 13.5px; font-weight: 750; }
-  .tool span { display: block; font-size: 13px; line-height: 1.45; color: var(--ink2); margin-top: 2px; }
-  .mk { margin-top: 9px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-  .mk .lb { font-size: 10px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; color: var(--ink3); }
-  .mk a { font-size: 11.5px; font-weight: 650; text-decoration: none; color: var(--a); padding: 3px 9px;
-    border-radius: 99px; background: color-mix(in srgb, var(--a) 11%, transparent);
-    border: 1px solid color-mix(in srgb, var(--a) 24%, transparent); transition: .14s; }
-  .mk a:hover { background: var(--a); color: #fff; border-color: var(--a); }
-
-  .mats { display: grid; gap: 7px; }
-  .mats a, .mats span.slot { display: flex; align-items: center; gap: 9px; font-size: 13.5px; padding: 11px 13px;
-    border: 1px solid var(--line); border-radius: 9px; text-decoration: none; color: var(--ink); transition: .15s; }
-  .mats a:hover { border-color: var(--a); background: color-mix(in srgb, var(--a) 7%, transparent); }
-  .mats span.slot { color: var(--ink3); border-style: dashed; }
-  .mats .tagr { margin-left: auto; padding-left: 8px; font-size: 9.5px; font-weight: 800; letter-spacing: .05em;
-    text-transform: uppercase; color: var(--ink3); white-space: nowrap; }
-
-  .quotes { display: grid; gap: 13px; }
-  blockquote { padding: 12px 15px; border-radius: 10px; background: var(--soft);
-    border-left: 3px solid color-mix(in srgb, var(--a) 70%, transparent); }
-  blockquote p { font-size: 14px; line-height: 1.5; color: var(--ink); max-width: 72ch; }
-  blockquote cite { display: block; margin-top: 6px; font-size: 11.5px; font-style: normal; font-weight: 750; color: var(--a); }
-  blockquote .nt { display: block; margin-top: 4px; font-size: 11.5px; color: var(--ink3); }
-
-  .cl { list-style: none; display: grid; gap: 2px; }
-  .cl label { display: grid; grid-template-columns: 18px 1fr; gap: 11px; align-items: start; padding: 7px 6px;
-    border-radius: 8px; cursor: pointer; font-size: 14px; line-height: 1.45; color: var(--ink2); transition: background .14s; }
-  .cl label:hover { background: color-mix(in srgb, var(--a) 6%, transparent); color: var(--ink); }
-  .cl input { appearance: none; width: 18px; height: 18px; margin-top: 1px; border-radius: 5px; cursor: pointer;
-    border: 1.6px solid color-mix(in srgb, var(--a) 40%, var(--line)); background: var(--card);
-    position: relative; transition: .14s; }
-  .cl input:hover { border-color: var(--a); }
-  .cl input:checked { background: var(--a); border-color: var(--a); }
-  .cl input:checked::after { content:""; position:absolute; left:4.6px; top:1.8px; width:5.6px; height:9.4px;
-    border: 2px solid #fff; border-top: 0; border-left: 0; transform: rotate(38deg); }
-  .cl input:checked + span { color: var(--ink3); text-decoration: line-through; text-decoration-color: var(--line); }
-  .clbar { height: 4px; max-width: 260px; margin-bottom: 12px; border-radius: 99px; background: var(--soft); overflow: hidden; }
-  .clbar i { display: block; height: 100%; width: 0; background: var(--a); transition: width .3s; }
-
-  .gate { margin-top: 14px; border-radius: 14px; padding: 18px 22px; color: #fff; box-shadow: var(--sh);
-    background: linear-gradient(100deg, var(--a), color-mix(in srgb, var(--a) 55%, #0d1b3a)); }
-  .gate .k { font-size: 10.5px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; color: rgba(255,255,255,.72); }
-  .gate .g { margin-top: 8px; font-size: 17px; line-height: 1.4; font-weight: 700; max-width: 62ch; }
-  .gate .s { margin-top: 9px; font-size: 11.5px; line-height: 1.45; color: rgba(255,255,255,.66); max-width: 70ch; }
-
-  .pg { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
-  .pg button { font: inherit; font-size: 13px; font-weight: 650; color: var(--ink2); background: var(--card);
-    border: 1px solid var(--line); border-radius: 9px; padding: 9px 14px; cursor: pointer; transition: .15s; }
-  .pg button:hover:not(:disabled) { color: var(--ink); border-color: var(--ink3); }
-  .pg button.pri { color: #fff; background: var(--a); border-color: var(--a); }
-  .pg button.pri:hover { filter: brightness(1.08); color: #fff; }
-  .pg .of { flex: 1; text-align: center; font-size: 11.5px; color: var(--ink3); }
-
-  @media (max-width: 1020px) {
-    .cards5 { grid-template-columns: repeat(2, 1fr); }
-    .steps3, .csf3, .lens { grid-template-columns: 1fr; }
-    .flow { overflow-x: auto; }
-    .seg { flex: 0 0 168px; }
-    .seg.home { flex: 0 0 88px; }
-  }
-  @media (max-width: 640px) {
-    .wrap { padding: 0 16px; }
-    .cards5 { grid-template-columns: 1fr; }
-    .hd .wrap { height: auto; padding: 12px 16px; flex-wrap: wrap; }
-    .hprog { display: none; }
-    .hero { padding: 16px 18px 18px 20px; }
-    h2.big { font-size: 22px; }
-  }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-
-  @media print {
-    .flowbar, .pg, .hb, .mats { display: none !important; }
-    .view { display: block !important; page-break-after: always; }
-    details, .hero, .gate { box-shadow: none; }
-    .bd { padding-left: 16px; }
-  }
+@media print{
+  .hd,.stepbar,.pg,.cta,.clfoot{display:none!important}
+  .view{display:block!important;page-break-after:always;padding:0}
+  body{background:#fff}
+  .acc details,.card,.gate{box-shadow:none;border-color:#ddd}
+}
 </style>
 </head>
 <body>
+
 <header class="hd">
   <div class="wrap">
-    <span class="mark"></span>
-    <h1>Toolkit de collabs<br><s>framework de aplicação · MPA FGV EAESP</s></h1>
+    <span class="brand"><i></i>Toolkit de collabs</span>
     <span class="sp"></span>
-    <span class="hprog"><span class="hbar"><i id="hb"></i></span><b id="hn">0/33</b></span>
-    <button class="hb" id="bExp" type="button">baixar checklist</button>
-    <button class="hb" id="bPr" type="button">imprimir</button>
-    <button class="hb" id="bTh" type="button">tema</button>
+    <span class="gp"><span class="gbar"><i id="hb"></i></span><b id="hn">0/33</b></span>
+    <button class="ib opt" id="bExp" type="button">Baixar checklist</button>
+    <button class="ib opt" id="bPr" type="button">Imprimir</button>
+    <button class="ib" id="bTh" type="button" aria-label="Alternar tema">Tema</button>
   </div>
 </header>
 
-<div class="flowbar"><div class="wrap"><nav class="flow" id="flow" aria-label="Etapas do framework"></nav></div></div>
+<div class="stepbar"><div class="wrap"><nav class="steps" id="flow" aria-label="Etapas"></nav></div></div>
 
 <main class="wrap" id="main"></main>
 
@@ -424,13 +357,7 @@ const DATA = [
       "Testei a hipótese com consumidor antes de avançar",
       "Registrei por que os candidatos descartados foram descartados"
     ],
-    quotes: [
-      ["A gente tem um time que vai olhar o que está acontecendo no mercado, junto com o time de pesquisa e de inteligência de mercado.", "Laura Godoi · Outback Brasil", ""],
-      ["Quando a gente vai olhar para quem são as possíveis collabs, a gente busca empresas que tenham esse mesmo propósito.", "Regiane Bueno · Coty", ""],
-      ["Você pesa o quanto que você vai ter que colocar de esforço, seja financeiro, seja de recurso de tempo, versus o output que você espera.", "Bruno Macário · PepsiCo Brasil", ""],
-      ["A gente não tem estrutura pra fazer pesquisa de mercado, é tentativa e erro.", "Adriana Lotaif · Pipó", "Contraste de porte: a mesma etapa acontece com instrumentação bem diferente."]
-    ],
-    mats: [["Matriz de fit estratégico", "#"], ["Base de benchmark", "#"], ["Relatório de social listening", "#"]]
+        mats: [["Matriz de fit estratégico", "#"], ["Base de benchmark", "#"], ["Relatório de social listening", "#"]]
   },
   {
     id: 2, cor: "var(--s2)", nome: "Estruturação e planejamento",
@@ -473,14 +400,7 @@ const DATA = [
       "Pontos de atrito previsíveis listados, com plano para cada um",
       "Regra de decisão definida para o caso de impasse"
     ],
-    quotes: [
-      ["Quando você pensa em uma collab, você tem que envolver jurídico, área de produto, logístico, comercial [...] de ponta a ponta.", "Bruno Macário · PepsiCo Brasil", ""],
-      ["A gente tem um processo de inovação muito forte, a gente tem gate meeting, várias fases de projeto [...] apresentar para membros do board.", "Regiane Bueno · Coty", "Portões de fase já existem na prática das empresas maiores."],
-      ["Vai passar pelo local, pelo regional, vai ter que bater no global. Você vai ter um SLA de 10 dias pra cada aprovação.", "Bruno Macário · PepsiCo Brasil", ""],
-      ["As áreas de marketing sentam juntas, aprovam juntas, fazem a campanha juntos ou a embalagem.", "Adriana Lotaif · Pipó", "O outro extremo: governança leve, sem perder alinhamento."],
-      ["Tem que ter muita paciência e articulação e jogo de boa vizinhança, porque é a colaboração mesmo, as duas empresas colaborando pro projeto sair.", "Lisiane Campos · Piracanjuba", ""]
-    ],
-    mats: [["Matriz de responsabilidades", "#"], ["Modelo de governança por porte", "#"], ["Cronograma padrão", "#"], ["Checklist jurídico", "#"]]
+        mats: [["Matriz de responsabilidades", "#"], ["Modelo de governança por porte", "#"], ["Cronograma padrão", "#"], ["Checklist jurídico", "#"]]
   },
   {
     id: 3, cor: "var(--s3)", nome: "Cocriação e execução",
@@ -523,13 +443,7 @@ const DATA = [
       "Distribuição pensada em conjunto, não só o produto",
       "Se há royalties envolvidos, existe camada real de criação conjunta"
     ],
-    quotes: [
-      ["Antes de aprovar, a gente vai precisar de uma pesquisa com o consumidor.", "Esdras Jr. · Dr. Oetker Brasil", ""],
-      ["Foram dois testes sensoriais, fora os testes entre nós, entre Ruffles, para garantir o sabor.", "Laura Godoi · Outback Brasil", "Parceria Ruffles × Outback."],
-      ["Uma collab tem muito a ver de fazer junto, de desenvolver junto, de chegar num produto que é construído por essas duas partes.", "Esdras Jr. · Dr. Oetker Brasil", ""],
-      ["Pagar royalties é uma forma de collab, mas é uma collab mais fraca.", "Henrique Mendonça · Cimed", "Há graus de desenvolvimento conjunto, de royalties a revenue share."]
-    ],
-    mats: [["Checklist de desenvolvimento conjunto", "#"], ["Roteiro de workshop", "#"], ["Protocolo de teste com consumidor", "#"]]
+        mats: [["Checklist de desenvolvimento conjunto", "#"], ["Roteiro de workshop", "#"], ["Protocolo de teste com consumidor", "#"]]
   },
   {
     id: 4, cor: "var(--s4)", nome: "Lançamento e monitoramento",
@@ -569,13 +483,7 @@ const DATA = [
       "Earned media e repercussão sendo medidos, não só venda",
       "Combinado com o parceiro o que cada um divulga e quando"
     ],
-    quotes: [
-      ["A união em si já é motivo para se criar uma conversa. Duas marcas se unirem significa que elas romperam aquele muro da autocentricidade de falar sobre si.", "André Britto · Bauducco", ""],
-      ["A união das marcas gera uma conversa. Não é só sobre quantas unidades você vendeu; é sobre o quanto você movimentou o mercado.", "André Britto · Bauducco", ""],
-      ["Eu vou me associar a essa marca, porque essa marca vai me trazer tal associação, muito mais do que o próprio investimento de mídia.", "Laura Godoi · Outback Brasil", ""],
-      ["Enquanto o produto tem demanda, tem venda, faz sentido para nós, para o parceiro.", "Adriana Lotaif · Pipó", ""]
-    ],
-    mats: [["Dashboard de lançamento", "#"], ["Tracker de brand equity", "#"], ["Relatório de earned media", "#"]]
+        mats: [["Dashboard de lançamento", "#"], ["Tracker de brand equity", "#"], ["Relatório de earned media", "#"]]
   },
   {
     id: 5, cor: "var(--s5)", nome: "Captura de aprendizados",
@@ -614,13 +522,7 @@ const DATA = [
       "Aprendizado compartilhado com outras equipes",
       "Se a pessoa que conduziu saísse amanhã, o que ela sabe está escrito"
     ],
-    quotes: [
-      ["Quase todas as nossas ações aqui são empíricas, porque do que eu aprendi da vida, eu vou seguir.", "Laura Godoi · Outback Brasil", "O conhecimento tácito como norma, e como risco organizacional."],
-      ["A gente vem aprendendo sobre a roda das collabs.", "Loara Costa · Sovena", ""],
-      ["Tem o boom da partida, depois ela cai meio num platô normal.", "Loara Costa · Sovena", "Aprendizado sobre o ciclo de vida, incorporado ao critério de decisão."],
-      ["O processo em si burocratizou, óbvio, versus o início, mas ele também assegura.", "Loara Costa · Sovena", ""]
-    ],
-    mats: [["Roteiro de debriefing", "#"], ["Base de casos", "#"], ["Critérios de fit (documento vivo)", "#"]]
+        mats: [["Roteiro de debriefing", "#"], ["Base de casos", "#"], ["Critérios de fit (documento vivo)", "#"]]
   }
 ];
 
@@ -637,9 +539,16 @@ const MATRIX = [
   ["dc", "Transforming", [0, 0, 0, 0, 2]]
 ];
 
+
 const KEY = "collab-toolkit-v3";
-const state = JSON.parse(localStorage.getItem(KEY) || "{}");
-const save = () => localStorage.setItem(KEY, JSON.stringify(state));
+const store = (() => {           /* localStorage pode estar bloqueado (file://, aba privada) */
+  try { localStorage.setItem("__t", "1"); localStorage.removeItem("__t"); return localStorage; }
+  catch (e) { return null; }
+})();
+const state = (() => {
+  try { return JSON.parse((store && store.getItem(KEY)) || "{}"); } catch (e) { return {}; }
+})();
+const save = () => { try { if (store) store.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const TOTAL = DATA.reduce((n, s) => n + s.check.length, 0);
 const nDone = s => s.check.filter((_, j) => state[s.id + "." + j]).length;
@@ -648,196 +557,178 @@ const nDone = s => s.check.filter((_, j) => state[s.id + "." + j]).length;
 document.getElementById("flow").innerHTML =
   `<button class="seg home" data-v="home" type="button"><span class="nm">Início</span></button>` +
   DATA.map(s => `
-    <button class="seg" style="--c:${s.cor}" data-v="${s.id}" type="button" id="seg-${s.id}">
+    <button class="seg" style="--c:${s.cor}" data-v="${s.id}" type="button" id="seg-${s.id}"
+      title="Etapa ${s.id} · ${esc(s.nome)}">
       <span class="n">${s.id}</span>
-      <span><span class="nm">${esc(s.nome)}</span></span>
-      <span class="tick"></span><span class="fill" data-fill="${s.id}"></span>
+      <span class="nm">${esc(s.nome)}</span>
+      <span class="fill" data-fill="${s.id}"></span>
     </button>`).join("");
 
 /* ==================================================================== home */
 const home = `
 <section class="view" id="v-home">
-  <h2 class="big">O que uma organização faz, <em>por dentro</em>, para tirar uma collab do papel</h2>
-  <p class="lede" style="margin-top:14px">
-    Este toolkit organiza em cinco etapas o processo que dez organizações brasileiras seguem para
-    identificar, estruturar, cocriar, lançar e aprender com uma collab. Cada etapa traz o que é feito,
-    como é feito, quem entra, quais ferramentas, os materiais de apoio e um checklist. Vem da dissertação
-    de mestrado <i>Collab de dentro para fora</i> (MPA FGV EAESP), construída a partir de entrevistas
-    com executivos C-level das marcas envolvidas.
-  </p>
+  <h2 class="t">Toolkit de collabs</h2>
+  <p class="sub">Framework de aplicação em cinco etapas para estruturar uma collab entre marcas.</p>
 
-  <div class="defbox">
-    <b>Definição.</b> Collab é uma modalidade de co-branding caracterizada por desenvolvimento conjunto
-    genuíno, risco compartilhado entre parceiros e geração de valor predominantemente simbólico e cultural.
-    Diferencia-se de licenciamento e patrocínio pelo desenvolvimento conjunto de produto, iteração criativa
-    bilateral e validação colaborativa com consumidores.
+  <div class="cta">
+    <button class="pri" id="goNext" type="button" data-v="1">Começar pela etapa 1</button>
+    <span class="gh"><b id="hn2">0</b> de ${TOTAL} itens do checklist</span>
+    <button class="lnk" id="bReset" type="button" hidden>limpar progresso</button>
   </div>
 
-  <div class="block">
-    <div class="h2">Como usar</div>
-    <div class="steps3">
-      <div class="u"><span class="i">1</span><p>Percorra as etapas na ordem. Elas formam um ciclo: o que se aprende na etapa 5 realimenta a etapa 1.</p></div>
-      <div class="u"><span class="i">2</span><p>Em cada etapa, abra os blocos conforme a necessidade. Só o primeiro vem aberto.</p></div>
-      <div class="u"><span class="i">3</span><p>Use o checklist e o critério de passagem para decidir se a etapa fechou. O progresso fica salvo neste navegador.</p></div>
-    </div>
-  </div>
+  <ol class="cards">
+    ${DATA.map(s => `<li>
+      <button class="card" style="--c:${s.cor}" data-v="${s.id}" type="button">
+        <span class="n">${s.id}</span>
+        <h3>${esc(s.nome)}</h3>
+        <p>${esc(s.foco)}</p>
+        <span class="pb"><span><i data-card="${s.id}"></i></span><em data-cardn="${s.id}">0/${s.check.length}</em></span>
+      </button></li>`).join("")}
+  </ol>
 
-  <div class="block">
-    <div class="h2">As cinco etapas</div>
-    <div class="cards5">
-      ${DATA.map(s => `
-        <button class="card5" style="--c:${s.cor}" data-v="${s.id}" type="button">
-          <span class="n">${s.id}</span>
-          <h3>${esc(s.nome)}</h3>
-          <p>${esc(s.foco)}</p>
-          <div class="mini"><i data-card="${s.id}"></i></div>
-        </button>`).join("")}
-    </div>
-  </div>
+  <div class="ref">
+    <div class="lbl">Referência</div>
 
-  <div class="block">
-    <div class="h2">Permeia todas as etapas · fatores críticos de sucesso</div>
-    <div class="csf3">
-      <div class="u" style="--c:var(--s1)"><h3>Fit de propósito e valores</h3><p>Pesa mais do que a compatibilidade de audiência. É o alinhamento de significado que sustenta a parceria.</p></div>
-      <div class="u" style="--c:var(--s3)"><h3>Autenticidade do desenvolvimento conjunto</h3><p>É o que distingue a collab genuína do licenciamento. As duas marcas precisam contribuir de verdade.</p></div>
-      <div class="u" style="--c:var(--s5)"><h3>Confiança relacional</h3><p>Destrava a coordenação entre empresas autônomas e a resolução das tensões inevitáveis do processo.</p></div>
-    </div>
-  </div>
+    <details class="d">
+      <summary>O que é considerado collab<span class="cv">▾</span></summary>
+      <div class="bd"><p class="p">Modalidade de co-branding caracterizada por desenvolvimento conjunto genuíno,
+        risco compartilhado entre os parceiros e geração de valor predominantemente simbólico e cultural.
+        Difere de licenciamento e patrocínio pelo desenvolvimento conjunto de produto, pela iteração criativa
+        bilateral e pela validação colaborativa com consumidores.</p></div>
+    </details>
 
-  <div class="block">
-    <div class="h2">As duas lentes teóricas</div>
-    <div class="lens">
-      <div class="lensbox" style="--c:var(--mo)">
-        <div class="k">Market Orientation · da porta pra fora</div>
-        <h3>Sentir o mercado e os parceiros</h3>
-        <p>Gerar inteligência sobre consumidor <i>e</i> sobre outras marcas, disseminar internamente e responder.
-          Nas collabs, essa inteligência atravessa a fronteira entre as duas empresas.</p>
-        <div class="trio">
-          <div><b>Geração de inteligência.</b> Captar informação sobre mercado, consumidor, concorrência e sobre outras marcas.</div>
-          <div><b>Disseminação.</b> Fazer essa inteligência circular entre as áreas, e aqui também entre as duas empresas.</div>
-          <div><b>Responsividade.</b> Agir com base na inteligência: responder, ajustar, executar.</div>
+    <details class="d">
+      <summary>Fatores críticos, presentes em todas as etapas<span class="cv">▾</span></summary>
+      <div class="bd"><div class="tri">
+        <div class="u"><h4>Fit de propósito e valores</h4><p>Pesa mais do que compatibilidade de audiência.</p></div>
+        <div class="u"><h4>Autenticidade do desenvolvimento conjunto</h4><p>As duas marcas contribuem de fato; é o que separa collab de licenciamento.</p></div>
+        <div class="u"><h4>Confiança relacional</h4><p>Destrava a coordenação entre empresas autônomas e a resolução de tensões.</p></div>
+      </div></div>
+    </details>
+
+    <details class="d">
+      <summary>Lentes teóricas<span class="cv">▾</span></summary>
+      <div class="bd"><div class="lensgrid">
+        <div class="lb" style="--c:var(--mo)">
+          <div class="k">Market Orientation</div>
+          <h4>Sentir o mercado e os parceiros</h4>
+          <div class="it"><b>Geração de inteligência.</b> Captar informação sobre mercado, consumidor, concorrência e outras marcas.</div>
+          <div class="it"><b>Disseminação.</b> Fazer a inteligência circular entre as áreas e entre as duas empresas.</div>
+          <div class="it"><b>Responsividade.</b> Agir com base na inteligência: responder, ajustar, executar.</div>
+          <div class="refs">${REFS.mo.map(r => `<a href="${r[2]}" target="_blank" rel="noopener"><b>${esc(r[0])}</b> · ${esc(r[1])}</a>`).join("")}</div>
         </div>
-        <div class="refs">${REFS.mo.map(r => `<a href="${r[2]}" target="_blank" rel="noopener"><b>${esc(r[0])}</b> ${esc(r[1])}<span class="ex">abrir ↗</span></a>`).join("")}</div>
-      </div>
-      <div class="lensbox" style="--c:var(--dc)">
-        <div class="k">Dynamic Capabilities · da porta pra dentro</div>
-        <h3>Orquestrar e reconfigurar recursos</h3>
-        <p>Nas collabs, a orquestração é de ativos de <i>duas</i> empresas juridicamente autônomas,
-          de forma temporária.</p>
-        <div class="trio">
-          <div><b>Sensing.</b> Detectar e moldar oportunidades e ameaças. Ler o ambiente.</div>
-          <div><b>Seizing.</b> Capturar e explorar a oportunidade: mobilizar recursos, decidir, estruturar.</div>
-          <div><b>Transforming.</b> Reconfigurar recursos e rotinas para não enrijecer. Aparece também como <i>reconfiguring</i>.</div>
+        <div class="lb" style="--c:var(--dc)">
+          <div class="k">Dynamic Capabilities</div>
+          <h4>Orquestrar e reconfigurar recursos</h4>
+          <div class="it"><b>Sensing.</b> Detectar e moldar oportunidades e ameaças.</div>
+          <div class="it"><b>Seizing.</b> Capturar a oportunidade: mobilizar recursos, decidir, estruturar.</div>
+          <div class="it"><b>Transforming.</b> Reconfigurar recursos e rotinas para não enrijecer.</div>
+          <div class="refs">${REFS.dc.map(r => `<a href="${r[2]}" target="_blank" rel="noopener"><b>${esc(r[0])}</b> · ${esc(r[1])}</a>`).join("")}</div>
         </div>
-        <div class="refs">${REFS.dc.map(r => `<a href="${r[2]}" target="_blank" rel="noopener"><b>${esc(r[0])}</b> ${esc(r[1])}<span class="ex">abrir ↗</span></a>`).join("")}</div>
+      </div></div>
+    </details>
+
+    <details class="d">
+      <summary>Capacidades por etapa<span class="cv">▾</span></summary>
+      <div class="bd">
+        <p class="p">A relação não é de um para um: a mesma capacidade atravessa mais de uma etapa, e cada etapa
+          opera capacidades das duas lentes.</p>
+        <div class="mxwrap"><table class="mx">
+          <thead><tr><th></th>
+            ${DATA.map(s => `<th style="--c:${s.cor}"><b>${s.id}</b>${esc(s.nome)}</th>`).join("")}
+          </tr></thead>
+          <tbody>
+            ${MATRIX.map(([th, nome, vals]) => `<tr>
+              <th class="rh ${th}">${esc(nome)}</th>
+              ${vals.map(v => `<td>${v ? `<i class="${v === 2 ? "d2" : "d1"}" style="background:var(--${th})"></i>` : ""}</td>`).join("")}
+            </tr>`).join("")}
+          </tbody>
+        </table></div>
+        <div class="mxleg">
+          <span><i></i>dominante</span>
+          <span><i class="d1"></i>presente</span>
+          <span><i style="background:var(--mo)"></i>Market Orientation</span>
+          <span><i style="background:var(--dc)"></i>Dynamic Capabilities</span>
+        </div>
       </div>
-    </div>
+    </details>
+
+    <details class="d">
+      <summary>Fonte e limites<span class="cv">▾</span></summary>
+      <div class="bd">
+        <p class="p">Conteúdo das etapas: Quadro 5 e Capítulo 4 da dissertação <i>Collab de dentro para fora:
+          uma investigação qualitativa sobre como são construídas as collabs entre grandes marcas no Brasil</i>.
+          Douglas R. Bocalão, orientador Prof. Dr. Felipe Zambaldi, MPA FGV EAESP, 2026. Base empírica: dez
+          entrevistas com executivos de marketing de organizações brasileiras (2025–2026).</p>
+        <p class="p">Não é um método validado por ciclos de design, e sim a sistematização descritiva de práticas
+          observadas, a ser adaptada a cada contexto. Os <b>exemplos de mercado</b> citados nas ferramentas são
+          acréscimo de apoio do autor e não derivam da pesquisa.</p>
+      </div>
+    </details>
   </div>
 
-  <div class="block">
-    <div class="h2">Como as duas lentes cruzam as cinco etapas</div>
-    <p class="note">A relação não é de um para um. A mesma capacidade atravessa mais de uma etapa, e cada
-      etapa opera capacidades das duas lentes ao mesmo tempo. É por isso que não existe um rótulo teórico
-      único por etapa.</p>
-    <div class="mxwrap">
-      <table class="mx">
-        <thead><tr><th></th>
-          ${DATA.map(s => `<th style="--c:${s.cor}"><b>${s.id}</b>${esc(s.nome)}</th>`).join("")}
-        </tr></thead>
-        <tbody>
-          ${MATRIX.map(([th, nome, vals]) => `<tr>
-            <th class="rh ${th}">${esc(nome)}</th>
-            ${vals.map(v => `<td>${v ? `<i class="${v === 2 ? "d2" : "d1"}" style="background:var(--${th})"></i>` : ""}</td>`).join("")}
-          </tr>`).join("")}
-        </tbody>
-      </table>
-    </div>
-    <div class="mxleg">
-      <span><i class="dot d2" style="background:var(--ink3)"></i> dominante</span>
-      <span><i class="dot d1" style="background:var(--ink3)"></i> presente</span>
-      <span><i class="sw" style="background:var(--mo)"></i> Market Orientation · Kohli e Jaworski (1990)</span>
-      <span><i class="sw" style="background:var(--dc)"></i> Dynamic Capabilities · Teece (2007)</span>
-    </div>
-  </div>
-
-  <div class="pg" style="--a:var(--s1)"><span class="sp"></span>
-    <button class="pri" data-v="1" type="button">começar pela etapa 1 →</button>
-  </div>
-
-  <div class="fine">
-    <b>Fonte:</b> Quadro 5 e Capítulo 4 da dissertação <i>Collab de dentro para fora: uma investigação
-    qualitativa sobre como são construídas as collabs entre grandes marcas no Brasil</i>, a partir de dez entrevistas com executivos
-    C-level (2025–2026). Douglas R. Bocalão · orientador Prof. Dr. Felipe Zambaldi · MPA FGV EAESP, 2026.<br>
-    Não é um método validado por ciclos de design: é a sistematização do que o campo já faz, ponto de partida
-    para adaptação. Os <b>exemplos de mercado</b> indicados nas ferramentas são acréscimo de apoio, não citados
-    na pesquisa. Os checklists ficam salvos apenas neste navegador.
-  </div>
+  <p class="foot">Atalhos: <span class="kbd">1</span>–<span class="kbd">5</span> abrem as etapas,
+    <span class="kbd">0</span> volta ao início, <span class="kbd">←</span> <span class="kbd">→</span> navegam.
+    O checklist fica salvo apenas neste navegador.</p>
 </section>`;
 
-/* =================================================================== stage */
+/* =================================================================== etapa */
 const stage = s => `
 <section class="view" id="v-${s.id}" style="--a:${s.cor}">
-  <div class="hero">
-    <div class="hrow">
-      <span class="eta">Etapa ${s.id} de 5</span>
+  <div class="shead">
+    <div class="kick">
+      <span class="e">Etapa ${s.id} de 5</span>
+      ${s.cap.map(c => `<span class="cx ${c[1]}" title="${THEORY[c[1]]}">${esc(c[0].toLowerCase())}</span>`).join("")}
     </div>
     <h2>${esc(s.nome)}</h2>
     <p class="foco">${esc(s.foco)}</p>
-    <p class="ten">${esc(s.tensao)}</p>
   </div>
 
   <div class="acc">
     <details open>
-      <summary><span class="ic">1</span><span class="tt">O que é feito</span><span class="cv">▾</span></summary>
-      <div class="bd"><p>${s.resumo}</p><p>${esc(s.oque)}</p></div>
+      <summary><span class="ic">1</span>O que é feito<span class="cv">▾</span></summary>
+      <div class="bd">
+        <p class="p">${s.resumo}</p>
+        <p class="p">${esc(s.oque)}</p>
+        <p class="note">${esc(s.tensao)}</p>
+      </div>
     </details>
 
     <details>
-      <summary><span class="ic">2</span><span class="tt">Como é feito</span>
-        <span class="ct">${s.frentes.length} frentes</span><span class="cv">▾</span></summary>
+      <summary><span class="ic">2</span>Como é feito<span class="ct">${s.frentes.length}</span><span class="cv">▾</span></summary>
       <div class="bd"><ol class="how">${s.frentes.map(f => `<li>${esc(f)}</li>`).join("")}</ol></div>
     </details>
 
     <details>
-      <summary><span class="ic">3</span><span class="tt">Áreas envolvidas</span>
-        <span class="ct">${s.quem.length}</span><span class="cv">▾</span></summary>
+      <summary><span class="ic">3</span>Áreas envolvidas<span class="ct">${s.quem.length}</span><span class="cv">▾</span></summary>
       <div class="bd"><div class="areas">${s.quem.map(q => `<div class="area">
         <b>${esc(q[0])}${q[2] ? '<span class="ld">lidera</span>' : ""}</b><span>${esc(q[1])}</span></div>`).join("")}</div></div>
     </details>
 
     <details>
-      <summary><span class="ic">4</span><span class="tt">Ferramentas utilizadas</span>
-        <span class="ct">${s.ferr.length}</span><span class="cv">▾</span></summary>
+      <summary><span class="ic">4</span>Ferramentas<span class="ct">${s.ferr.length}</span><span class="cv">▾</span></summary>
       <div class="bd"><div class="tools">${s.ferr.map(f => `<div class="tool">
         <b>${esc(f[0])}</b><span>${esc(f[1])}</span>
-        ${f[2] && f[2].length ? `<div class="mk"><span class="lb">exemplos de mercado</span>
+        ${f[2] && f[2].length ? `<div class="mk"><span class="k">exemplos de mercado</span>
           ${f[2].map(t => `<a href="${t[1]}" target="_blank" rel="noopener">${esc(t[0])} ↗</a>`).join("")}</div>` : ""}
         </div>`).join("")}</div></div>
     </details>
 
     <details>
-      <summary><span class="ic">5</span><span class="tt">Materiais</span>
-        <span class="ct">${s.mats.length}</span><span class="cv">▾</span></summary>
+      <summary><span class="ic">5</span>Materiais<span class="ct">${s.mats.length}</span><span class="cv">▾</span></summary>
       <div class="bd"><div class="mats">${s.mats.map(m => m[1] === "#"
         ? `<span class="slot">${esc(m[0])}<span class="tagr">adicionar link</span></span>`
         : `<a href="${esc(m[1])}" target="_blank" rel="noopener">${esc(m[0])}<span class="tagr">abrir ↗</span></a>`).join("")}</div></div>
     </details>
 
     <details>
-      <summary><span class="ic">6</span><span class="tt">Do campo</span>
-        <span class="ct">${s.quotes.length} falas</span><span class="cv">▾</span></summary>
-      <div class="bd"><div class="quotes">${s.quotes.map(q => `<blockquote><p>“${esc(q[0])}”</p>
-        <cite>${esc(q[1])}</cite>${q[2] ? `<span class="nt">${esc(q[2])}</span>` : ""}</blockquote>`).join("")}</div></div>
-    </details>
-
-    <details>
-      <summary><span class="ic">7</span><span class="tt">Checklist</span>
-        <span class="ct" data-count="${s.id}">0/${s.check.length}</span><span class="cv">▾</span></summary>
+      <summary><span class="ic">6</span>Checklist<span class="ct" data-count="${s.id}">0/${s.check.length}</span><span class="cv">▾</span></summary>
       <div class="bd">
         <div class="clbar"><i data-bar="${s.id}"></i></div>
         <ul class="cl">${s.check.map((c, j) => `<li><label>
           <input type="checkbox" data-s="${s.id}" data-j="${j}" ${state[s.id + "." + j] ? "checked" : ""}>
           <span>${esc(c)}</span></label></li>`).join("")}</ul>
+        <div class="clfoot"><button class="lnk" type="button" data-clear="${s.id}">desmarcar etapa</button></div>
       </div>
     </details>
   </div>
@@ -848,16 +739,10 @@ const stage = s => `
     <div class="s">${s.gateSrc}</div>
   </div>
 
-  <div class="lensline">
-    <span class="lb">capacidades predominantes</span>
-    ${s.cap.map(c => `<span class="cx ${c[1]}">${esc(c[0].toLowerCase())}</span><em>${THEORY[c[1]]}</em>`).join("")}
-    <button class="lk" data-v="home" type="button">ver o cruzamento completo</button>
-  </div>
-
   <div class="pg">
-    <button type="button" data-v="${s.id === 1 ? "home" : s.id - 1}">← ${s.id === 1 ? "início" : "etapa " + (s.id - 1)}</button>
+    <button class="nav" type="button" data-v="${s.id === 1 ? "home" : s.id - 1}">← ${s.id === 1 ? "Início" : "Etapa " + (s.id - 1)}</button>
     <span class="of">etapa ${s.id} de 5</span>
-    <button type="button" class="pri" data-v="${s.id === 5 ? "home" : s.id + 1}">${s.id === 5 ? "voltar ao início" : "etapa " + (s.id + 1) + " →"}</button>
+    <button class="nav" type="button" data-v="${s.id === 5 ? "home" : s.id + 1}">${s.id === 5 ? "Início" : "Etapa " + (s.id + 1)} →</button>
   </div>
 </section>`;
 
@@ -873,6 +758,8 @@ function show(v, push) {
   document.querySelectorAll(".seg").forEach(b => b.setAttribute("aria-current", b.dataset.v === id));
   if (push) history.replaceState(null, "", id === "home" ? "#inicio" : "#etapa-" + id);
   state.last = id; save();
+  const seg = document.querySelector(`.seg[data-v="${id}"]`);
+  if (seg) seg.scrollIntoView({ block: "nearest", inline: "nearest" });
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 
@@ -882,33 +769,57 @@ function refresh() {
     const n = nDone(s), pct = n / s.check.length;
     done += n;
     document.querySelector(`[data-count="${s.id}"]`).textContent = n + "/" + s.check.length;
+    document.querySelector(`[data-cardn="${s.id}"]`).textContent = n + "/" + s.check.length;
     document.querySelector(`[data-bar="${s.id}"]`).style.width = pct * 100 + "%";
     document.querySelector(`[data-card="${s.id}"]`).style.width = pct * 100 + "%";
     document.querySelector(`[data-fill="${s.id}"]`).style.width = pct * 100 + "%";
     document.getElementById("seg-" + s.id).classList.toggle("done", pct === 1);
   });
   document.getElementById("hn").textContent = done + "/" + TOTAL;
+  document.getElementById("hn2").textContent = done;
   document.getElementById("hb").style.width = 100 * done / TOTAL + "%";
+  document.getElementById("bReset").hidden = done === 0;
+
+  const next = DATA.find(s => nDone(s) < s.check.length) || DATA[4];
+  const btn = document.getElementById("goNext");
+  btn.dataset.v = next.id;
+  btn.textContent = done === 0 ? "Começar pela etapa 1" : "Continuar na etapa " + next.id;
 }
 
 document.addEventListener("click", e => {
+  const clr = e.target.closest("[data-clear]");
+  if (clr) {
+    const id = +clr.dataset.clear;
+    DATA.find(s => s.id === id).check.forEach((_, j) => delete state[id + "." + j]);
+    document.querySelectorAll(`input[data-s="${id}"]`).forEach(i => i.checked = false);
+    save(); refresh(); return;
+  }
   const b = e.target.closest("[data-v]");
   if (b) show(b.dataset.v === "home" ? "home" : +b.dataset.v, true);
 });
+
 document.getElementById("main").addEventListener("change", e => {
   const c = e.target;
   if (c.matches('input[type="checkbox"]')) {
     state[c.dataset.s + "." + c.dataset.j] = c.checked; save(); refresh();
   }
 });
+
 document.addEventListener("keydown", e => {
-  if (e.target.matches("input, textarea")) return;
+  if (e.target.matches("input, textarea") || e.metaKey || e.ctrlKey) return;
   const cur = state.last === "home" ? 0 : +state.last;
   if (/^[1-5]$/.test(e.key)) show(+e.key, true);
-  else if (e.key === "0" || e.key === "h") show("home", true);
+  else if (e.key === "0" || e.key === "h" || e.key === "Escape") show("home", true);
   else if (e.key === "ArrowRight" && cur < 5) show(cur + 1, true);
-  else if (e.key === "ArrowLeft" && cur > 1) show(cur - 1, true);
+  else if (e.key === "ArrowLeft" && cur > 0) show(cur === 1 ? "home" : cur - 1, true);
 });
+
+document.getElementById("bReset").onclick = () => {
+  if (!confirm("Desmarcar todos os itens do checklist?")) return;
+  DATA.forEach(s => s.check.forEach((_, j) => delete state[s.id + "." + j]));
+  document.querySelectorAll('input[type="checkbox"]').forEach(i => i.checked = false);
+  save(); refresh();
+};
 
 document.getElementById("bPr").onclick = () => window.print();
 window.addEventListener("beforeprint", () => {
@@ -917,6 +828,7 @@ window.addEventListener("beforeprint", () => {
 window.addEventListener("afterprint", () => {
   document.querySelectorAll("details").forEach(d => { d.open = d.dataset.was === "1"; });
 });
+
 document.getElementById("bTh").onclick = () => {
   const now = document.documentElement.getAttribute("data-theme");
   const next = now === "dark" ? "light" : now === "light" ? "" : "dark";
@@ -924,6 +836,7 @@ document.getElementById("bTh").onclick = () => {
        : document.documentElement.removeAttribute("data-theme");
   state.theme = next; save();
 };
+
 document.getElementById("bExp").onclick = () => {
   const L = ["# Checklist de aplicação de collab", ""];
   DATA.forEach(s => {
