@@ -79,7 +79,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .brand i::before,.brand i::after{content:"";position:absolute;top:8px;width:12px;height:12px;
   border:2px solid #fff;border-radius:50%}
 .brand i::before{left:4px} .brand i::after{right:4px;opacity:.75}
-.brand s{text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+.brand .tag{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
   color:rgba(255,255,255,.72);border-left:1px solid rgba(255,255,255,.3);padding-left:11px;margin-left:2px}
 .sp{flex:1}
 .gp{display:flex;align-items:center;gap:9px;font-size:12px;color:rgba(255,255,255,.78)}
@@ -92,7 +92,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   padding:7px 12px;transition:.15s;backdrop-filter:blur(4px)}
 .ib:hover{background:rgba(255,255,255,.24);color:#fff;border-color:rgba(255,255,255,.6)}
 .ib:focus-visible{outline-color:#fff}
-@media (max-width:760px){.gp,.brand s{display:none}}
+@media (max-width:760px){.gp,.brand .tag{display:none}}
 @media (max-width:520px){.ib.opt{display:none}}
 
 /* ============================================================ stepper */
@@ -281,12 +281,16 @@ ol.how li strong{color:var(--ink);font-weight:650}
 .mk a{font-size:11.5px;color:var(--ink2);text-decoration:none;border:1px solid var(--line);
   border-radius:99px;padding:3px 9px;background:var(--card)}
 .mk a:hover{color:var(--ink);border-color:var(--a)}
-.mats{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.mats a,.mats .slot{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  border:1px solid var(--line);border-radius:var(--r3);padding:11px 13px;font-size:13px;text-decoration:none;background:var(--bg)}
-.mats a:hover{border-color:var(--a)}
-.mats .slot{border-style:dashed;color:var(--ink3)}
+.mats{grid-template-columns:repeat(auto-fit,minmax(265px,1fr))}
+.mats a,.mats .slot{display:block;border:1px solid var(--line);border-radius:var(--r3);
+  padding:12px 14px;text-decoration:none;background:var(--bg)}
+.mats b{display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+  font-size:13.5px;font-weight:650;color:var(--ink);line-height:1.3;margin-bottom:5px}
+.mats .ds{display:block;font-size:12.5px;color:var(--ink2);line-height:1.45}
 .mats a{border-left:3px solid var(--a)}
+.mats a:hover{border-color:var(--a)}
+.mats .slot{border-style:dashed}
+.mats .slot b{color:var(--ink2)}
 .tagr{font-size:10.5px;font-weight:600;color:var(--ink3);white-space:nowrap}
 .mats a .tagr{color:var(--a)}
 
@@ -306,13 +310,17 @@ ul.cl input:checked+span{color:var(--ink3);text-decoration:line-through;text-dec
 .clfoot{display:flex;justify-content:flex-end;margin-top:10px}
 
 /* gate + paginação */
-.gate{position:relative;margin-top:22px;border:1px solid color-mix(in srgb,var(--a) 32%,var(--line));
-  border-radius:var(--r);background:color-mix(in srgb,var(--a) 8%,var(--card));padding:16px 18px 16px 22px;
-  overflow:hidden}
-.gate::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--a)}
-.gate .k{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--a);margin-bottom:6px}
-.gate .g{font-size:15px;font-weight:600;line-height:1.4}
-.gate .s{font-size:12px;color:var(--ink3);margin-top:7px;line-height:1.45}
+.gate{position:relative;margin-top:28px;border:1.5px solid color-mix(in srgb,var(--a) 45%,var(--line));
+  border-radius:var(--r);padding:20px 22px 20px 28px;overflow:hidden;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--a) 14%,var(--card)),color-mix(in srgb,var(--a) 5%,var(--card)));
+  box-shadow:0 12px 32px -24px color-mix(in srgb,var(--a) 95%,transparent)}
+.gate::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--a)}
+.gate .k{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:#fff;background:var(--a);border-radius:99px;padding:5px 12px;margin-bottom:11px;
+  box-shadow:0 6px 14px -8px color-mix(in srgb,var(--a) 90%,transparent)}
+.gate .g{font-size:clamp(16px,1.6vw,18px);font-weight:650;line-height:1.35;letter-spacing:-.015em;max-width:64ch}
+.gate .s{font-size:12px;color:var(--ink3);margin-top:11px;padding-top:10px;line-height:1.45;
+  border-top:1px dashed color-mix(in srgb,var(--a) 28%,var(--line))}
 .pg{display:flex;align-items:center;gap:12px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
 .pg .of{flex:1;text-align:center;font-size:12px;color:var(--ink3)}
 .pg .nav{font-size:13.5px;font-weight:600;color:var(--ink2);border:1px solid var(--line);
@@ -322,6 +330,20 @@ ul.cl input:checked+span{color:var(--ink3);text-decoration:line-through;text-dec
 .foot{margin-top:52px;padding-top:18px;border-top:1px solid var(--line);
   font-size:11.5px;color:var(--ink3);line-height:1.6;max-width:80ch}
 .kbd{font-size:11px;border:1px solid var(--line);border-radius:5px;padding:1px 5px;color:var(--ink3);background:var(--card)}
+
+/* blocos "preciso de uma collab?" */
+.whenwrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:12px}
+.when{--c:var(--s3);border:1px solid var(--line);border-top:3px solid var(--c);border-radius:var(--r2);
+  padding:14px 16px;background:var(--bg)}
+.when.yes{--c:var(--s5)} .when.no{--c:#E8452C}
+.when .k{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--c);margin-bottom:10px}
+.when ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.when li{position:relative;padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.5}
+.when li::before{content:"";position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;
+  background:var(--c);opacity:.7}
+.ref.intro{margin-top:26px}
+.path{margin-top:38px}
+.path .p{margin-bottom:2px}
 
 /* ============================================================ notícias */
 .news{margin-top:44px}
@@ -358,7 +380,7 @@ ul.cl input:checked+span{color:var(--ink3);text-decoration:line-through;text-dec
 
 <header class="hd">
   <div class="wrap">
-    <span class="brand"><i></i>Toolkit de collabs<s>FGV EAESP</s></span>
+    <span class="brand"><i></i>Toolkit de collabs<span class="tag">FGV EAESP</span></span>
     <span class="sp"></span>
     <span class="gp"><span class="gbar"><i id="hb"></i></span><b id="hn">0/33</b></span>
     <button class="ib opt" id="bExp" type="button">Baixar checklist</button>
@@ -406,12 +428,14 @@ const DATA = [
       ["Insights / consumer intelligence", "valida a percepção do consumidor e reduz o risco de decidir só com visão interna", false]
     ],
     ferr: [
-      ["Matriz de fit estratégico", "alinhamento de valores, público, operação e comunicação entre as marcas", []],
+      ["Matriz de fit estratégico", "alinhamento de valores, público, operação e comunicação entre as marcas",
+        [["Airtable", "https://www.airtable.com"], ["Notion", "https://www.notion.com"], ["Google Sheets", "https://sheets.google.com"]]],
       ["Social listening", "associações espontâneas e proximidade simbólica entre marcas",
-        [["Brandwatch", "https://www.brandwatch.com"], ["Talkwalker", "https://www.talkwalker.com"], ["Stilingue", "https://www.stilingue.com.br"]]],
-      ["Base de benchmark de collabs", "casos relevantes, formatos e resultados", []],
+        [["Brandwatch", "https://www.brandwatch.com"], ["Talkwalker", "https://www.talkwalker.com"], ["Stilingue", "https://www.stilingue.com.br"], ["Sprinklr", "https://www.sprinklr.com"]]],
+      ["Base de benchmark de collabs", "casos relevantes, formatos e resultados",
+        [["Airtable", "https://www.airtable.com"], ["Notion", "https://www.notion.com"]]],
       ["Testes rápidos com consumidores", "coerência da parceria antes de avançar",
-        [["Typeform", "https://www.typeform.com"], ["SurveyMonkey", "https://www.surveymonkey.com"], ["Qualtrics", "https://www.qualtrics.com"]]]
+        [["Typeform", "https://www.typeform.com"], ["SurveyMonkey", "https://www.surveymonkey.com"], ["Qualtrics", "https://www.qualtrics.com"], ["Opinion Box", "https://www.opinionbox.com"], ["Google Forms", "https://forms.google.com"]]]
     ],
     gate: "Hipótese de parceria validada com o consumidor e fit de propósito confirmado.",
     gateSrc: "Critério declarado no próprio Quadro 5: “validar hipóteses de parceria com consumidores antes de avançar”.",
@@ -424,7 +448,11 @@ const DATA = [
       "Testei a hipótese com consumidor antes de avançar",
       "Registrei por que os candidatos descartados foram descartados"
     ],
-        mats: [["Matriz de fit estratégico", "#"], ["Base de benchmark", "#"], ["Relatório de social listening", "#"]]
+    mats: [
+      ["Matriz de fit estratégico", "#", "Planilha que compara candidatos a parceiro por valores, público, operação e comunicação, com peso e nota para cada critério."],
+      ["Base de benchmark de collabs", "#", "Repositório de casos de mercado com marcas envolvidas, formato, mecânica e resultado percebido, para consultar antes de decidir."],
+      ["Relatório de social listening", "#", "Leitura das menções e associações espontâneas entre as duas marcas: volume, sentimento e temas recorrentes."]
+    ]
   },
   {
     id: 2, cor: "var(--s2)", nome: "Estruturação e planejamento",
@@ -449,12 +477,13 @@ const DATA = [
     ],
     ferr: [
       ["Matriz de responsabilidades", "evita sobreposição e lacunas entre as empresas",
-        [["Asana", "https://asana.com"], ["Monday", "https://monday.com"], ["Notion", "https://www.notion.com"]]],
+        [["Asana", "https://asana.com"], ["Monday", "https://monday.com"], ["Notion", "https://www.notion.com"], ["Trello", "https://trello.com"]]],
       ["Cronograma estruturado", "marcos de decisão, dependências e prazos de aprovação",
-        [["Asana", "https://asana.com"], ["Smartsheet", "https://www.smartsheet.com"]]],
-      ["Modelo de governança simples", "adaptado ao porte de cada parceira", []],
+        [["Asana", "https://asana.com"], ["Smartsheet", "https://www.smartsheet.com"], ["ClickUp", "https://clickup.com"], ["Microsoft Project", "https://www.microsoft.com/microsoft-365/project/project-management-software"]]],
+      ["Modelo de governança simples", "adaptado ao porte de cada parceira",
+        [["Notion", "https://www.notion.com"], ["Confluence", "https://www.atlassian.com/software/confluence"]]],
       ["Documentos de formalização", "alinhamento inicial e troca segura de informação",
-        [["DocuSign", "https://www.docusign.com"], ["Adobe Acrobat Sign", "https://www.adobe.com/sign.html"]]]
+        [["DocuSign", "https://www.docusign.com"], ["Adobe Acrobat Sign", "https://www.adobe.com/sign.html"], ["Clicksign", "https://www.clicksign.com"], ["Dropbox Sign", "https://sign.dropbox.com"]]]
     ],
     gate: "Escopo, governança, cronograma e responsáveis definidos, com atritos antecipados.",
     gateSrc: "Reformulação da seção “o que é feito” desta etapa no Quadro 5.",
@@ -467,7 +496,12 @@ const DATA = [
       "Pontos de atrito previsíveis listados, com plano para cada um",
       "Regra de decisão definida para o caso de impasse"
     ],
-        mats: [["Matriz de responsabilidades", "#"], ["Modelo de governança por porte", "#"], ["Cronograma padrão", "#"], ["Checklist jurídico", "#"]]
+    mats: [
+      ["Matriz de responsabilidades", "#", "Quem decide, quem executa, quem é consultado e quem é apenas informado, nas duas empresas."],
+      ["Modelo de governança por porte", "#", "Dois ou três desenhos prontos, do mais direto ao mais formal, para escolher conforme o porte das parceiras."],
+      ["Cronograma padrão", "#", "Linha do tempo com marcos de decisão, dependências entre áreas e prazo de cada aprovação."],
+      ["Checklist jurídico", "#", "Pontos a fechar antes de assinar: propriedade intelectual, uso de marca, exclusividade, prazos e responsabilidades."]
+    ]
   },
   {
     id: 3, cor: "var(--s3)", nome: "Cocriação e execução",
@@ -491,13 +525,14 @@ const DATA = [
       ["Consumidores", "participam da validação", false]
     ],
     ferr: [
-      ["Checklist de desenvolvimento conjunto", "garante contribuição real das duas marcas", []],
+      ["Checklist de desenvolvimento conjunto", "garante contribuição real das duas marcas",
+        [["Notion", "https://www.notion.com"], ["Google Docs", "https://docs.google.com"]]],
       ["Testes com consumidores", "validam produto e comunicação antes da aprovação",
-        [["UserTesting", "https://www.usertesting.com"], ["Qualtrics", "https://www.qualtrics.com"]]],
+        [["UserTesting", "https://www.usertesting.com"], ["Qualtrics", "https://www.qualtrics.com"], ["Maze", "https://maze.co"], ["Opinion Box", "https://www.opinionbox.com"]]],
       ["Workshops conjuntos", "alinham as equipes das duas empresas",
         [["Miro", "https://miro.com"], ["FigJam", "https://www.figma.com/figjam/"], ["Mural", "https://www.mural.co"]]],
       ["Prototipagem rápida", "encurta o ciclo entre ideia e teste",
-        [["Figma", "https://www.figma.com"], ["Canva", "https://www.canva.com"]]]
+        [["Figma", "https://www.figma.com"], ["Canva", "https://www.canva.com"], ["Adobe Illustrator", "https://www.adobe.com/products/illustrator.html"], ["Adobe Express", "https://www.adobe.com/express/"]]]
     ],
     gate: "Produto e comunicação validados com o consumidor, com contribuição real das duas marcas.",
     gateSrc: "Critério declarado no próprio Quadro 5: “testar conceitos e protótipos com consumidores antes da finalização”.",
@@ -510,7 +545,11 @@ const DATA = [
       "Distribuição pensada em conjunto, não só o produto",
       "Se há royalties envolvidos, existe camada real de criação conjunta"
     ],
-        mats: [["Checklist de desenvolvimento conjunto", "#"], ["Roteiro de workshop", "#"], ["Protocolo de teste com consumidor", "#"]]
+    mats: [
+      ["Checklist de desenvolvimento conjunto", "#", "Verificação de que as duas marcas contribuíram de fato, em produto, comunicação e distribuição."],
+      ["Roteiro de workshop", "#", "Pauta da sessão conjunta entre as equipes: objetivo, dinâmica, materiais e decisões esperadas ao fim."],
+      ["Protocolo de teste com consumidor", "#", "Como testar conceito, produto e comunicação antes da aprovação final, com critério de aceitação definido."]
+    ]
   },
   {
     id: 4, cor: "var(--s4)", nome: "Lançamento e monitoramento",
@@ -532,13 +571,13 @@ const DATA = [
     ],
     ferr: [
       ["Dashboards de acompanhamento", "vendas, engajamento e share of voice",
-        [["Looker Studio", "https://lookerstudio.google.com"], ["Power BI", "https://www.microsoft.com/power-platform/products/power-bi"], ["Tableau", "https://www.tableau.com"]]],
+        [["Looker Studio", "https://lookerstudio.google.com"], ["Power BI", "https://www.microsoft.com/power-platform/products/power-bi"], ["Tableau", "https://www.tableau.com"], ["Metabase", "https://www.metabase.com"]]],
       ["Social listening pós-lançamento", "repercussão, menções e sentimento",
-        [["Brandwatch", "https://www.brandwatch.com"], ["Talkwalker", "https://www.talkwalker.com"], ["Stilingue", "https://www.stilingue.com.br"]]],
+        [["Brandwatch", "https://www.brandwatch.com"], ["Talkwalker", "https://www.talkwalker.com"], ["Stilingue", "https://www.stilingue.com.br"], ["Sprinklr", "https://www.sprinklr.com"]]],
       ["Relatórios de earned media", "amplitude da conversa gerada",
-        [["Meltwater", "https://www.meltwater.com"], ["Cision", "https://www.cision.com"], ["Muck Rack", "https://muckrack.com"]]],
+        [["Meltwater", "https://www.meltwater.com"], ["Cision", "https://www.cision.com"], ["Muck Rack", "https://muckrack.com"], ["Knewin", "https://www.knewin.com"]]],
       ["Trackers de brand equity", "antes e depois, para isolar o impacto",
-        [["Kantar", "https://www.kantar.com"], ["YouGov", "https://business.yougov.com"], ["Latana", "https://latana.com"]]]
+        [["Kantar", "https://www.kantar.com"], ["YouGov", "https://business.yougov.com"], ["Latana", "https://latana.com"], ["Ipsos", "https://www.ipsos.com"]]]
     ],
     gate: "Lançamento sincronizado e métricas comercial, de marca e digital em acompanhamento.",
     gateSrc: "Reformulação da seção “o que é feito” desta etapa no Quadro 5.",
@@ -550,7 +589,11 @@ const DATA = [
       "Earned media e repercussão sendo medidos, não só venda",
       "Combinado com o parceiro o que cada um divulga e quando"
     ],
-        mats: [["Dashboard de lançamento", "#"], ["Tracker de brand equity", "#"], ["Relatório de earned media", "#"]]
+    mats: [
+      ["Dashboard de lançamento", "#", "Painel único com venda, engajamento, share of voice e repercussão, no ar antes de a collab chegar ao mercado."],
+      ["Tracker de brand equity", "#", "Medição de awareness, consideração e associações antes e depois, para isolar o efeito da parceria."],
+      ["Relatório de earned media", "#", "Consolidação da cobertura espontânea: veículos, alcance, tom e amplitude da conversa gerada."]
+    ]
   },
   {
     id: 5, cor: "var(--s5)", nome: "Captura de aprendizados",
@@ -572,12 +615,14 @@ const DATA = [
       ["RH ou gestão do conhecimento", "apoia a disseminação interna", false]
     ],
     ferr: [
-      ["Roteiro de debriefing", "estrutura a conversa de fechamento", []],
+      ["Roteiro de debriefing", "estrutura a conversa de fechamento",
+        [["Google Docs", "https://docs.google.com"], ["Notion", "https://www.notion.com"]]],
       ["Base interna de casos", "torna o histórico consultável",
-        [["Notion", "https://www.notion.com"], ["Confluence", "https://www.atlassian.com/software/confluence"]]],
-      ["Sessões de compartilhamento", "levam o aprendizado a outras equipes", []],
+        [["Notion", "https://www.notion.com"], ["Confluence", "https://www.atlassian.com/software/confluence"], ["SharePoint", "https://www.microsoft.com/microsoft-365/sharepoint/collaboration"]]],
+      ["Sessões de compartilhamento", "levam o aprendizado a outras equipes",
+        [["Loom", "https://www.loom.com"], ["Microsoft Teams", "https://www.microsoft.com/microsoft-teams/group-chat-software"]]],
       ["Documentos vivos", "critérios atualizados a cada collab",
-        [["Notion", "https://www.notion.com"], ["Google Docs", "https://docs.google.com"]]]
+        [["Notion", "https://www.notion.com"], ["Google Docs", "https://docs.google.com"], ["Coda", "https://coda.io"]]]
     ],
     gate: "Caso documentado e critérios de decisão atualizados. O aprendizado realimenta a etapa 1.",
     gateSrc: "Reformulação da seção “o que é feito” desta etapa no Quadro 5.",
@@ -589,7 +634,11 @@ const DATA = [
       "Aprendizado compartilhado com outras equipes",
       "Se a pessoa que conduziu saísse amanhã, o que ela sabe está escrito"
     ],
-        mats: [["Roteiro de debriefing", "#"], ["Base de casos", "#"], ["Critérios de fit (documento vivo)", "#"]]
+    mats: [
+      ["Roteiro de debriefing", "#", "Perguntas que estruturam a conversa de fechamento: o que funcionou, o que não funcionou, o que muda na próxima."],
+      ["Base de casos", "#", "Registro do caso com contexto, decisões, resultados e aprendizados, acessível a quem não participou."],
+      ["Critérios de fit (documento vivo)", "#", "Os critérios de escolha de parceiro revistos a cada collab, com registro do que mudou e por quê."]
+    ]
   }
 ];
 
@@ -664,32 +713,76 @@ const home = `
   <h2 class="t">Toolkit de collabs</h2>
   <p class="sub">Framework de aplicação em cinco etapas para estruturar uma collab entre marcas.</p>
 
-  <div class="cta">
-    <button class="pri" id="goNext" type="button" data-v="1">Começar pela etapa 1</button>
-    <span class="gh"><b id="hn2">0</b> de ${TOTAL} itens do checklist</span>
-    <button class="lnk" id="bReset" type="button" hidden>limpar progresso</button>
-  </div>
-
-  <ol class="cards">
-    ${DATA.map(s => `<li>
-      <button class="card" style="--c:${s.cor}" data-v="${s.id}" type="button">
-        <span class="n">${s.id}</span>
-        <h3>${esc(s.nome)}</h3>
-        <p>${esc(s.foco)}</p>
-        <span class="pb"><span><i data-card="${s.id}"></i></span><em data-cardn="${s.id}">0/${s.check.length}</em></span>
-      </button></li>`).join("")}
-  </ol>
-
-  <div class="ref">
-    <div class="lbl">Referência</div>
-
-    <details class="d" style="--dot:var(--s1)">
+  <div class="ref intro">
+    <details class="d" style="--dot:var(--s1)" open>
       <summary>O que é considerado collab<span class="cv">▾</span></summary>
       <div class="bd"><p class="p">Modalidade de co-branding caracterizada por desenvolvimento conjunto genuíno,
         risco compartilhado entre os parceiros e geração de valor predominantemente simbólico e cultural.
         Difere de licenciamento e patrocínio pelo desenvolvimento conjunto de produto, pela iteração criativa
         bilateral e pela validação colaborativa com consumidores.</p></div>
     </details>
+
+    <details class="d" style="--dot:var(--s3)">
+      <summary>Preciso de uma collab?<span class="cv">▾</span></summary>
+      <div class="bd">
+        <p class="p">A pesquisa não encontrou a collab como resposta universal. Nos casos estudados, a decisão parte
+          de um problema de marca, e não de uma oportunidade de mídia: rejuvenescer a imagem, entrar num território
+          cultural onde a marca não tem repertório, falar com um público que não responde à comunicação atual ou
+          devolver relevância a uma categoria estagnada. O critério que os executivos colocam à frente dos demais,
+          inclusive dos estritamente comerciais, é o <b>fit de propósito e valores</b> entre as marcas. Vale considerar
+          também a natureza do retorno: o ganho percebido é predominantemente simbólico, em conversa, associação e
+          reposicionamento, com efeito às vezes perceptível sobre outras categorias do portfólio, e não em venda
+          imediata. E o custo não é só financeiro. Uma collab mobiliza várias áreas das duas empresas, exige governança
+          entre organizações autônomas e raramente acontece por inércia: alguém precisa conduzir do começo ao fim.</p>
+        <div class="whenwrap">
+          <div class="when yes">
+            <div class="k">Costuma fazer sentido quando</div>
+            <ul>
+              <li>a marca precisa de uma associação simbólica que não constrói sozinha, ou não no tempo disponível;</li>
+              <li>há complementaridade real de ativos entre as duas: produto, distribuição ou capacidade criativa;</li>
+              <li>propósito e posicionamento são compatíveis na prática, não apenas no discurso;</li>
+              <li>existe quem sustente a coordenação entre as empresas até o fim do projeto.</li>
+            </ul>
+          </div>
+          <div class="when no">
+            <div class="k">Provavelmente não é o caminho quando</div>
+            <ul>
+              <li>o objetivo é volume de venda no curto prazo e a conta só fecha por aí;</li>
+              <li>a motivação é ocupar espaço ou repetir o que o mercado está fazendo, o risco de fazer collab por fazer;</li>
+              <li>não está previsto desenvolvimento conjunto, caso em que o instrumento tende a ser licenciamento ou patrocínio;</li>
+              <li>a estrutura interna não comporta o engajamento simultâneo de marketing, jurídico, produto e operações.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="path">
+    <div class="lbl">Se a resposta for sim</div>
+    <p class="p">O processo observado nas organizações estudadas se organiza em cinco etapas. Cada uma reúne o que é
+      feito, como é feito, quem entra, as ferramentas, os materiais de apoio e um checklist. Ao fim de cada etapa, um
+      critério de passagem indica se já dá para avançar.</p>
+
+    <div class="cta">
+      <button class="pri" id="goNext" type="button" data-v="1">Começar pela etapa 1</button>
+      <span class="gh"><b id="hn2">0</b> de ${TOTAL} itens do checklist</span>
+      <button class="lnk" id="bReset" type="button" hidden>limpar progresso</button>
+    </div>
+
+    <ol class="cards">
+      ${DATA.map(s => `<li>
+        <button class="card" style="--c:${s.cor}" data-v="${s.id}" type="button">
+          <span class="n">${s.id}</span>
+          <h3>${esc(s.nome)}</h3>
+          <p>${esc(s.foco)}</p>
+          <span class="pb"><span><i data-card="${s.id}"></i></span><em data-cardn="${s.id}">0/${s.check.length}</em></span>
+        </button></li>`).join("")}
+    </ol>
+  </div>
+
+  <div class="ref">
+    <div class="lbl">Referência</div>
 
     <details class="d" style="--dot:var(--s2)">
       <summary>Fatores críticos, presentes em todas as etapas<span class="cv">▾</span></summary>
@@ -827,12 +920,13 @@ const stage = s => `
     <details>
       <summary><span class="ic">5</span>Materiais<span class="ct">${s.mats.length}</span><span class="cv">▾</span></summary>
       <div class="bd"><div class="mats">${s.mats.map(m => m[1] === "#"
-        ? `<span class="slot">${esc(m[0])}</span>`
-        : `<a href="${esc(m[1])}" target="_blank" rel="noopener">${esc(m[0])}<span class="tagr">abrir ↗</span></a>`).join("")}</div></div>
+        ? `<div class="slot"><b>${esc(m[0])}</b><span class="ds">${esc(m[2])}</span></div>`
+        : `<a href="${esc(m[1])}" target="_blank" rel="noopener"><b>${esc(m[0])}<span class="tagr">abrir ↗</span></b>
+           <span class="ds">${esc(m[2])}</span></a>`).join("")}</div></div>
     </details>
 
     <details>
-      <summary><span class="ic">6</span>Checklist<span class="ct" data-count="${s.id}">0/${s.check.length}</span><span class="cv">▾</span></summary>
+      <summary><span class="ic">6</span>Checklist (passo a passo)<span class="ct" data-count="${s.id}">0/${s.check.length}</span><span class="cv">▾</span></summary>
       <div class="bd">
         <div class="clbar"><i data-bar="${s.id}"></i></div>
         <ul class="cl">${s.check.map((c, j) => `<li><label>
