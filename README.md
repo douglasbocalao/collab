@@ -14,7 +14,9 @@ O toolkit organiza em cinco etapas o processo que dez organizações brasileiras
 - materiais de apoio;
 - um checklist e o critério de passagem para a etapa seguinte.
 
-A tela inicial traz apenas as cinco etapas e o progresso do checklist. O material de referência (definição de collab, fatores críticos, lentes teóricas, matriz de capacidades por etapa, fonte e limites) fica recolhido em acordeões ao final da página.
+A tela inicial traz apenas as cinco etapas e o progresso do checklist. O material de referência (definição de collab, fatores críticos, lentes teóricas, matriz de capacidades por etapa, fonte e limites) fica recolhido em acordeões logo abaixo.
+
+Ao final da home há uma vitrine com as 20 publicações mais recentes sobre collabs no **Meio & Mensagem** e no **Propmark**, com imagem, título e link que abre em nova janela. É contexto de mercado, não material da pesquisa, e está sinalizado como tal na própria página. A lista não inclui notícias que citem as empresas entrevistadas, para não reassociar o toolkit a elas.
 
 O toolkit não identifica entrevistados nem empresas.
 
@@ -29,7 +31,7 @@ Duas ressalvas importantes, as mesmas registradas no documento:
 
 ## Características técnicas
 
-Arquivo único, sem dependência externa, sem build. Funciona offline com duplo clique no `index.html`.
+Arquivo único, sem build. Funciona com duplo clique no `index.html`. A única dependência externa são as imagens das notícias, servidas pelos próprios veículos: sem internet os cards aparecem sem a foto, e o resto da interface funciona normalmente.
 
 - Tema claro e escuro, acompanhando a preferência do sistema, com alternância manual.
 - Progresso do checklist salvo no navegador (`localStorage`, chave `collab-toolkit-v3`). É por navegador e por endereço: não sincroniza entre dispositivos.
@@ -43,7 +45,9 @@ Arquivo único, sem dependência externa, sem build. Funciona offline com duplo 
 
 Edite o `index.html` e faça commit na branch principal. O GitHub Pages publica em seguida.
 
-Os **materiais de apoio** de cada etapa têm slots vazios, marcados com `"#"` na lista `mats` dentro da constante `DATA`. Enquanto ficarem com `#`, aparecem na interface como pendentes.
+Os **materiais de apoio** de cada etapa têm slots vazios, marcados com `"#"` na lista `mats` dentro da constante `DATA`. Enquanto ficarem com `#`, aparecem com borda tracejada e sem link.
+
+As notícias ficam na constante `NEWS`, no formato `[título, link, imagem, data, veículo]`, e a data do levantamento em `NEWS_DATA`. Para atualizar a vitrine, substitua essa lista: os dois veículos expõem a API do WordPress em `/wp-json/wp/v2/posts?search=collab&per_page=20&_embed=1`.
 
 ## Como citar
 

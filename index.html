@@ -33,7 +33,7 @@
   --r:16px; --r2:12px; --r3:9px;
   --sh:0 1px 2px rgba(16,19,42,.04), 0 10px 26px -18px rgba(16,19,42,.3);
   --shl:0 2px 6px rgba(16,19,42,.06), 0 24px 48px -28px rgba(16,19,42,.45);
-  --top:57px;
+  --top:60px;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
@@ -67,22 +67,32 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ============================================================ topbar */
-.hd{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);
-  backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
-.hd .wrap{display:flex;align-items:center;gap:14px;height:56px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em;font-size:15.5px}
-.brand i{width:26px;height:26px;border-radius:8px;flex:0 0 auto;
-  background:linear-gradient(135deg,#7C5CFF,#12C8CB)}
+.hd{position:sticky;top:0;z-index:50;color:#fff;overflow:hidden;
+  background:linear-gradient(102deg,#3D2BC9 0%,#5B4BE3 22%,#2E7FE6 58%,#0FAF9E 100%)}
+.hd::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 200% at 8% 0%,rgba(255,255,255,.22),transparent 55%)}
+.hd .wrap{position:relative;z-index:1;display:flex;align-items:center;gap:14px;height:60px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.025em;font-size:17px}
+.brand i{width:30px;height:30px;border-radius:9px;flex:0 0 auto;position:relative;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.brand i::before,.brand i::after{content:"";position:absolute;top:8px;width:12px;height:12px;
+  border:2px solid #fff;border-radius:50%}
+.brand i::before{left:4px} .brand i::after{right:4px;opacity:.75}
+.brand s{text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.72);border-left:1px solid rgba(255,255,255,.3);padding-left:11px;margin-left:2px}
 .sp{flex:1}
-.gp{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--ink2)}
-.gp b{color:var(--ink);font-variant-numeric:tabular-nums;font-weight:600}
-.gbar{width:84px;height:5px;border-radius:99px;background:var(--line);overflow:hidden}
+.gp{display:flex;align-items:center;gap:9px;font-size:12px;color:rgba(255,255,255,.78)}
+.gp b{color:#fff;font-variant-numeric:tabular-nums;font-weight:700}
+.gbar{width:88px;height:6px;border-radius:99px;background:rgba(255,255,255,.22);overflow:hidden}
 .gbar i{display:block;height:100%;width:0;border-radius:99px;
-  background:linear-gradient(90deg,var(--s1),var(--s5));transition:width .3s}
-.ib{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:var(--ink2);
-  border:1px solid var(--line);background:var(--card);border-radius:9px;padding:7px 11px;transition:.15s}
-.ib:hover{color:var(--ink);border-color:color-mix(in srgb,var(--a) 45%,var(--line))}
-@media (max-width:760px){.gp{display:none}}
+  background:linear-gradient(90deg,#FFD166,#fff);transition:width .3s}
+.ib{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:rgba(255,255,255,.92);
+  border:1px solid rgba(255,255,255,.32);background:rgba(255,255,255,.12);border-radius:9px;
+  padding:7px 12px;transition:.15s;backdrop-filter:blur(4px)}
+.ib:hover{background:rgba(255,255,255,.24);color:#fff;border-color:rgba(255,255,255,.6)}
+.ib:focus-visible{outline-color:#fff}
+@media (max-width:760px){.gp,.brand s{display:none}}
 @media (max-width:520px){.ib.opt{display:none}}
 
 /* ============================================================ stepper */
@@ -98,7 +108,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   font-size:11px;font-weight:700;color:#fff;background:var(--c)}
 .seg .nm{display:block;font-size:11.5px;font-weight:600;line-height:1.2;color:var(--ink);
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.seg[aria-current="true"]{background:color-mix(in srgb,var(--c) 10%,var(--card));border-color:var(--c)}
+.seg[aria-current="true"]{background:var(--c);border-color:var(--c);
+  box-shadow:0 6px 16px -8px color-mix(in srgb,var(--c) 80%,transparent)}
+.seg[aria-current="true"] .nm{color:#fff}
+.seg[aria-current="true"] .n{background:rgba(255,255,255,.25);color:#fff}
+.seg.home[aria-current="true"]{background:var(--ink);border-color:var(--ink)}
 .seg .fill{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--c);transition:width .3s}
 .seg.done .n::after{content:"";position:absolute;inset:auto auto auto auto;width:0;height:0}
 .seg.done .n{background:var(--c);font-size:0}
@@ -113,7 +127,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 h2.t{font-size:clamp(26px,3.4vw,34px);line-height:1.1;letter-spacing:-.03em;font-weight:700}
 p.sub{color:var(--ink2);font-size:16px;margin-top:8px;max-width:58ch}
-.lbl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
+.lbl{display:flex;align-items:center;gap:9px;font-size:11px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink2);margin-bottom:12px}
+.lbl::before{content:"";width:22px;height:3px;border-radius:99px;background:linear-gradient(90deg,var(--s1),var(--s5))}
 
 /* home: ações */
 .cta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px}
@@ -132,8 +148,9 @@ p.sub{color:var(--ink2);font-size:16px;margin-top:8px;max-width:58ch}
 @media (max-width:700px){.cards{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:460px){.cards{grid-template-columns:1fr}}
 .card{--c:var(--s1);position:relative;width:100%;height:100%;text-align:left;background:var(--card);
-  border:1px solid var(--line);border-radius:var(--r);padding:16px 16px 14px;box-shadow:var(--sh);
-  display:flex;flex-direction:column;gap:7px;transition:.18s}
+  border:1px solid var(--line);border-radius:var(--r);padding:18px 16px 14px;box-shadow:var(--sh);
+  display:flex;flex-direction:column;gap:7px;transition:.18s;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--c)}
 .card:hover{transform:translateY(-3px);box-shadow:var(--shl);border-color:color-mix(in srgb,var(--c) 45%,var(--line))}
 .card .n{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;
   font-size:12.5px;font-weight:700;color:#fff;background:var(--c)}
@@ -148,8 +165,9 @@ p.sub{color:var(--ink2);font-size:16px;margin-top:8px;max-width:58ch}
 .ref{margin-top:40px}
 details.d{border:1px solid var(--line);background:var(--card);border-radius:var(--r2);margin-bottom:8px;overflow:hidden}
 details.d[open]{box-shadow:var(--sh)}
-details.d>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:10px;
+details.d>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:11px;
   font-size:14px;font-weight:600;transition:.15s}
+details.d>summary::before{content:"";width:8px;height:8px;border-radius:50%;flex:0 0 auto;background:var(--dot,var(--s3))}
 details.d>summary::-webkit-details-marker{display:none}
 details.d>summary:hover{background:var(--hair)}
 details.d>summary .cv{margin-left:auto;color:var(--ink3);font-size:14px;line-height:1;transition:transform .2s}
@@ -161,7 +179,9 @@ details.d .bd>*+*{margin-top:12px}
 
 /* trios (fatores, lentes) */
 .tri{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
-.tri .u{border:1px solid var(--line);border-radius:var(--r2);padding:13px 14px;background:var(--bg)}
+.tri .u{--c:var(--s1);border:1px solid var(--line);border-top:3px solid var(--c);border-radius:var(--r2);
+  padding:13px 14px;background:var(--bg)}
+.tri .u h4{color:var(--ink)}
 .tri .u h4{font-size:13.5px;font-weight:650;margin-bottom:5px}
 .tri .u p{font-size:12.5px;color:var(--ink2);line-height:1.5}
 .lensgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
@@ -193,7 +213,10 @@ details.d .bd>*+*{margin-top:12px}
 .mxleg i.d1{opacity:.32}
 
 /* ============================================================ etapa */
-.shead{border-bottom:1px solid var(--line);padding-bottom:20px}
+.shead{position:relative;border-bottom:1px solid var(--line);padding-bottom:20px}
+.shead::before{content:"";position:absolute;left:50%;top:-38px;width:100vw;height:230px;
+  transform:translateX(-50%);z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--a) 13%,transparent),transparent)}
 .kick{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11.5px;color:var(--ink3);margin-bottom:10px}
 .kick .e{font-weight:700;color:var(--a);letter-spacing:.08em;text-transform:uppercase}
 .cx{font-size:11px;font-weight:600;border-radius:99px;padding:3px 9px;border:1px solid;
@@ -210,26 +233,44 @@ details.d .bd>*+*{margin-top:12px}
   font-size:14.5px;font-weight:600;transition:.15s}
 .acc summary::-webkit-details-marker{display:none}
 .acc summary:hover{background:var(--hair)}
-.acc .ic{width:22px;height:22px;flex:0 0 auto;border-radius:7px;display:grid;place-items:center;
-  font-size:11px;font-weight:700;color:var(--a);background:color-mix(in srgb,var(--a) 12%,transparent)}
+.acc .ic{width:23px;height:23px;flex:0 0 auto;border-radius:7px;display:grid;place-items:center;
+  font-size:11.5px;font-weight:800;color:#fff;background:var(--a);
+  box-shadow:0 4px 10px -6px color-mix(in srgb,var(--a) 90%,transparent)}
 .acc .ct{margin-left:auto;font-size:11.5px;font-weight:500;color:var(--ink3);font-variant-numeric:tabular-nums}
 .acc .cv{color:var(--ink3);font-size:14px;line-height:1;margin-left:10px;transition:transform .2s}
 .acc details[open] .cv{transform:rotate(180deg)}
 .acc .bd{padding:4px 16px 18px;border-top:1px solid var(--hair)}
 .acc .bd>*+*{margin-top:12px}
 
-.note{border-left:3px solid color-mix(in srgb,var(--a) 60%,transparent);padding:2px 0 2px 12px;
-  font-size:13px;color:var(--ink2);line-height:1.5}
-ol.how{list-style:none;counter-reset:h;display:flex;flex-direction:column;gap:9px}
-ol.how li{counter-increment:h;padding-left:30px;position:relative;font-size:14px;color:var(--ink2);line-height:1.5}
-ol.how li::before{content:counter(h);position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:6px;
-  display:grid;place-items:center;font-size:10.5px;font-weight:700;color:var(--ink3);background:var(--soft)}
+/* texto editorial */
+.lead{font-size:clamp(17px,1.5vw,20px);line-height:1.45;letter-spacing:-.017em;color:var(--ink);
+  font-weight:450;max-width:62ch}
+.lead strong{font-weight:700;color:var(--a);
+  background:linear-gradient(transparent 62%,color-mix(in srgb,var(--a) 22%,transparent) 0)}
+.p strong,.p b{color:var(--ink);font-weight:650}
+.pull{position:relative;margin-top:18px;padding:16px 18px 16px 46px;border-radius:var(--r2);
+  background:color-mix(in srgb,var(--a) 7%,var(--card));
+  border:1px solid color-mix(in srgb,var(--a) 22%,transparent);
+  font-size:15.5px;line-height:1.45;font-weight:550;color:var(--ink);letter-spacing:-.01em}
+.pull::before{content:"”";position:absolute;left:14px;top:14px;font-size:44px;line-height:.7;
+  font-weight:800;color:color-mix(in srgb,var(--a) 45%,transparent)}
+.pull .k{display:block;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--a);margin-bottom:5px}
+ol.how{list-style:none;counter-reset:h;display:block;margin-top:2px}
+ol.how li{counter-increment:h;display:grid;grid-template-columns:46px 1fr;gap:16px;align-items:start;
+  padding:15px 0;border-top:1px solid var(--hair);font-size:15px;color:var(--ink2);line-height:1.5}
+ol.how li:first-child{border-top:0;padding-top:4px}
+ol.how li::before{content:counter(h,decimal-leading-zero);font-size:24px;font-weight:800;line-height:1;
+  letter-spacing:-.04em;color:var(--a);opacity:.85;font-variant-numeric:tabular-nums}
+ol.how li strong{color:var(--ink);font-weight:650}
 .areas,.tools,.mats{display:grid;gap:9px}
 .areas{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
 .area{border:1px solid var(--line);border-radius:var(--r3);padding:11px 13px;background:var(--bg)}
 .area b{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:650;margin-bottom:3px}
-.area .ld{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;
-  background:var(--a);border-radius:99px;padding:2px 7px}
+.area .ld{font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;
+  background:var(--a);border-radius:99px;padding:2px 8px;
+  box-shadow:0 4px 10px -6px color-mix(in srgb,var(--a) 90%,transparent)}
+.area{border-left:3px solid color-mix(in srgb,var(--a) 35%,var(--line))}
 .area span{font-size:12.5px;color:var(--ink2);line-height:1.45}
 .tools{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
 .tool{border:1px solid var(--line);border-radius:var(--r3);padding:11px 13px;background:var(--bg)}
@@ -245,6 +286,7 @@ ol.how li::before{content:counter(h);position:absolute;left:0;top:1px;width:20px
   border:1px solid var(--line);border-radius:var(--r3);padding:11px 13px;font-size:13px;text-decoration:none;background:var(--bg)}
 .mats a:hover{border-color:var(--a)}
 .mats .slot{border-style:dashed;color:var(--ink3)}
+.mats a{border-left:3px solid var(--a)}
 .tagr{font-size:10.5px;font-weight:600;color:var(--ink3);white-space:nowrap}
 .mats a .tagr{color:var(--a)}
 
@@ -264,8 +306,10 @@ ul.cl input:checked+span{color:var(--ink3);text-decoration:line-through;text-dec
 .clfoot{display:flex;justify-content:flex-end;margin-top:10px}
 
 /* gate + paginação */
-.gate{margin-top:22px;border:1px solid color-mix(in srgb,var(--a) 30%,var(--line));border-radius:var(--r);
-  background:color-mix(in srgb,var(--a) 6%,var(--card));padding:16px 18px}
+.gate{position:relative;margin-top:22px;border:1px solid color-mix(in srgb,var(--a) 32%,var(--line));
+  border-radius:var(--r);background:color-mix(in srgb,var(--a) 8%,var(--card));padding:16px 18px 16px 22px;
+  overflow:hidden}
+.gate::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--a)}
 .gate .k{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--a);margin-bottom:6px}
 .gate .g{font-size:15px;font-weight:600;line-height:1.4}
 .gate .s{font-size:12px;color:var(--ink3);margin-top:7px;line-height:1.45}
@@ -279,8 +323,31 @@ ul.cl input:checked+span{color:var(--ink3);text-decoration:line-through;text-dec
   font-size:11.5px;color:var(--ink3);line-height:1.6;max-width:80ch}
 .kbd{font-size:11px;border:1px solid var(--line);border-radius:5px;padding:1px 5px;color:var(--ink3);background:var(--card)}
 
+/* ============================================================ notícias */
+.news{margin-top:44px}
+.newsnote{font-size:12.5px;color:var(--ink3);line-height:1.5;max-width:80ch;margin:-4px 0 14px}
+.nwgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:1000px){.nwgrid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){.nwgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:460px){.nwgrid{grid-template-columns:1fr}}
+.nw{--c:var(--s3);display:flex;flex-direction:column;text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh);transition:.18s}
+.nw.mm{--c:#E8452C} .nw.pm{--c:#0E9BC9}
+.nw:hover{transform:translateY(-3px);box-shadow:var(--shl);border-color:color-mix(in srgb,var(--c) 50%,var(--line))}
+.nw .th{display:block;aspect-ratio:16/9;background:linear-gradient(135deg,
+  color-mix(in srgb,var(--c) 22%,var(--soft)),var(--soft));overflow:hidden}
+.nw .th img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.nw:hover .th img{transform:scale(1.04)}
+.nw.noimg .th img{display:none}
+.nw .mt{display:flex;align-items:center;gap:8px;padding:11px 13px 0}
+.nw .mt em{font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:#fff;background:var(--c);border-radius:99px;padding:3px 8px}
+.nw .mt i{font-style:normal;font-size:11px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.nw h4{padding:8px 13px 14px;font-size:13.5px;font-weight:650;line-height:1.32;letter-spacing:-.012em;color:var(--ink)}
+.nw:hover h4{color:var(--c)}
+
 @media print{
-  .hd,.stepbar,.pg,.cta,.clfoot{display:none!important}
+  .hd,.stepbar,.pg,.cta,.clfoot,.news{display:none!important}
   .view{display:block!important;page-break-after:always;padding:0}
   body{background:#fff}
   .acc details,.card,.gate{box-shadow:none;border-color:#ddd}
@@ -291,7 +358,7 @@ ul.cl input:checked+span{color:var(--ink3);text-decoration:line-through;text-dec
 
 <header class="hd">
   <div class="wrap">
-    <span class="brand"><i></i>Toolkit de collabs</span>
+    <span class="brand"><i></i>Toolkit de collabs<s>FGV EAESP</s></span>
     <span class="sp"></span>
     <span class="gp"><span class="gbar"><i id="hb"></i></span><b id="hn">0/33</b></span>
     <button class="ib opt" id="bExp" type="button">Baixar checklist</button>
@@ -540,6 +607,33 @@ const MATRIX = [
 ];
 
 
+/* Notícias de collabs no mercado. Links externos para Meio & Mensagem e Propmark,
+   coletados em 14/09/2026. Não são dado de pesquisa: servem de contexto de mercado.
+   Formato: [titulo, link, imagem, data, veiculo] */
+const NEWS = [
+  ["MSP Estúdios lança coleção de Halloween com Herchcovitch", "https://www.meioemensagem.com.br/marketing/msp-estudios-lanca-colecao-de-halloween-com-herchcovitch", "https://www.meioemensagem.com.br/wp-content/uploads/2026/09/TURMA-DA-MONICA-E-PENADINHO-e-alexandre-Herchcovitch-cred-div-1280x852-1-768x511.jpg", "2026-09-11", "mm"],
+  ["Kenner estreia no futebol paulista em parceria com o São Paulo FC", "https://propmark.com.br/anunciantes/kenner-estreia-no-futebol-paulista-em-parceria-com-o-sao-paulo-fc/", "https://propmark.com.br/wp-content/uploads/2026/09/KENNER-SPFC1725-768x587.jpg", "2026-09-09", "pm"],
+  ["Boca Rosa anuncia collab de esmaltes com Mundial e Impala", "https://propmark.com.br/anunciantes/boca-rosa-anuncia-collab-de-esmaltes-com-mundial-e-impala/", "https://propmark.com.br/wp-content/uploads/2026/09/Boca-Rosa-Impala_Divulgacao-3-e1788876013627-768x666.jpg", "2026-09-08", "pm"],
+  ["Working Title transforma collabs em estratégia de marca", "https://www.meioemensagem.com.br/marketing/working-title-transforma-collabs-em-estrategia-de-marca", "https://www.meioemensagem.com.br/wp-content/uploads/2026/08/1280x852-working-titles-disney-fila-cred-div-768x511.jpg", "2026-09-03", "mm"],
+  ["SBT lança coleção de camisetas do Bozo em parceria com a Loja 90", "https://propmark.com.br/midia/sbt-lanca-colecao-de-camisetas-do-bozo-em-parceria-com-a-loja-90/", "https://propmark.com.br/wp-content/uploads/2026/09/unnamed-e1788284663166-300x252.png", "2026-09-01", "pm"],
+  ["Ovvi e #Togetherband lançam coleção com artesãos Yawanawá do Acre", "https://propmark.com.br/anunciantes/ovvi-e-togetherband-lancam-colecao-com-artesaos-yawanawa-do-acre/", "https://propmark.com.br/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-01-at-09.49.40-768x434.jpeg", "2026-09-01", "pm"],
+  ["Converse, Puma e Nike investem em collabs com animes", "https://www.meioemensagem.com.br/marketing/converse-puma-e-nike-investem-em-collabs-com-animes", "https://www.meioemensagem.com.br/wp-content/uploads/2026/08/animes_cred_kuremo_Acento-Creativo-stockadobecom_div_site-768x511.jpg", "2026-08-31", "mm"],
+  ["Rahra anuncia parceria com Warner Bros. para coleção de Looney Tunes", "https://propmark.com.br/anunciantes/rahra-anuncia-parceria-com-warner-bros-para-colecao-de-looney-tunes/", "https://propmark.com.br/wp-content/uploads/2026/08/IMG_1451-e1787861534621-768x689.jpg", "2026-08-27", "pm"],
+  ["Havaianas e KidSuper revitalizam quadra no Brás para antecipar nova coleção", "https://propmark.com.br/anunciantes/havaianas-e-kidsuper-revitalizam-quadra-no-bras-para-antecipar-nova-colecao/", "https://propmark.com.br/wp-content/uploads/2026/08/Captura-de-tela-2026-08-27-100459-768x504.png", "2026-08-27", "pm"],
+  ["Quais redes de fast-food apostaram nas collabs em 2026?", "https://www.meioemensagem.com.br/marketing/quais-redes-de-fast-food-apostaram-nas-collabs-em-2026", "https://www.meioemensagem.com.br/wp-content/uploads/2026/08/fastfood-collabs-768x512.jpg", "2026-08-26", "mm"],
+  ["Ação da Bershka lança coleção com Marina Sena e faixa inédita da cantora", "https://propmark.com.br/anunciantes/acao-da-bershka-lanca-colecao-com-marina-sena-e-faixa-inedita-da-cantora/", "https://propmark.com.br/wp-content/uploads/2026/08/Captura-de-tela-2026-08-26-123812-768x403.png", "2026-08-26", "pm"],
+  ["Shein e Warner Bros anunciam collab para o Dia das Crianças", "https://propmark.com.br/anunciantes/shein-e-warner-bros-anunciam-collab-para-o-dia-das-criancas/", "https://propmark.com.br/wp-content/uploads/2026/08/Design-sem-nome-1-1-768x512.jpg", "2026-08-25", "pm"],
+  ["Busca de Adam Mitch pelo ‘tom canela perfeito’ vira coleção com Eudora", "https://propmark.com.br/anunciantes/busca-de-adam-mitch-pelo-tom-canela-perfeito-vira-colecao-com-eudora/", "https://propmark.com.br/wp-content/uploads/2026/08/unnamed-53-768x518.png", "2026-08-25", "pm"],
+  ["Texaco e Approve criam coleção de roupas em collab", "https://www.meioemensagem.com.br/marketing/texaco-e-approve-criam-colecao-de-roupas-em-collab", "https://www.meioemensagem.com.br/wp-content/uploads/2026/08/Texaco-Approve-cred-divulgacao-3-768x511.jpg", "2026-08-24", "mm"],
+  ["Mondelez e Mattel unem BIS e UNO em collab", "https://www.meioemensagem.com.br/marketing/mondelez-e-mattel-unem-bis-e-uno-em-collab", "https://www.meioemensagem.com.br/wp-content/uploads/2026/08/Fotos-Divulgacao-2026-08-20T153714.597-768x511.jpg", "2026-08-20", "mm"],
+  ["Farm Rio e Stanley 1913 lançam primeira coleção conjunta", "https://propmark.com.br/anunciantes/farm-rio-e-stanley-1913-lancam-primeira-colecao-conjunta/", "https://propmark.com.br/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-19-at-18.10.19-1-768x576.jpeg", "2026-08-19", "pm"],
+  ["Porta dos Fundos cria coleção exclusiva com a Reserva", "https://www.meioemensagem.com.br/midia/porta-dos-fundos-cria-colecao-exclusiva-com-a-reserva", "https://www.meioemensagem.com.br/wp-content/uploads/2026/08/1280x852-colecao-porta-dos-fundos-cred-divulgacao-768x511.jpg", "2026-08-14", "mm"],
+  ["Converse lança coleção de tênis inspirada em Dragon Ball Z", "https://www.meioemensagem.com.br/marketing/converse-lanca-colecao-de-tenis-inspirada-em-dragon-ball-z", "https://www.meioemensagem.com.br/wp-content/uploads/2026/08/4c250a62-1126-43e1-887d-115d6bb78bd1-768x511.jpg", "2026-08-11", "mm"],
+  ["Rennova Care e Cláudia Raia lançam coleção inspirada em Tarsila", "https://propmark.com.br/anunciantes/rennova-care-e-claudia-raia-lancam-colecao-inspirada-em-tarsila/", "https://propmark.com.br/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-05-at-18.17.07-768x512.webp", "2026-08-06", "pm"],
+  ["Quando a influência vira estratégia: a nova era das collabs", "https://propmark.com.br/artigos/quando-a-influencia-vira-estrategia-a-nova-era-das-collabs/", "https://propmark.com.br/wp-content/uploads/2026/08/Lele-Saddi_Creditos-Divulgacao-scaled-e1785872008786-768x507.webp", "2026-08-04", "pm"]
+];
+const NEWS_DATA = "14/09/2026";
+
 const KEY = "collab-toolkit-v3";
 const store = (() => {           /* localStorage pode estar bloqueado (file://, aba privada) */
   try { localStorage.setItem("__t", "1"); localStorage.removeItem("__t"); return localStorage; }
@@ -589,7 +683,7 @@ const home = `
   <div class="ref">
     <div class="lbl">Referência</div>
 
-    <details class="d">
+    <details class="d" style="--dot:var(--s1)">
       <summary>O que é considerado collab<span class="cv">▾</span></summary>
       <div class="bd"><p class="p">Modalidade de co-branding caracterizada por desenvolvimento conjunto genuíno,
         risco compartilhado entre os parceiros e geração de valor predominantemente simbólico e cultural.
@@ -597,16 +691,16 @@ const home = `
         bilateral e pela validação colaborativa com consumidores.</p></div>
     </details>
 
-    <details class="d">
+    <details class="d" style="--dot:var(--s2)">
       <summary>Fatores críticos, presentes em todas as etapas<span class="cv">▾</span></summary>
       <div class="bd"><div class="tri">
-        <div class="u"><h4>Fit de propósito e valores</h4><p>Pesa mais do que compatibilidade de audiência.</p></div>
-        <div class="u"><h4>Autenticidade do desenvolvimento conjunto</h4><p>As duas marcas contribuem de fato; é o que separa collab de licenciamento.</p></div>
-        <div class="u"><h4>Confiança relacional</h4><p>Destrava a coordenação entre empresas autônomas e a resolução de tensões.</p></div>
+        <div class="u" style="--c:var(--s1)"><h4>Fit de propósito e valores</h4><p>Pesa mais do que compatibilidade de audiência.</p></div>
+        <div class="u" style="--c:var(--s3)"><h4>Autenticidade do desenvolvimento conjunto</h4><p>As duas marcas contribuem de fato; é o que separa collab de licenciamento.</p></div>
+        <div class="u" style="--c:var(--s5)"><h4>Confiança relacional</h4><p>Destrava a coordenação entre empresas autônomas e a resolução de tensões.</p></div>
       </div></div>
     </details>
 
-    <details class="d">
+    <details class="d" style="--dot:var(--s3)">
       <summary>Lentes teóricas<span class="cv">▾</span></summary>
       <div class="bd"><div class="lensgrid">
         <div class="lb" style="--c:var(--mo)">
@@ -628,7 +722,7 @@ const home = `
       </div></div>
     </details>
 
-    <details class="d">
+    <details class="d" style="--dot:var(--s4)">
       <summary>Capacidades por etapa<span class="cv">▾</span></summary>
       <div class="bd">
         <p class="p">A relação não é de um para um: a mesma capacidade atravessa mais de uma etapa, e cada etapa
@@ -653,7 +747,7 @@ const home = `
       </div>
     </details>
 
-    <details class="d">
+    <details class="d" style="--dot:var(--s5)">
       <summary>Fonte e limites<span class="cv">▾</span></summary>
       <div class="bd">
         <p class="p">Conteúdo das etapas: Quadro 5 e Capítulo 4 da dissertação <i>Collab de dentro para fora:
@@ -665,6 +759,22 @@ const home = `
           acréscimo de apoio do autor e não derivam da pesquisa.</p>
       </div>
     </details>
+  </div>
+
+  <div class="news">
+    <div class="lbl">Collabs no mercado</div>
+    <p class="newsnote">Últimas ${NEWS.length} publicações sobre collabs em Meio &amp; Mensagem e Propmark,
+      levantadas em ${NEWS_DATA}. Contexto de mercado, não material da pesquisa. Abrem em nova janela.</p>
+    <div class="nwgrid">
+      ${NEWS.map(n => `
+        <a class="nw ${n[4]}" href="${n[1]}" target="_blank" rel="noopener">
+          <span class="th"><img src="${n[2]}" alt="" loading="lazy" decoding="async"
+            onerror="this.closest('.nw').classList.add('noimg')"></span>
+          <span class="mt"><em>${n[4] === "mm" ? "Meio &amp; Mensagem" : "Propmark"}</em>
+            <i>${n[3].split("-").reverse().join("/")}</i></span>
+          <h4>${esc(n[0])}</h4>
+        </a>`).join("")}
+    </div>
   </div>
 
   <p class="foot">Atalhos: <span class="kbd">1</span>–<span class="kbd">5</span> abrem as etapas,
@@ -688,9 +798,9 @@ const stage = s => `
     <details open>
       <summary><span class="ic">1</span>O que é feito<span class="cv">▾</span></summary>
       <div class="bd">
-        <p class="p">${s.resumo}</p>
+        <p class="lead">${s.resumo}</p>
         <p class="p">${esc(s.oque)}</p>
-        <p class="note">${esc(s.tensao)}</p>
+        <div class="pull"><span class="k">ponto de atenção</span>${esc(s.tensao)}</div>
       </div>
     </details>
 
@@ -717,7 +827,7 @@ const stage = s => `
     <details>
       <summary><span class="ic">5</span>Materiais<span class="ct">${s.mats.length}</span><span class="cv">▾</span></summary>
       <div class="bd"><div class="mats">${s.mats.map(m => m[1] === "#"
-        ? `<span class="slot">${esc(m[0])}<span class="tagr">adicionar link</span></span>`
+        ? `<span class="slot">${esc(m[0])}</span>`
         : `<a href="${esc(m[1])}" target="_blank" rel="noopener">${esc(m[0])}<span class="tagr">abrir ↗</span></a>`).join("")}</div></div>
     </details>
 
