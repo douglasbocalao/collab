@@ -360,8 +360,6 @@ ul.cl input:checked+span{color:var(--ink3);text-decoration:line-through;
 .resume .rt{display:flex;flex-direction:column;gap:2px;min-width:0}
 .resume b{font-size:15px;font-weight:650;letter-spacing:-.012em}
 .resume span{font-size:12.5px;color:var(--ink2);font-variant-numeric:tabular-nums}
-.resume .pri{margin-left:auto}
-@media (max-width:520px){.resume .pri{margin-left:0;width:100%}}
 .intro{margin-top:28px;display:flex;flex-direction:column;gap:16px}
 .panel{position:relative;border:1px solid var(--line);border-radius:var(--r);background:var(--card);
   box-shadow:var(--sh);padding:28px 30px 26px;overflow:hidden}
@@ -790,7 +788,6 @@ const home = `
 
   <div class="resume" id="resume" hidden>
     <div class="rt"><b id="rTit"></b><span id="rSub"></span></div>
-    <button class="pri" id="rGo" type="button" data-v="1"></button>
   </div>
 
   <div class="intro">
@@ -1139,10 +1136,6 @@ function refresh() {
     document.getElementById("rSub").textContent = tudo
       ? "O aprendizado da etapa 5 realimenta a etapa 1."
       : done + " de " + TOTAL + " itens marcados";
-    const rgo = document.getElementById("rGo");
-    rgo.textContent = tudo ? "Baixar o checklist" : "Continuar na etapa " + next.id;
-    rgo.dataset.v = next.id;
-    rgo.dataset.done = tudo ? "1" : "";
   }
 }
 
