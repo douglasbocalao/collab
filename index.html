@@ -354,12 +354,6 @@ ul.cl input:checked+span{color:var(--ink3);text-decoration:line-through;
 .kbd{font-size:11px;border:1px solid var(--line);border-radius:5px;padding:1px 5px;color:var(--ink3);background:var(--card)}
 
 /* ================================== paineis de entrada da home */
-.resume{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:22px;padding:16px 20px;
-  border:1px solid color-mix(in srgb,var(--a) 34%,var(--line));border-radius:var(--r2);
-  background:color-mix(in srgb,var(--a) 7%,var(--card))}
-.resume .rt{display:flex;flex-direction:column;gap:2px;min-width:0}
-.resume b{font-size:15px;font-weight:650;letter-spacing:-.012em}
-.resume span{font-size:12.5px;color:var(--ink2);font-variant-numeric:tabular-nums}
 .intro{margin-top:28px;display:flex;flex-direction:column;gap:16px}
 .panel{position:relative;border:1px solid var(--line);border-radius:var(--r);background:var(--card);
   box-shadow:var(--sh);padding:28px 30px 26px;overflow:hidden}
@@ -786,10 +780,6 @@ const home = `
   <h1 class="t" tabindex="-1">Toolkit de collabs</h1>
   <p class="sub">Framework de aplicação em cinco etapas para estruturar uma collab entre marcas.</p>
 
-  <div class="resume" id="resume" hidden>
-    <div class="rt"><b id="rTit"></b><span id="rSub"></span></div>
-  </div>
-
   <div class="intro">
 
     <section class="panel pa">
@@ -1126,17 +1116,6 @@ function refresh() {
   btn.textContent = done === 0 ? "Começar pela etapa 1"
     : tudo ? "Baixar o checklist completo" : "Continuar na etapa " + next.id;
   btn.dataset.done = tudo ? "1" : "";
-
-  const box = document.getElementById("resume");
-  box.hidden = done === 0;
-  if (done > 0) {
-    document.getElementById("rTit").textContent = tudo
-      ? "Checklist completo, 33 de 33 itens"
-      : "Você parou na etapa " + next.id + ", " + next.nome;
-    document.getElementById("rSub").textContent = tudo
-      ? "O aprendizado da etapa 5 realimenta a etapa 1."
-      : done + " de " + TOTAL + " itens marcados";
-  }
 }
 
 document.addEventListener("click", e => {
