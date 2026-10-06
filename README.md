@@ -4,6 +4,8 @@ Versão navegável do framework integrativo de gestão de collabs entre marcas, 
 
 **Acesse:** https://douglasbocalao.github.io/collab/
 
+**English version:** https://douglasbocalao.github.io/collab/eng/ (arquivo `eng/index.html`, mesmo CSS e mesma lógica, conteúdo traduzido). As duas páginas têm um botão PT/EN no cabeçalho. As manchetes da vitrine de notícias continuam em português nas duas, porque são links para a imprensa brasileira.
+
 ## O que é
 
 O toolkit organiza em cinco etapas o processo que dez organizações brasileiras seguem para identificar, estruturar, cocriar, lançar e aprender com uma collab. Para cada etapa são apresentados:
@@ -43,6 +45,7 @@ A cor de destaque não é o âmbar da Ampfy: no lugar dele entra turquesa `#2DD4
 O tema segue a preferência do sistema, claro ou escuro. Não há botão de alternância.
 
 - Tema claro e escuro, acompanhando a preferência do sistema.
+- Contador de visitas por GoatCounter (`collab.goatcounter.com`), sem cookies e sem nada visível na página. O script fica antes do `</body>` nas duas versões, e cada idioma aparece como um caminho separado no painel.
 - Progresso do checklist salvo no navegador (`localStorage`, chave `collab-toolkit-v3`). É por navegador e por endereço: não sincroniza entre dispositivos.
 - Exportação do checklist em Markdown.
 - Navegação por teclado: `1` a `5` para as etapas, `0`, `h` ou `Esc` para o início, setas para avançar e voltar.
