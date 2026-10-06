@@ -9,7 +9,7 @@ def escurece(h,k=.62):
     h=h.lstrip("#"); r,g,b=[int(h[i:i+2],16) for i in (0,2,4)]
     return "#%02X%02X%02X"%(int(r*k),int(g*k),int(b*k))
 
-def build(path, W, H, fsize, baseline, cell, topy, boty, vet, ras):
+def build(path, W, H, fsize, baseline, cell, topy, boty, vet, ras, linhas=None, fundo_op=0):
     random.seed(11)
     FUNDO="#12100E"; LETRA="#F5F2EC"
     defs="".join(f'<image id="r{i}" width="24" height="24" preserveAspectRatio="xMidYMid meet" '
@@ -37,29 +37,32 @@ def build(path, W, H, fsize, baseline, cell, topy, boty, vet, ras):
             x+=cell
         y+=cell
     itens="".join(itens)
+    L=linhas or [("COLLAB", fsize, baseline)]
+    texto="".join(f'<text x="{W/2}" y="{by}" text-anchor="middle" '
+                  f'font-family="Impact,\'Arial Black\',sans-serif" font-size="{fs}" '
+                  f'letter-spacing="-10">{t}</text>' for t,fs,by in L)
     html=f"""<!doctype html><meta charset="utf-8">
 <style>
  html,body{{margin:0;padding:0;background:{FUNDO}}}
  .c{{width:{W}px;height:{H}px;position:relative;overflow:hidden;background:{FUNDO}}}
- .rule{{position:absolute;left:0;top:0;width:100%;height:14px;background:#2DD4BF}}
- .top{{position:absolute;left:58px;top:{topy}px;font-family:"Courier New",monospace;font-size:19px;
+ .rule{{position:absolute;left:0;top:0;width:100%;height:14px;background:#2DD4BF;z-index:3}}
+ .top{{position:absolute;z-index:3;left:58px;top:{topy}px;font-family:"Courier New",monospace;font-size:19px;
       letter-spacing:.22em;text-transform:uppercase;color:#F5F2EC}}
- .meta{{position:absolute;left:58px;right:58px;bottom:{boty}px;display:flex;justify-content:space-between;
+ .meta{{position:absolute;z-index:3;left:58px;right:58px;bottom:{boty}px;display:flex;justify-content:space-between;
        align-items:flex-end;font-family:"Courier New",monospace;font-size:19px;letter-spacing:.13em;
        text-transform:uppercase;color:#F5F2EC}}
  .meta .r{{text-align:right;color:#A6A099;font-size:15px;line-height:1.65;letter-spacing:.1em}}
 </style>
 <div class="c">
+ <div style="position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(18,16,14,.92) 0,rgba(18,16,14,0) 16%,rgba(18,16,14,0) 84%,rgba(18,16,14,.92) 100%)"></div>
  <div class="rule"></div>
  <div class="top">Toolkit de collabs</div>
  <svg width="{W}" height="{H}" viewBox="0 0 {W} {H}" style="position:absolute;left:0;top:0"
       xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>{defs}
-   <clipPath id="L">
-    <text x="{W/2}" y="{baseline}" text-anchor="middle" font-family="Impact,'Arial Black',sans-serif"
-          font-size="{fsize}" letter-spacing="-10">COLLAB</text>
-   </clipPath>
+   <clipPath id="L">{texto}</clipPath>
   </defs>
+  <g opacity="{fundo_op}">{itens}</g>
   <g clip-path="url(#L)">
    <rect x="0" y="0" width="{W}" height="{H}" fill="{LETRA}"/>{itens}
   </g>
@@ -73,6 +76,6 @@ def build(path, W, H, fsize, baseline, cell, topy, boty, vet, ras):
 
 vet=json.load(io.open(sys.argv[3],encoding="utf-8"))
 ras=json.load(io.open(sys.argv[4],encoding="utf-8"))
-build(sys.argv[1], 1080, 1080, 338, 660, 46, 54, 54, vet, ras)
-build(sys.argv[2], 1200, 630, 268, 408, 38, 42, 38, vet, ras)
+build(sys.argv[1], 1080, 1350, 338, 760, 46, 58, 58, vet, ras, fundo_op=0.13)
+build(sys.argv[2], 1200, 630, 268, 408, 38, 42, 38, vet, ras, fundo_op=0.13)
 print(f"gerado com {len(vet)} vetores + {len(ras)} marcas da pesquisa")
