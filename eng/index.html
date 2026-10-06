@@ -1,0 +1,1363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 fill=%27%232DD4BF%27/%3E%3Ccircle cx=%2738%27 cy=%2750%27 r=%2718%27 fill=%27none%27 stroke=%27%230E0D0B%27 stroke-width=%278%27/%3E%3Ccircle cx=%2762%27 cy=%2750%27 r=%2718%27 fill=%27none%27 stroke=%27%230E0D0B%27 stroke-width=%278%27/%3E%3C/svg%3E">
+<title>Collab toolkit</title>
+<meta name="description" content="An application framework for brand collabs, in five stages, with the departments involved, tools, gate criteria and checklists. It comes from a master's dissertation at FGV EAESP, Brazil.">
+<meta name="author" content="Douglas R. Bocalão">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Collab toolkit">
+<meta property="og:description" content="An application framework for brand collabs, in five stages. It comes from a master's dissertation at FGV EAESP, built on ten interviews with marketing executives in Brazil.">
+<meta property="og:url" content="https://douglasbocalao.github.io/collab/eng/">
+<meta property="og:image" content="https://douglasbocalao.github.io/collab/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<!--
+  TOOLKIT DE COLLABS · framework de aplicação
+  Douglas R. Bocalão · MPA FGV EAESP · orientador Prof. Dr. Felipe Zambaldi
+  Conteúdo das etapas: Quadro 5 e Capítulo 4 da dissertação.
+
+  Arquivo único. Dependências externas: as fontes do Google e as imagens das
+  notícias, servidas pelos próprios veículos.
+  Materiais de cada etapa: procure "#" na lista "mats" dentro de DATA.
+  Notícias: constante NEWS, no formato [titulo, link, imagem, data, veiculo].
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Montserrat:wght@300;400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  color-scheme:light;
+  --bg:#F5F2EC; --paper:#FFFFFF; --paper2:#FBF9F4;
+  --tint:#E9F8F5; --tint2:#D8F2EC;
+  --ink:#0E0D0B; --ink2:#5D574E; --ink3:#8A8378;
+  --line:#E4DED2; --line2:#ECE7DC;
+  --acc:#2DD4BF; --acc-deep:#14B8A6;
+  --pos:#5C7A47; --neg:#C74E32; --pas:#C9C2B6;
+  --mono:"Source Code Pro",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --disp:"Montserrat",-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
+  --text:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --top:66px;
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#181716; --paper:#201E1B; --paper2:#1C1A17;
+  --tint:#10302C; --tint2:#163C36;
+  --ink:#F5F2EC; --ink2:#A6A099; --ink3:#7C756B;
+  --line:#322D26; --line2:#272320;
+  --acc:#2DD4BF; --acc-deep:#5EEAD4;
+  --pos:#8FBF6C; --neg:#E06A4E; --pas:#4A443C;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#181716; --paper:#201E1B; --paper2:#1C1A17;
+    --tint:#10302C; --tint2:#163C36;
+    --ink:#F5F2EC; --ink2:#A6A099; --ink3:#7C756B;
+    --line:#322D26; --line2:#272320;
+    --acc:#2DD4BF; --acc-deep:#5EEAD4;
+    --pos:#8FBF6C; --neg:#E06A4E; --pas:#4A443C;
+  }
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--text);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--ink)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--acc);color:#0E0D0B}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+h1[tabindex="-1"]:focus,h1[tabindex="-1"]:focus-visible{outline:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+@media (max-width:620px){.wrap{padding:0 18px}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h1,h2,h3,h4{font-family:var(--disp);font-weight:300;text-transform:uppercase;letter-spacing:.02em;
+  line-height:1.12;color:var(--ink)}
+b,strong{font-weight:600}
+.mark{background:var(--acc);color:#0E0D0B;padding:0 6px;font-weight:400}
+
+/* ------------------------------------------------------------------ topo */
+.hd{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:1px solid var(--line)}
+.faixa{height:6px;background:var(--acc)}
+.hd .wrap{display:flex;align-items:center;gap:18px;height:59px}
+.brand{display:flex;align-items:center;gap:13px;padding:0}
+.brand i{width:26px;height:26px;flex:0 0 auto;position:relative;border:1px solid var(--ink)}
+.brand i::before,.brand i::after{content:"";position:absolute;top:6px;width:12px;height:12px;
+  border:1.5px solid var(--ink);border-radius:50%}
+.brand i::before{left:2px} .brand i::after{right:2px;opacity:.45}
+.brand span{font-family:var(--disp);font-weight:400;font-size:13.5px;letter-spacing:.1em;
+  text-transform:uppercase;white-space:nowrap}
+.brand:hover i{border-color:var(--acc-deep)}
+.brand:hover i::before,.brand:hover i::after{border-color:var(--acc-deep)}
+.sp{flex:1}
+.gp{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;color:var(--ink3)}
+.gp b{color:var(--ink);font-weight:600}
+.gbar{width:74px;height:4px;background:var(--line);overflow:hidden}
+.gbar i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
+.hnav{display:flex;gap:2px;flex-wrap:nowrap}
+.hnav button{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink2);padding:8px 13px;border:1px solid transparent;
+  transition:color .2s ease-out,border-color .2s ease-out,background .2s ease-out}
+.hnav button:hover{color:var(--ink);border-color:var(--line);background:var(--paper2)}
+.hnav button[aria-current="true"]{color:var(--ink);border-color:var(--acc);background:var(--tint)}
+.lang{display:inline-flex;align-items:center;font-family:var(--mono);font-size:12px;font-weight:600;
+  letter-spacing:.08em;color:var(--ink);text-decoration:none;padding:8px 13px;border:1px solid var(--line);
+  margin-left:4px;transition:all .2s ease-out}
+.lang:hover{border-color:var(--acc);background:var(--tint)}
+@media (max-width:980px){.gp{display:none}}
+@media (max-width:700px){
+  .hd .wrap{gap:8px;height:54px}
+  .brand span{font-size:11.5px;letter-spacing:.04em}
+  .hnav button{padding:7px 7px;font-size:10px;letter-spacing:.02em;white-space:nowrap}
+}
+@media (max-width:460px){.brand span{display:none}}
+
+/* --------------------------------------------------------------- etapas */
+.stepbar{position:sticky;top:var(--top);z-index:50;background:var(--paper);border-bottom:1px solid var(--line)}
+@media (max-width:700px){:root{--top:60px}}
+.steps{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.steps::-webkit-scrollbar{display:none}
+.seg{position:relative;flex:0 0 auto;text-align:left;font-family:var(--mono);font-size:12px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);padding:12px 16px 9px;
+  border-bottom:3px solid transparent;white-space:nowrap;transition:color .2s ease-out,border-color .2s ease-out}
+.seg:hover{color:var(--ink)}
+.seg .n{color:var(--ink3);margin-right:7px}
+.seg[aria-current="true"]{color:var(--ink);border-bottom-color:var(--acc)}
+.seg[aria-current="true"] .n{color:var(--acc-deep)}
+.seg.done .n::after{content:"✓";margin-left:3px;color:var(--pos)}
+.seg .nm{display:inline}
+.seg .fill{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--acc);opacity:.35;transition:width .3s}
+
+/* ---------------------------------------------------------------- views */
+.view{display:none;padding:38px 0 70px}
+.view.on{display:block;animation:fade .25s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+.eyebrow{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink3)}
+.lbl{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink3);padding-top:12px;border-top:1px solid var(--line);margin-bottom:18px;
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.lbl em{font-style:normal;letter-spacing:.04em;text-transform:none;font-weight:400;color:var(--ink3)}
+.p{font-size:15.5px;line-height:1.6;color:var(--ink2);max-width:76ch}
+.p + .p{margin-top:12px}
+.p b{color:var(--ink);font-weight:600}
+.lead{font-size:clamp(16.5px,1.5vw,19px);line-height:1.5;color:var(--ink);max-width:62ch}
+.lead b{font-weight:400;background:var(--acc);color:#0E0D0B;padding:0 6px}
+
+/* ------------------------------------------------------------ capa/home */
+.masthead{padding:4px 0 0}
+.mrow{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;
+  font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+.mrow span:first-child{color:var(--ink)}
+.masthead h1{font-size:clamp(40px,8vw,104px);font-weight:300;letter-spacing:.005em;line-height:.98;
+  margin:18px 0 0}
+.msub{display:block;margin-top:26px;
+  padding-bottom:28px;border-bottom:1px solid var(--line)}
+.msub .pitch{font-size:clamp(16px,1.5vw,18.5px);line-height:1.5;color:var(--ink);max-width:58ch}
+.msub .pitch b{font-weight:400;background:var(--acc);color:#0E0D0B;padding:0 6px}
+.facts{display:flex;gap:30px;flex-wrap:wrap}
+.fact b{display:block;font-family:var(--disp);font-weight:300;font-size:44px;line-height:1;color:var(--ink)}
+.fact span{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink3);display:block;margin-top:7px}
+@media (max-width:760px){.msub{grid-template-columns:1fr;gap:22px}}
+
+.cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:30px 0 0}
+.pri{font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--acc);color:#0E0D0B;padding:12px 20px;border:1px solid var(--acc);
+  transition:all .2s ease-out}
+.pri:hover{background:var(--acc-deep);border-color:var(--acc-deep)}
+.gh{font-family:var(--mono);font-size:12px;color:var(--ink3)}
+.gh b{color:var(--ink2)}
+.lnk{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);
+  text-decoration:underline;text-underline-offset:3px}
+.lnk:hover{color:var(--ink)}
+
+.band{position:relative;margin-top:54px;padding-top:26px;border-top:3px solid var(--ink)}
+.band.alt{margin-top:0;padding-bottom:46px}
+.band.alt::before{content:"";position:absolute;left:50%;top:0;width:100vw;height:100%;
+  transform:translateX(-50%);background:var(--paper);z-index:-1;pointer-events:none}
+.bandt{font-size:clamp(22px,3.1vw,36px);font-weight:300;text-transform:uppercase;letter-spacing:.02em;
+  line-height:1.05;margin-bottom:20px}
+.deflead{font-size:clamp(18px,2vw,25px);line-height:1.4;letter-spacing:-.005em;color:var(--ink);
+  max-width:32ch;font-weight:400}
+.deflead b{font-weight:400;background:var(--acc);color:#0E0D0B;padding:0 7px}
+.crit{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:30px;border-top:1px solid var(--line)}
+.crit article{padding:18px 22px 20px 0;border-right:1px solid var(--line)}
+.crit article:last-child{border-right:0;padding-right:0}
+.crit article + article{padding-left:22px}
+.crit .n{display:block;font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.1em;
+  color:var(--acc-deep);margin-bottom:9px}
+.crit h4{font-family:var(--text);font-size:15px;font-weight:600;text-transform:none;letter-spacing:0;
+  line-height:1.3;margin-bottom:5px}
+.crit p{font-size:13.5px;line-height:1.5;color:var(--ink2)}
+.bandfoot{margin-top:16px;padding-bottom:4px;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink3)}
+@media (max-width:820px){
+  .crit{grid-template-columns:1fr}
+  .crit article{border-right:0;border-bottom:1px solid var(--line);padding:16px 0}
+  .crit article + article{padding-left:0}
+  .crit article:last-child{border-bottom:0}
+}
+.needcols{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:26px}
+.needcols .p{max-width:none}
+.needcols .p + .p{margin-top:0;padding-left:34px;border-left:1px solid var(--line)}
+@media (max-width:820px){
+  .needcols{grid-template-columns:1fr;gap:14px}
+  .needcols .p + .p{margin-top:14px;padding-left:0;border-left:0}
+}
+.whenwrap{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:30px;border:1px solid var(--line);
+  background:var(--bg)}
+@media (max-width:620px){.whenwrap{grid-template-columns:1fr}}
+.when{padding:20px 24px;border-top:3px solid var(--line)}
+.when + .when{border-left:1px solid var(--line)}
+@media (max-width:620px){.when + .when{border-left:0}}
+.when.yes{border-top-color:var(--pos)} .when.no{border-top-color:var(--neg)}
+.when .k{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:12px}
+.when.yes .k{color:var(--pos)} .when.no .k{color:var(--neg)}
+.when ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.when li{font-size:13.5px;line-height:1.5;color:var(--ink2);padding-left:16px;position:relative}
+.when li::before{content:"";position:absolute;left:0;top:.68em;width:8px;height:1px;background:var(--ink3)}
+.index{border-top:1px solid var(--line)}
+.ix{display:grid;grid-template-columns:auto 1.1fr 1.4fr auto;gap:24px;align-items:center;width:100%;
+  text-align:left;padding:20px 6px;border-bottom:1px solid var(--line);transition:all .2s ease-out}
+.ix:hover{background:var(--paper);padding-left:14px;padding-right:14px}
+.ix .n{font-family:var(--disp);font-weight:300;font-size:44px;line-height:.85;color:var(--ink3);min-width:64px}
+.ix:hover .n{color:var(--acc-deep)}
+.ix h3{font-size:17px;font-weight:400;letter-spacing:.04em}
+.ix p{font-size:14px;line-height:1.45;color:var(--ink2)}
+.ix .pb{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;color:var(--ink3);
+  min-width:96px}
+.ix .pb span{flex:1;height:3px;background:var(--line);overflow:hidden}
+.ix .pb i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
+@media (max-width:880px){
+  .ix{grid-template-columns:auto 1fr;gap:16px;row-gap:7px}
+  .ix p{grid-column:2} .ix .pb{grid-column:2}
+}
+
+details.d{border:1px solid var(--line);background:var(--paper);margin-bottom:7px}
+details.d>summary{list-style:none;cursor:pointer;padding:14px 18px;display:flex;align-items:center;gap:12px;
+  font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  transition:all .2s ease-out}
+details.d>summary::-webkit-details-marker{display:none}
+details.d>summary:hover{background:var(--tint)}
+details.d>summary .cv{margin-left:auto;color:var(--ink3);font-size:13px;transition:transform .2s}
+details.d[open]>summary .cv{transform:rotate(180deg)}
+details.d .bd{padding:6px 18px 20px;border-top:1px solid var(--line)}
+details.d .bd>*+*{margin-top:14px}
+.tri{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.tri .u{border-top:2px solid var(--acc);padding-top:11px}
+.tri .u h4{font-family:var(--text);font-size:14.5px;font-weight:600;text-transform:none;letter-spacing:0;
+  margin-bottom:5px}
+.tri .u p{font-size:13.5px;color:var(--ink2);line-height:1.45}
+.lensgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.lb{border-top:2px solid var(--c,var(--acc));padding-top:13px}
+.lb .k{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:7px}
+.lb h4{font-size:15px;font-weight:400;letter-spacing:.04em;margin-bottom:11px}
+.lb .it{font-size:13.5px;color:var(--ink2);line-height:1.5}
+.lb .it+.it{margin-top:7px}
+.lb .it b{color:var(--ink)}
+.refs{display:flex;flex-direction:column;gap:5px;margin-top:12px}
+.refs a{font-family:var(--mono);font-size:11px;color:var(--ink3);text-decoration:none;line-height:1.45}
+.refs a b{color:var(--ink2)} .refs a:hover{color:var(--ink)}
+.mxwrap{overflow-x:auto}
+.mx{border-collapse:collapse;width:100%;min-width:580px;font-size:12.5px}
+.mx th,.mx td{border-bottom:1px solid var(--line);padding:10px 8px;text-align:center}
+.mx thead th{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--ink3);vertical-align:bottom;line-height:1.3}
+.mx thead th b{display:block;color:var(--ink);font-size:13px}
+.mx .rh{text-align:left;font-weight:600;color:var(--ink);white-space:nowrap;padding-right:14px;font-size:13px}
+.mx i{display:inline-block;width:11px;height:11px;border-radius:50%}
+.mx i.d1{opacity:.3}
+.mxleg{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px;font-family:var(--mono);font-size:11px;
+  color:var(--ink3);align-items:center}
+.mxleg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:var(--ink3)}
+.mxleg i.d1{opacity:.3}
+
+.nwgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (max-width:1000px){.nwgrid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){.nwgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:440px){.nwgrid{grid-template-columns:1fr}}
+.nw{display:flex;flex-direction:column;text-decoration:none;background:var(--paper);transition:background .2s ease-out}
+.nw:hover{background:var(--tint)}
+.nw .th{display:block;aspect-ratio:16/10;overflow:hidden;background:var(--paper2);position:relative}
+.nw .th::after{content:attr(data-v);position:absolute;left:0;bottom:0;font-family:var(--mono);font-size:10px;
+  font-weight:600;letter-spacing:.08em;background:var(--acc);color:#0E0D0B;padding:2px 7px}
+.nw .th img{width:100%;height:100%;object-fit:cover;display:block}
+.nw.noimg .th img{display:none}
+.nw .mt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);
+  padding:12px 14px 0}
+.nw h4{padding:7px 14px 16px;font-family:var(--text);font-size:14px;font-weight:600;line-height:1.35;
+  text-transform:none;letter-spacing:0;color:var(--ink)}
+details.nwmore{margin-top:12px}
+details.nwmore>summary{list-style:none;cursor:pointer;font-family:var(--mono);font-size:11.5px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);padding:10px 0}
+details.nwmore>summary::-webkit-details-marker{display:none}
+details.nwmore>summary:hover{color:var(--ink)}
+details.nwmore .nwgrid{margin-top:8px}
+
+/* ---------------------------------------------------------------- etapa */
+.shead{padding-bottom:24px;border-bottom:1px solid var(--line)}
+.kick{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.kick .e{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink3)}
+.cx{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 9px;border:1px solid var(--line);color:var(--ink2);background:var(--paper)}
+.cx.mo{border-color:var(--acc);background:var(--tint)}
+.cx.dc{border-color:var(--pos);color:var(--pos)}
+.shead h1{font-size:clamp(28px,5vw,50px);font-weight:300}
+.shead .foco{font-size:16.5px;color:var(--ink2);margin-top:14px;max-width:62ch;line-height:1.45}
+
+.acc{margin-top:22px}
+.acc details{border:1px solid var(--line);background:var(--paper);margin-bottom:7px}
+.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:13px;padding:15px 18px;
+  font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  transition:all .2s ease-out}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary:hover{background:var(--tint)}
+.acc .ic{font-family:var(--mono);font-size:11.5px;color:var(--ink3);font-weight:600}
+.acc details[open] .ic{color:var(--acc-deep)}
+.acc .ct{margin-left:auto;font-family:var(--mono);font-size:11.5px;font-weight:400;color:var(--ink3)}
+.acc .cv{color:var(--ink3);font-size:13px;transition:transform .2s}
+.acc details[open] .cv{transform:rotate(180deg)}
+.acc .bd{padding:18px;border-top:1px solid var(--line)}
+.acc .bd>*+*{margin-top:14px}
+.pull{border-left:3px solid var(--acc);background:var(--tint);padding:15px 18px;font-size:15px;
+  line-height:1.5;color:var(--ink)}
+.pull .k{display:block;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink3);margin-bottom:7px}
+
+ol.how{list-style:none;counter-reset:h}
+ol.how li{counter-increment:h;display:grid;grid-template-columns:54px 1fr;gap:18px;align-items:start;
+  padding:17px 0;border-top:1px solid var(--line)}
+ol.how li:first-child{border-top:0;padding-top:2px}
+ol.how li::before{content:counter(h,decimal-leading-zero);font-family:var(--disp);font-weight:300;font-size:30px;
+  line-height:.9;color:var(--ink3)}
+ol.how h4{font-family:var(--text);font-size:15px;font-weight:600;text-transform:none;letter-spacing:0;
+  color:var(--ink);margin-bottom:5px;line-height:1.3}
+ol.how p{font-size:14px;line-height:1.55;color:var(--ink2);max-width:72ch}
+
+.areas,.tools,.mats{display:grid;gap:12px}
+.areas{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.area{border-left:2px solid var(--line);padding:2px 0 2px 13px}
+.area b{display:flex;align-items:center;gap:9px;font-size:14px;margin-bottom:3px}
+.area .ld{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:#0E0D0B;background:var(--acc);padding:2px 7px}
+.area span{font-size:13px;color:var(--ink2);line-height:1.45}
+.tools{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.tool{border:1px solid var(--line);padding:13px 15px;background:var(--paper2)}
+.tool b{display:block;font-size:14px;margin-bottom:3px}
+.tool>span{display:block;font-size:13px;color:var(--ink2);line-height:1.45}
+.mk{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:11px;padding-top:10px;
+  border-top:1px solid var(--line)}
+.mk .k{width:100%;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink3)}
+.mk a{font-family:var(--mono);font-size:11px;color:var(--ink2);text-decoration:none;border:1px solid var(--line);
+  padding:3px 9px;background:var(--paper);transition:all .2s ease-out}
+.mk a:hover{border-color:var(--acc);background:var(--tint);color:var(--ink)}
+.mats{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.mats a,.mats .slot{display:block;border:1px solid var(--line);padding:13px 15px;text-decoration:none;
+  background:var(--paper2)}
+.mats .slot{border-style:dashed;opacity:.65}
+.mats b{display:flex;justify-content:space-between;gap:10px;font-size:14px;margin-bottom:3px}
+.mats .ds{display:block;font-size:12.5px;color:var(--ink2);line-height:1.4}
+.tagr{font-family:var(--mono);font-size:10.5px;color:var(--ink3);font-weight:600}
+.mats a:hover{border-color:var(--acc);background:var(--tint)}
+
+.clbar{height:3px;background:var(--line);overflow:hidden;margin-bottom:14px}
+.clbar i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
+ul.cl{list-style:none}
+ul.cl label{display:flex;gap:13px;align-items:flex-start;padding:11px 9px;cursor:pointer;font-size:14.5px;
+  color:var(--ink2);line-height:1.45;transition:background .15s ease-out;border-bottom:1px solid var(--line2)}
+ul.cl li:last-child label{border-bottom:0}
+ul.cl label:hover{background:var(--tint);color:var(--ink)}
+ul.cl input{appearance:none;width:17px;height:17px;flex:0 0 auto;margin-top:2px;border:1px solid var(--ink3);
+  background:var(--paper);cursor:pointer;position:relative;transition:all .15s ease-out}
+ul.cl input:checked{background:var(--acc);border-color:var(--acc)}
+ul.cl input:checked::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;
+  border:2px solid #0E0D0B;border-top:0;border-left:0;transform:rotate(42deg)}
+ul.cl input:checked+span{color:var(--ink3);text-decoration:line-through}
+.clfoot{display:flex;justify-content:flex-end;margin-top:12px}
+
+.gate{margin-top:24px;border:1px solid var(--line);border-left:4px solid var(--acc);background:var(--tint);
+  padding:18px 20px}
+.gate.ready{border-color:var(--pos);border-left-color:var(--pos);background:var(--paper)}
+.gate .k{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:8px}
+.gate.ready .k{color:var(--pos)}
+.gate .g{font-size:16px;line-height:1.45;color:var(--ink)}
+.gate .s{font-size:12.5px;color:var(--ink3);margin-top:9px;line-height:1.45}
+.gate .pri{margin-top:16px}
+.pg{display:flex;align-items:center;gap:14px;margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
+.pg .of{flex:1;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink3)}
+.nav{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink);border:1px solid var(--line);background:var(--paper);padding:10px 15px;
+  transition:all .2s ease-out}
+.nav:hover{border-color:var(--acc);background:var(--tint)}
+
+/* ------------------------------------------------- guia, pesquisa, autor */
+.ghead{padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:30px}
+.ghead h1{font-size:clamp(28px,5vw,48px);font-weight:300;margin-top:14px}
+.ghead .p{margin-top:14px}
+.gblock{border-top:1px solid var(--line);padding-top:20px;margin-top:28px}
+.gtitle{display:flex;align-items:baseline;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.gtitle .n{font-family:var(--disp);font-weight:300;font-size:34px;line-height:1;color:var(--ink3)}
+.gtitle h2{font-size:17px;font-weight:400;letter-spacing:.04em}
+.gtitle .gg{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink3);text-align:right;max-width:48ch}
+.g2{display:grid;grid-template-columns:1.25fr .75fr;gap:30px}
+@media (max-width:880px){.g2{grid-template-columns:1fr;gap:20px}.gtitle .gg{display:none}}
+.g2 .k{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:10px}
+.tlist{list-style:none;display:flex;flex-direction:column;gap:7px}
+.tlist li{font-size:13px;color:var(--ink2);line-height:1.45;padding-left:15px;position:relative}
+.tlist li::before{content:"";position:absolute;left:0;top:.65em;width:7px;height:1px;background:var(--acc)}
+.tlist b{color:var(--ink);font-weight:600}
+.gacts{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+
+.prose{max-width:78ch}
+.prose h2{font-size:15px;font-weight:400;letter-spacing:.05em;margin:30px 0 10px}
+.prose h2:first-child{margin-top:0}
+.prose p{font-size:15.5px;line-height:1.62;color:var(--ink2)}
+.prose p+p{margin-top:11px}
+.prose b{color:var(--ink)}
+.bio{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:start}
+@media (max-width:620px){.bio{grid-template-columns:1fr}}
+.bioid{border:1px solid var(--line);background:var(--paper);padding:20px;min-width:230px}
+.bioid .mk2{font-family:var(--disp);font-weight:300;font-size:46px;line-height:1;color:var(--ink);
+  background:var(--acc);display:inline-block;padding:2px 10px}
+.bioid dl{margin-top:16px;font-family:var(--mono);font-size:11.5px;line-height:1.5}
+.bioid dt{color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;font-size:9.5px;margin-top:11px}
+.bioid dd{color:var(--ink)}
+.bioid a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.bioid a:hover{background:var(--tint)}
+
+/* --------------------------------------------------------------- rodapé */
+.ft{border-top:1px solid var(--line);background:var(--paper);margin-top:44px}
+.ft .wrap{padding-top:28px;padding-bottom:36px;display:grid;grid-template-columns:1.6fr 1fr;gap:30px}
+@media (max-width:760px){.ft .wrap{grid-template-columns:1fr;gap:20px}}
+.ft .tt{font-family:var(--disp);font-weight:300;text-transform:uppercase;font-size:15px;line-height:1.4;
+  letter-spacing:.02em;max-width:54ch}
+.ft .meta{font-family:var(--mono);font-size:11.5px;line-height:1.75;color:var(--ink3);margin-top:12px}
+.ft .meta b{color:var(--ink);font-weight:600}
+.ft a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.ft a:hover{background:var(--tint)}
+.ft .kb{font-family:var(--mono);font-size:11px;color:var(--ink3);line-height:1.9}
+.kbd{border:1px solid var(--line);padding:1px 6px;color:var(--ink2);background:var(--bg)}
+
+@media print{
+  .hd,.stepbar,.pg,.cta,.clfoot,.gacts,.news{display:none!important}
+  .view{display:block!important;page-break-after:always;padding:0}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="faixa"></div>
+  <div class="wrap">
+    <button class="brand" type="button" data-v="home" title="Voltar ao início"><i></i><span>Collab toolkit</span></button>
+    <span class="sp"></span>
+    <span class="gp"><span class="gbar"><i id="hb"></i></span><b id="hn">0/33</b></span>
+    <nav class="hnav" aria-label="Seções">
+      <button type="button" data-v="pesquisa">The research</button>
+      <button type="button" data-v="autor">The author</button>
+      <a class="lang" href="../" title="Versão em português">PT</a>
+    </nav>
+  </div>
+</header>
+
+<div class="stepbar"><div class="wrap"><nav class="steps" id="flow" aria-label="Etapas"></nav></div></div>
+
+<main class="wrap" id="main"></main>
+<p class="sr" id="live" aria-live="polite"></p>
+
+<footer class="ft">
+  <div class="wrap">
+    <div>
+      <div class="tt">Collab de dentro para fora: a qualitative investigation into how collabs between large brands are built in Brazil</div>
+      <div class="meta">
+        <b>Douglas R. Bocalão</b><br>
+        Professional Master in Business Administration, FGV EAESP, 2026<br>
+        Supervisor: Prof. Felipe Zambaldi<br>
+        <a href="mailto:bocalao@gmail.com">bocalao@gmail.com</a>
+      </div>
+    </div>
+    <div class="kb">
+      Shortcuts<br>
+      <span class="kbd">1</span> to <span class="kbd">5</span> open the stages<br>
+      <span class="kbd">0</span> goes back home<br>
+      <span class="kbd">←</span> <span class="kbd">→</span> move between stages<br><br>
+      The checklist is saved in this browser only.
+    </div>
+  </div>
+</footer>
+
+<script>
+"use strict";
+
+const REFS = {
+  mo: [
+    ["Kohli & Jaworski (1990)", "Market orientation: the construct, research propositions, and managerial implications. Journal of Marketing, 54(2)", "https://doi.org/10.1177/002224299005400201"],
+    ["Narver & Slater (1990)", "The effect of a market orientation on business profitability. Journal of Marketing, 54(4)", "https://doi.org/10.1177/002224299005400403"]
+  ],
+  dc: [
+    ["Teece, Pisano & Shuen (1997)", "Dynamic capabilities and strategic management. Strategic Management Journal, 18(7)", "https://sms.onlinelibrary.wiley.com/doi/abs/10.1002/(SICI)1097-0266(199708)18:7%3C509::AID-SMJ882%3E3.0.CO;2-Z"],
+    ["Teece (2007)", "Explicating dynamic capabilities: the nature and microfoundations of enterprise performance. SMJ, 28(13)", "https://doi.org/10.1002/smj.640"]
+  ]
+};
+
+const DATA = [
+  {
+    id: 1, cor: "var(--s1)", nome: "Spotting opportunities",
+    cap: [["Sensing", "dc"], ["Intelligence generation", "mo"]],
+    foco: "Find partners with real potential for joint creation.",
+    tensao: "Fit of purpose, values and complementary assets weigh more than audience reach.",
+    resumo: "<strong>Sensing</strong> applied to collabs starts by looking for partnership opportunities across different sources: consumer behaviour, competitor moves, what other brands are doing and new technology. What you build here is intelligence <strong>about other brands</strong>, and about how far each one can go with you in creating new associations of meaning and cultural relevance.",
+    oque: "Identify partners with potential for joint development, putting alignment of purpose and positioning ahead of reach or audience size. Assess how consistent each brand is between what it says and what it does, its track record in innovation, its openness to experiment and its ability to generate new symbolic associations. Map complementary assets: product, distribution and creative capability.",
+    frentes: [
+      { t: "Follow the consumer", d: "Track behaviour and emerging trends to spot cultural demands and brand territories nobody has taken yet." },
+      { t: "Read the competition", d: "Study sector moves and recent collabs to understand what worked, what did not and which spaces are still open." },
+      { t: "Map other brands", d: "Look at initiatives from brands in other categories, and at the associations the public already makes on its own, with no formal partnership in place." },
+      { t: "Watch the technology", d: "Keep an eye on innovations that open new product, experience or distribution formats, because they change what you can propose to a partner." },
+      { t: "Validate the hypothesis", d: "Take the partnership idea to consumers before moving on, to confirm the association makes sense and that the other brand is seen as relevant." }
+    ],
+    quem: [
+      ["Marketing", "reads the brand and spots opportunities", true],
+      ["Planning / Strategy", "analyses context and trends", false],
+      ["Insights / consumer intelligence", "validates consumer perception and reduces the risk of deciding on internal views alone", false]
+    ],
+    ferr: [
+      ["Strategic fit matrix", "alignment of values, audience, operations and communication between the brands",
+        [["Airtable", "https://www.airtable.com"], ["Notion", "https://www.notion.com"], ["Google Sheets", "https://sheets.google.com"]]],
+      ["Social listening", "spontaneous associations and symbolic proximity between brands",
+        [["Brandwatch", "https://www.brandwatch.com"], ["Talkwalker", "https://www.talkwalker.com"], ["Stilingue", "https://www.stilingue.com.br"], ["Sprinklr", "https://www.sprinklr.com"]]],
+      ["Collab benchmark base", "relevant cases, formats and results",
+        [["Airtable", "https://www.airtable.com"], ["Notion", "https://www.notion.com"]]],
+      ["Quick consumer tests", "checks the partnership holds up before you move on",
+        [["Typeform", "https://www.typeform.com"], ["SurveyMonkey", "https://www.surveymonkey.com"], ["Qualtrics", "https://www.qualtrics.com"], ["Opinion Box", "https://www.opinionbox.com"], ["Google Forms", "https://forms.google.com"]]]
+    ],
+    gate: "Partnership hypothesis validated with consumers and fit of purpose confirmed.",
+    gateSrc: "Criterion stated in Exhibit 5 itself: “validate partnership hypotheses with consumers before moving on”.",
+    check: [
+      "I mapped partners beyond the obvious candidate",
+      "I assessed how consistent each candidate is between discourse and practice",
+      "I checked their track record in innovation and openness to experiment",
+      "I listed complementary assets: product, distribution, creative capability",
+      "I looked at spontaneous associations in social listening, not only declared data",
+      "I tested the hypothesis with consumers before moving on",
+      "I recorded why the discarded candidates were discarded"
+    ],
+    mats: [
+      ["Strategic fit matrix", "#", "Spreadsheet comparing partner candidates by values, audience, operations and communication, with a weight and a score for each criterion."],
+      ["Collab benchmark base", "#", "Repository of market cases with brands involved, format, mechanics and perceived result, to consult before deciding."],
+      ["Social listening report", "#", "Reading of mentions and spontaneous associations between the two brands: volume, sentiment and recurring themes."]
+    ]
+  },
+  {
+    id: 2, cor: "var(--s2)", nome: "Structuring and planning",
+    cap: [["Seizing", "dc"], ["Intelligence dissemination", "mo"]],
+    foco: "Turn the opportunity into a workable partnership.",
+    tensao: "Governance that is too rigid stalls delivery; too loose and it breeds conflict. The balance point shifts with the size of the two companies.",
+    resumo: "The opportunity becomes a workable partnership once the collaboration is <strong>organised</strong>: expectations, responsibilities and ways of working agreed between the companies. This calls for coordination across departments and governance that balances control and speed.",
+    oque: "Define the scope of the collab, the governance model, the timeline and the split of responsibilities. Align the departments involved on both sides and establish how decisions will be made along the way. Anticipate friction points such as deadlines, approvals and how much autonomy each partner holds.",
+    frentes: [
+      { t: "Align the essentials", d: "Start with a simple agreement between the companies that makes it safe to exchange information before opening up data, plans and calendars." },
+      { t: "Map departments and owners", d: "List the departments involved on both sides and name one owner per workstream, so no decision is left without one." },
+      { t: "Size the governance to the companies", d: "In smaller structures a direct line between decision makers is enough. In larger organisations the process has to be more formal. The balance point shifts with the size of the two companies." },
+      { t: "Build the timeline", d: "Put together a realistic calendar, with dependencies between departments and each company's approval deadlines marked from the start." },
+      { t: "Agree costs and results", d: "Define upfront how investment, responsibilities and results will be split, including what happens if the project grows or shrinks." }
+    ],
+    quem: [
+      ["Marketing", "leads the project and the link between the companies", true],
+      ["Legal", "contractual safety and clarity", false],
+      ["Operations and supply chain", "production feasibility", false],
+      ["Sales", "distribution strategy", false],
+      ["Finance", "investment and return", false]
+    ],
+    ferr: [
+      ["Responsibility matrix", "avoids overlaps and gaps between the companies",
+        [["Asana", "https://asana.com"], ["Monday", "https://monday.com"], ["Notion", "https://www.notion.com"], ["Trello", "https://trello.com"]]],
+      ["Structured timeline", "decision milestones, dependencies and approval deadlines",
+        [["Asana", "https://asana.com"], ["Smartsheet", "https://www.smartsheet.com"], ["ClickUp", "https://clickup.com"], ["Microsoft Project", "https://www.microsoft.com/microsoft-365/project/project-management-software"]]],
+      ["Simple governance model", "sized to each partner",
+        [["Notion", "https://www.notion.com"], ["Confluence", "https://www.atlassian.com/software/confluence"]]],
+      ["Formalisation documents", "initial alignment and safe exchange of information",
+        [["DocuSign", "https://www.docusign.com"], ["Adobe Acrobat Sign", "https://www.adobe.com/sign.html"], ["Clicksign", "https://www.clicksign.com"], ["Dropbox Sign", "https://sign.dropbox.com"]]]
+    ],
+    gate: "Scope, governance, timeline and owners defined, with friction points anticipated.",
+    gateSrc: "Rewording of the “what is done” section of this stage in Exhibit 5.",
+    check: [
+      "Scope written down and accepted by both sides",
+      "An owner named per department, in each of the two companies",
+      "Governance model chosen according to the size of the two companies",
+      "Timeline with dependencies and a deadline for each approval",
+      "Split of costs, risks and results defined before starting",
+      "Foreseeable friction points listed, with a plan for each",
+      "Decision rule defined for a deadlock"
+    ],
+    mats: [
+      ["Responsibility matrix", "#", "Who decides, who executes, who is consulted and who is only informed, in both companies."],
+      ["Governance models by company size", "#", "Two or three ready-made designs, from the most direct to the most formal, to pick according to the partners' size."],
+      ["Standard timeline", "#", "Schedule with decision milestones, dependencies between departments and a deadline for each approval."],
+      ["Legal checklist", "#", "Points to close before signing: intellectual property, brand use, exclusivity, terms and liabilities."]
+    ]
+  },
+  {
+    id: 3, cor: "var(--s3)", nome: "Co-creation and delivery",
+    cap: [["Seizing", "dc"], ["Responsiveness", "mo"]],
+    foco: "Develop product, communication and narrative together.",
+    tensao: "This is where a collab parts ways with licensing: both brands create together and neither one dominates.",
+    resumo: "This is where the collab leaves the page. The two brands jointly develop a product and a narrative that make sense for both. The process is <strong>iterative</strong> and calls for continuous adjustment from tests and feedback.",
+    oque: "Develop product, communication and distribution strategy jointly. Make sure both brands contribute to the final result. Keep checking that what you are delivering still matches what the collab promised.",
+    frentes: [
+      { t: "Work in short cycles", d: "Alternate internal creation and external testing in short rounds, so mistakes surface early, while fixing them is still cheap." },
+      { t: "Put both teams in the room", d: "Run working sessions with people from both companies in the same room, rather than presentations traded between teams." },
+      { t: "Test with consumers", d: "Take concept and prototype to consumers before locking the product, using the same consistency criterion from stage 1." },
+      { t: "Adjust on what comes back", d: "Reopen product and communication based on what the test showed, and record what changed and why." },
+      { t: "Integrate the narrative", d: "Build a story of the partnership in which both brands carry their own weight, with neither reduced to a backdrop for the other." }
+    ],
+    quem: [
+      ["Marketing", "leads brand and communication", true],
+      ["Product and R&D", "own the development", false],
+      ["Operations", "ensure feasibility", false],
+      ["Creative partners", "support delivery", false],
+      ["Consumers", "take part in validation", false]
+    ],
+    ferr: [
+      ["Joint development checklist", "verifies what each of the two brands contributed",
+        [["Notion", "https://www.notion.com"], ["Google Docs", "https://docs.google.com"]]],
+      ["Consumer testing", "validates product and communication before approval",
+        [["UserTesting", "https://www.usertesting.com"], ["Qualtrics", "https://www.qualtrics.com"], ["Maze", "https://maze.co"], ["Opinion Box", "https://www.opinionbox.com"]]],
+      ["Joint workshops", "align the teams from both companies",
+        [["Miro", "https://miro.com"], ["FigJam", "https://www.figma.com/figjam/"], ["Mural", "https://www.mural.co"]]],
+      ["Rapid prototyping", "shortens the cycle between idea and test",
+        [["Figma", "https://www.figma.com"], ["Canva", "https://www.canva.com"], ["Adobe Illustrator", "https://www.adobe.com/products/illustrator.html"], ["Adobe Express", "https://www.adobe.com/express/"]]]
+    ],
+    gate: "Product and communication validated with consumers, and both brands contributed to the result.",
+    gateSrc: "Criterion stated in Exhibit 5 itself: “test concepts and prototypes with consumers before finalising”.",
+    check: [
+      "Both brands contributed something the other would not have done alone",
+      "There was a working session with both teams together, beyond exchanging files",
+      "Prototype tested with consumers before final approval",
+      "Integrated narrative, with neither brand dominating the other",
+      "Adjustments made from the test, and recorded",
+      "Distribution thought through jointly, alongside the product",
+      "If royalties are involved, there is a layer of joint creation behind them"
+    ],
+    mats: [
+      ["Joint development checklist", "#", "Verification of what each brand contributed in product, communication and distribution."],
+      ["Workshop script", "#", "Agenda for the joint session between teams: objective, format, materials and the decisions expected by the end."],
+      ["Consumer test protocol", "#", "How to test concept, product and communication before final approval, with an acceptance criterion defined."]
+    ]
+  },
+  {
+    id: 4, cor: "var(--s4)", nome: "Launch and monitoring",
+    cap: [["Responsiveness", "mo"], ["Seizing", "dc"]],
+    foco: "Go to market in sync and measure beyond sales.",
+    tensao: "The value sits in the conversation generated, in brand association and in cultural relevance. Measuring sell-out alone understates what a collab does.",
+    resumo: "The collab reaches the market and performance starts being tracked. What you measure is broader than in an ordinary launch: <strong>conversation, brand association and cultural relevance</strong> are weighed alongside sales.",
+    oque: "Launch the collab in a coordinated way across both brands and follow results on three fronts: commercial, brand and digital.",
+    frentes: [
+      { t: "Sync the channels", d: "Agree dates, assets and messages between the two companies and the retail partners, so the collab reaches the market as one thing." },
+      { t: "Explain the partnership", d: "Tell consumers why the two brands are together, with the same message on both sides." },
+      { t: "Track from day one", d: "Read results early and correct communication or distribution while the campaign is still running." },
+      { t: "Measure beyond sales", d: "Look at engagement, brand perception and spontaneous coverage, since the main reported gain is symbolic." }
+    ],
+    quem: [
+      ["Marketing", "leads launch and communication and captures consumer feedback", true],
+      ["Sales", "secures presence across channels", false],
+      ["Media and digital", "run campaigns and social", false]
+    ],
+    ferr: [
+      ["Tracking dashboards", "sales, engagement and share of voice",
+        [["Looker Studio", "https://lookerstudio.google.com"], ["Power BI", "https://www.microsoft.com/power-platform/products/power-bi"], ["Tableau", "https://www.tableau.com"], ["Metabase", "https://www.metabase.com"]]],
+      ["Post-launch social listening", "reach of the conversation, mentions and sentiment",
+        [["Brandwatch", "https://www.brandwatch.com"], ["Talkwalker", "https://www.talkwalker.com"], ["Stilingue", "https://www.stilingue.com.br"], ["Sprinklr", "https://www.sprinklr.com"]]],
+      ["Earned media reports", "how far the conversation travelled",
+        [["Meltwater", "https://www.meltwater.com"], ["Cision", "https://www.cision.com"], ["Muck Rack", "https://muckrack.com"], ["Knewin", "https://www.knewin.com"]]],
+      ["Brand equity trackers", "before and after, to isolate the impact",
+        [["Kantar", "https://www.kantar.com"], ["YouGov", "https://business.yougov.com"], ["Latana", "https://latana.com"], ["Ipsos", "https://www.ipsos.com"]]]
+    ],
+    gate: "Launch in sync and commercial, brand and digital metrics being tracked.",
+    gateSrc: "Rewording of the “what is done” section of this stage in Exhibit 5.",
+    check: [
+      "Date and narrative synced between the two brands",
+      "Dashboard live before the collab reaches the market",
+      "Brand equity read taken before launch, as a baseline",
+      "Fast-adjustment routine defined: who decides what, and how quickly",
+      "Earned media and conversation measured alongside sales",
+      "Agreed with the partner what each one announces, and when"
+    ],
+    mats: [
+      ["Launch dashboard", "#", "Single panel with sales, engagement, share of voice and coverage, live before the collab reaches the market."],
+      ["Brand equity tracker", "#", "Measurement of awareness, consideration and associations before and after, to isolate the effect of the partnership."],
+      ["Earned media report", "#", "Consolidation of spontaneous coverage: outlets, reach, tone and how far the conversation travelled."]
+    ]
+  },
+  {
+    id: 5, cor: "var(--s5)", nome: "Capturing what was learned",
+    cap: [["Transforming", "dc"], ["Intelligence dissemination", "mo"]],
+    foco: "Turn the experience into knowledge others can reuse.",
+    tensao: "This is the weakest stage in the companies studied. The knowledge stays tacit, held by whoever ran the project, and leaves the company when that person does.",
+    resumo: "The experience of the collab becomes knowledge for the organisation. What was learned in practice is recorded in a <strong>reusable</strong> form, so the next initiative does not depend on whoever ran the last one.",
+    oque: "Record what the collab taught and turn it into knowledge the organisation can reach. Identify what worked, what did not and what should change in the next partnerships.",
+    frentes: [
+      { t: "Run the debrief", d: "Bring the departments together right after the project, while memories are fresh, and separate what worked from what happened to go well." },
+      { t: "Document the case", d: "Record context, decisions, numbers and friction points, not only the final result." },
+      { t: "Store it where people look", d: "Put the material in a repository other teams can find and use without depending on whoever ran the project." },
+      { t: "Update the criteria", d: "Revise the fit matrix, the checklist and the contract templates with what the experience showed." },
+      { t: "Pass it on", d: "Share what was learned with other teams and brands in the group, because this knowledge tends to sit with very few people." }
+    ],
+    quem: [
+      ["Marketing", "leads the capture of learning", true],
+      ["Departments involved in the project", "contribute their own views", false],
+      ["HR or knowledge management", "support internal dissemination", false]
+    ],
+    ferr: [
+      ["Debrief script", "structures the closing conversation",
+        [["Google Docs", "https://docs.google.com"], ["Notion", "https://www.notion.com"]]],
+      ["Internal case base", "makes the history searchable",
+        [["Notion", "https://www.notion.com"], ["Confluence", "https://www.atlassian.com/software/confluence"], ["SharePoint", "https://www.microsoft.com/microsoft-365/sharepoint/collaboration"]]],
+      ["Sharing sessions", "carry the learning to other teams",
+        [["Loom", "https://www.loom.com"], ["Microsoft Teams", "https://www.microsoft.com/microsoft-teams/group-chat-software"]]],
+      ["Living documents", "criteria updated with every collab",
+        [["Notion", "https://www.notion.com"], ["Google Docs", "https://docs.google.com"], ["Coda", "https://coda.io"]]]
+    ],
+    gate: "Case documented and decision criteria updated. What was learned feeds back into stage 1.",
+    gateSrc: "Rewording of the “what is done” section of this stage in Exhibit 5.",
+    check: [
+      "Debrief held right after closing, with the departments involved",
+      "Case documented with context, decisions and results",
+      "Document in the repository, reachable by people who were not there",
+      "Fit criteria updated with what was learned",
+      "Learning shared with other teams",
+      "If the person who ran it left tomorrow, what they know is written down"
+    ],
+    mats: [
+      ["Debrief script", "#", "Questions that structure the closing conversation: what worked, what did not, what changes next time."],
+      ["Case base", "#", "Record of the case with context, decisions, results and learning, reachable by people who were not there."],
+      ["Fit criteria (living document)", "#", "The partner selection criteria revised with every collab, with a record of what changed and why."]
+    ]
+  }
+];
+
+const THEORY = { mo: "Market Orientation", dc: "Dynamic Capabilities" };
+
+/* cruzamento capacidade x etapa: 2 = dominante, 1 = presente, 0 = ausente.
+   Leitura do que o texto da dissertação sustenta (Quadro 5 e seção 4.7). */
+const MATRIX = [
+  ["mo", "Intelligence generation", [2, 1, 0, 1, 0]],
+  ["mo", "Intelligence dissemination", [0, 2, 1, 0, 2]],
+  ["mo", "Responsiveness", [0, 0, 2, 2, 0]],
+  ["dc", "Sensing", [2, 0, 0, 0, 0]],
+  ["dc", "Seizing", [0, 2, 2, 1, 0]],
+  ["dc", "Transforming", [0, 0, 0, 0, 2]]
+];
+
+
+/* Notícias de collabs no mercado. Links externos para Meio & Mensagem e Propmark,
+   levantados em 06/10/2026. Contexto de mercado, não dado de pesquisa.
+   Formato: [titulo, link, imagem, data, veiculo] */
+const NEWS = [
+  ["Nespresso e Swarovski se unem em coleção de fim de ano", "https://www.meioemensagem.com.br/marketing/nespresso-e-swarovski-se-unem-em-colecao-defim-de-ano", "https://www.meioemensagem.com.br/wp-content/uploads/2026/10/Nespresso-e-Swarosvki-768x511.png", "2026-10-05", "mm"],
+  ["Collabs levam novos consumidores às marcas do Grupo Boticário", "https://propmark.com.br/mercado/collabs-levam-novos-consumidores-as-marcas-do-grupo-boticario/", "https://propmark.com.br/wp-content/uploads/2026/10/grupo-boticario-768x724.png", "2026-10-05", "pm"],
+  ["Dona do Doce faz collab com Turma na Mônica em coleção de bolachas", "https://propmark.com.br/anunciantes/dona-do-doce-faz-collab-com-turma-na-monica-em-colecao-de-bolachas/", "https://propmark.com.br/wp-content/uploads/2026/10/Latas-Monica-e-Cebolinha-com-Sacola-e1790883750701-768x690.webp", "2026-10-01", "pm"],
+  ["Ana Castela assina linha de 40 anos da Rommanel", "https://www.meioemensagem.com.br/marketing/ana-castela-assina-linha-de-40-anos-da-rommanel", "https://www.meioemensagem.com.br/wp-content/uploads/2026/09/ana-Castela-rommanel-768x511.jpg", "2026-09-25", "mm"],
+  ["Reserva Mini e UNO anunciam collab para Dia das Crianças", "https://propmark.com.br/anunciantes/reserva-mini-e-uno-anunciam-collab-para-dia-das-criancas/", "https://propmark.com.br/wp-content/uploads/2026/09/Reserva-mini-UNO2-768x432.jpg", "2026-09-22", "pm"],
+  ["Jack Daniel’s e NFL levam parceria para coleção de roupas", "https://propmark.com.br/anunciantes/jack-daniels-e-nfl-levam-parceria-para-colecao-de-roupas/", "https://propmark.com.br/wp-content/uploads/2026/09/JD-NFL-SA-075-768x512.png", "2026-09-22", "pm"],
+  ["Julio Okubo estreia no licenciamento com coleção da Hello Kitty", "https://propmark.com.br/anunciantes/julio-okubo-estreia-no-licenciamento-com-colecao-da-hello-kitty/", "https://propmark.com.br/wp-content/uploads/2026/09/SaveClip.App_818654885_18628756708014025_964323867605669964_n-300x200.webp", "2026-09-22", "pm"],
+  ["Starbucks e Peanuts se unem em collab de Halloween", "https://propmark.com.br/anunciantes/starbucks-e-peanuts-se-unem-em-collab-de-halloween/", "https://propmark.com.br/wp-content/uploads/2026/09/peanutsmerchfall2026-01587-768x479.jpg", "2026-09-15", "pm"],
+  ["Granado mira mercado externo com collab inédita em Paris", "https://www.meioemensagem.com.br/marketing/granado-mira-mercado-externo-com-collab-inedita-em-paris", "https://www.meioemensagem.com.br/wp-content/uploads/2026/09/granado-fruttini-paris-768x512.jpg", "2026-09-14", "mm"],
+  ["Kenner estreia no futebol paulista em parceria com o São Paulo FC", "https://propmark.com.br/anunciantes/kenner-estreia-no-futebol-paulista-em-parceria-com-o-sao-paulo-fc/", "https://propmark.com.br/wp-content/uploads/2026/09/KENNER-SPFC1725-768x587.jpg", "2026-09-09", "pm"],
+  ["Boca Rosa anuncia collab de esmaltes com Mundial e Impala", "https://propmark.com.br/anunciantes/boca-rosa-anuncia-collab-de-esmaltes-com-mundial-e-impala/", "https://propmark.com.br/wp-content/uploads/2026/09/Boca-Rosa-Impala_Divulgacao-3-e1788876013627-768x666.jpg", "2026-09-08", "pm"],
+  ["Working Title transforma collabs em estratégia de marca", "https://www.meioemensagem.com.br/marketing/working-title-transforma-collabs-em-estrategia-de-marca", "https://www.meioemensagem.com.br/wp-content/uploads/2026/08/1280x852-working-titles-disney-fila-cred-div-768x511.jpg", "2026-09-03", "mm"],
+  ["SBT lança coleção de camisetas do Bozo em parceria com a Loja 90", "https://propmark.com.br/midia/sbt-lanca-colecao-de-camisetas-do-bozo-em-parceria-com-a-loja-90/", "https://propmark.com.br/wp-content/uploads/2026/09/unnamed-e1788284663166-300x252.png", "2026-09-01", "pm"],
+  ["Converse, Puma e Nike investem em collabs com animes", "https://www.meioemensagem.com.br/marketing/converse-puma-e-nike-investem-em-collabs-com-animes", "https://www.meioemensagem.com.br/wp-content/uploads/2026/08/animes_cred_kuremo_Acento-Creativo-stockadobecom_div_site-768x511.jpg", "2026-08-31", "mm"],
+  ["Rahra anuncia parceria com Warner Bros. para coleção de Looney Tunes", "https://propmark.com.br/anunciantes/rahra-anuncia-parceria-com-warner-bros-para-colecao-de-looney-tunes/", "https://propmark.com.br/wp-content/uploads/2026/08/IMG_1451-e1787861534621-768x689.jpg", "2026-08-27", "pm"],
+  ["Havaianas e KidSuper revitalizam quadra no Brás para antecipar nova coleção", "https://propmark.com.br/anunciantes/havaianas-e-kidsuper-revitalizam-quadra-no-bras-para-antecipar-nova-colecao/", "https://propmark.com.br/wp-content/uploads/2026/08/Captura-de-tela-2026-08-27-100459-768x504.png", "2026-08-27", "pm"],
+  ["Quais redes de fast-food apostaram nas collabs em 2026?", "https://www.meioemensagem.com.br/marketing/quais-redes-de-fast-food-apostaram-nas-collabs-em-2026", "https://www.meioemensagem.com.br/wp-content/uploads/2026/08/fastfood-collabs-768x512.jpg", "2026-08-26", "mm"],
+  ["Busca de Adam Mitch pelo ‘tom canela perfeito’ vira coleção com Eudora", "https://propmark.com.br/anunciantes/busca-de-adam-mitch-pelo-tom-canela-perfeito-vira-colecao-com-eudora/", "https://propmark.com.br/wp-content/uploads/2026/08/unnamed-53-768x518.png", "2026-08-25", "pm"],
+  ["Mondelez e Mattel unem BIS e UNO em collab", "https://www.meioemensagem.com.br/marketing/mondelez-e-mattel-unem-bis-e-uno-em-collab", "https://www.meioemensagem.com.br/wp-content/uploads/2026/08/Fotos-Divulgacao-2026-08-20T153714.597-768x511.jpg", "2026-08-20", "mm"],
+  ["Converse lança coleção de tênis inspirada em Dragon Ball Z", "https://www.meioemensagem.com.br/marketing/converse-lanca-colecao-de-tenis-inspirada-em-dragon-ball-z", "https://www.meioemensagem.com.br/wp-content/uploads/2026/08/4c250a62-1126-43e1-887d-115d6bb78bd1-768x511.jpg", "2026-08-11", "mm"]
+];
+const NEWS_DATA = "06/10/2026";
+
+const KEY = "collab-toolkit-v3";
+const store = (() => {            /* localStorage pode estar bloqueado (file://, aba privada) */
+  try { localStorage.setItem("__t", "1"); localStorage.removeItem("__t"); return localStorage; }
+  catch (e) { return null; }
+})();
+const state = (() => {
+  try { return JSON.parse((store && store.getItem(KEY)) || "{}"); } catch (e) { return {}; }
+})();
+const save = () => { try { if (store) store.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+const TOTAL = DATA.reduce((n, s) => n + s.check.length, 0);
+const nDone = s => s.check.filter((_, j) => state[s.id + "." + j]).length;
+const VEIC = { mm: "Meio &amp; Mensagem", pm: "Propmark" };
+
+/* ---------------------------------------------------------------- stepper */
+document.getElementById("flow").innerHTML =
+  `<button class="seg home" data-v="home" type="button"><span class="nm">Home</span></button>` +
+  DATA.map(s => `
+    <button class="seg" data-v="${s.id}" type="button" id="seg-${s.id}" title="Etapa ${s.id}. ${esc(s.nome)}">
+      <span class="n">${String(s.id).padStart(2, "0")}</span>
+      <span class="nm">${esc(s.nome.split(" ")[0])}</span>
+      <span class="fill" data-fill="${s.id}"></span>
+    </button>`).join("") +
+  `<button class="seg guia" data-v="guia" type="button"><span class="nm">Quick guide</span></button>`;
+
+/* ------------------------------------------------------------------ cartão de notícia */
+const card = n => `
+  <a class="nw" href="${n[1]}" target="_blank" rel="noopener">
+    <span class="th" data-v="${n[4] === "mm" ? "M&amp;M" : "PM"}"><img src="${n[2]}" alt="" loading="lazy"
+      decoding="async" onerror="this.closest('.nw').classList.add('noimg')"></span>
+    <span class="mt">${VEIC[n[4]]} · ${n[3].split("-").reverse().join("/")}</span>
+    <h4>${esc(n[0])}</h4>
+  </a>`;
+
+/* ------------------------------------------------------------------- home */
+const home = `
+<section class="view" id="v-home">
+  <div class="masthead">
+    <div class="mrow">
+      <span>Application framework</span><span>FGV EAESP · 2026</span><span>Collab from the inside out</span>
+    </div>
+    <h1 tabindex="-1">Collab toolkit</h1>
+    <div class="msub">
+      <p class="pitch">This framework comes from a <b>master's dissertation at FGV EAESP</b>, in Brazil. Ten marketing
+        executives from large Brazilian brands described how they run their collabs. What they do is organised here
+        in five stages, to help the people who run the next ones.</p>
+    </div>
+  </div>
+
+  <section class="band">
+    <h2 class="bandt">What is a collab?</h2>
+    <p class="deflead">A kind of co-branding in which the two brands <b>develop together</b> what goes to market,
+      <b>share the risk</b> and look for value that is above all <b>symbolic and cultural</b>.</p>
+    <div class="crit">
+      <article>
+        <span class="n">01</span>
+        <h4>Joint product development</h4>
+        <p>Both brands build together what reaches the consumer.</p>
+      </article>
+      <article>
+        <span class="n">02</span>
+        <h4>Two-way creative iteration</h4>
+        <p>The work travels between the two teams and changes on both sides.</p>
+      </article>
+      <article>
+        <span class="n">03</span>
+        <h4>Collaborative validation</h4>
+        <p>Consumers come in before launch, not after.</p>
+      </article>
+    </div>
+    <p class="bandfoot">These three points are what separates a collab from licensing and from sponsorship.</p>
+  </section>
+
+  <section class="band alt">
+    <h2 class="bandt">Do I need a collab?</h2>
+    <p class="deflead">The research did not find the collab to be a universal answer. In the cases studied, the
+      decision starts from a <b>brand problem</b>.</p>
+    <div class="needcols">
+      <p class="p">The problems that led to a collab were rejuvenating the brand image, entering a cultural territory
+        where the brand has no repertoire, reaching an audience that no longer responds to current communication, or
+        giving relevance back to a stalled category. The criterion executives put ahead of the others, commercial ones
+        included, is the fit of purpose and values between the brands.</p>
+      <p class="p">The perceived return is mostly symbolic, in conversation, association and repositioning, with an
+        effect that sometimes reaches other categories in the portfolio. The cost goes beyond money. A collab pulls in
+        several departments from both companies, calls for governance between autonomous organisations and rarely moves
+        on its own: somebody has to carry the project from beginning to end.</p>
+    </div>
+    <div class="whenwrap">
+      <div class="when yes">
+        <div class="k">It usually makes sense when</div>
+        <ul>
+          <li>the brand needs an association it cannot build alone, or not in the time available;</li>
+          <li>there are complementary assets between the two: product, distribution or creative capability;</li>
+          <li>purpose and positioning are compatible in practice, not only in what is said;</li>
+          <li>somebody is there to hold the coordination between the companies to the end.</li>
+        </ul>
+      </div>
+      <div class="when no">
+        <div class="k">It probably is not the way when</div>
+        <ul>
+          <li>the goal is short-term sales volume and the case rests on that alone;</li>
+          <li>the motivation is to occupy space or to follow what the market is doing;</li>
+          <li>no joint development is planned, in which case the instrument is usually licensing;</li>
+          <li>the internal structure cannot carry marketing, legal, product and operations at the same time.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta">
+    <button class="pri" id="goNext" type="button" data-v="1">Click to start with stage 1</button>
+    <span class="gh"><b id="hn2">0</b> of ${TOTAL} items checked</span>
+    <button class="lnk" id="bReset" type="button" hidden>clear progress</button>
+  </div>
+
+  <div class="lbl" style="margin-top:44px">The five stages <em>each with what is done, who takes part, tools and a checklist</em></div>
+  <div class="index">
+    ${DATA.map(s => `
+      <button class="ix" data-v="${s.id}" type="button">
+        <span class="n">${String(s.id).padStart(2, "0")}</span>
+        <h3>${esc(s.nome)}</h3>
+        <p>${esc(s.foco)}</p>
+        <span class="pb"><span><i data-card="${s.id}"></i></span><em data-cardn="${s.id}">0/${s.check.length}</em></span>
+      </button>`).join("")}
+  </div>
+
+  <div class="news" style="margin-top:34px">
+    <div class="lbl">Collabs in the press <em>Meio &amp; Mensagem and Propmark, in Portuguese, ${NEWS_DATA}</em></div>
+    <div class="nwgrid">${NEWS.slice(0, 8).map(card).join("")}</div>
+    ${NEWS.length > 8 ? `<details class="nwmore">
+      <summary>See more published collabs<span class="cv">▾</span></summary>
+      <div class="nwgrid">${NEWS.slice(8).map(card).join("")}</div>
+    </details>` : ""}
+  </div>
+
+  <div class="lbl">Reference</div>
+  <div class="ref">
+    <details class="d">
+      <summary>Critical factors, present in every stage<span class="cv">▾</span></summary>
+      <div class="bd"><div class="tri">
+        <div class="u"><h4>Fit of purpose and values</h4><p>Weighs more than audience compatibility.</p></div>
+        <div class="u"><h4>Authenticity of joint development</h4><p>Both brands really contribute. It is what separates a collab from licensing.</p></div>
+        <div class="u"><h4>Relational trust</h4><p>Unlocks coordination between autonomous companies and a way out of tensions.</p></div>
+      </div></div>
+    </details>
+
+    <details class="d">
+      <summary>Theoretical lenses<span class="cv">▾</span></summary>
+      <div class="bd"><div class="lensgrid">
+        <div class="lb" style="--c:var(--acc)">
+          <div class="k">Market Orientation</div>
+          <h4>Sensing the market and the partners</h4>
+          <div class="it"><b>Intelligence generation.</b> Gathering information about the market, consumers, competitors and other brands.</div>
+          <div class="it"><b>Dissemination.</b> Circulating that information across departments and between the two companies.</div>
+          <div class="it"><b>Responsiveness.</b> Acting on it: responding, adjusting, delivering.</div>
+          <div class="refs">${REFS.mo.map(r => `<a href="${r[2]}" target="_blank" rel="noopener"><b>${esc(r[0])}</b> · ${esc(r[1])}</a>`).join("")}</div>
+        </div>
+        <div class="lb" style="--c:var(--pos)">
+          <div class="k">Dynamic Capabilities</div>
+          <h4>Orchestrating and reconfiguring resources</h4>
+          <div class="it"><b>Sensing.</b> Detecting and shaping opportunities and threats.</div>
+          <div class="it"><b>Seizing.</b> Capturing the opportunity: mobilising resources, deciding, structuring.</div>
+          <div class="it"><b>Transforming.</b> Reconfiguring resources and routines so the company does not stiffen.</div>
+          <div class="refs">${REFS.dc.map(r => `<a href="${r[2]}" target="_blank" rel="noopener"><b>${esc(r[0])}</b> · ${esc(r[1])}</a>`).join("")}</div>
+        </div>
+      </div></div>
+    </details>
+
+    <details class="d">
+      <summary>Capabilities by stage<span class="cv">▾</span></summary>
+      <div class="bd">
+        <p class="p">The relationship is not one to one. The same capability runs through more than one stage, and every
+          stage puts capabilities from both lenses to work.</p>
+        <div class="mxwrap"><table class="mx">
+          <caption class="sr">Capabilities from both theoretical lenses by stage of the framework</caption>
+          <thead><tr><th scope="col"><span class="sr">Capability</span></th>
+            ${DATA.map(s => `<th scope="col"><b>${String(s.id).padStart(2, "0")}</b>${esc(s.nome)}</th>`).join("")}
+          </tr></thead>
+          <tbody>
+            ${MATRIX.map(([th, nome, vals]) => `<tr>
+              <th scope="row" class="rh">${esc(nome)}</th>
+              ${vals.map(v => `<td>${v
+                ? `<i class="${v === 2 ? "d2" : "d1"}" style="background:var(--${th === "mo" ? "acc" : "pos"})"></i><span class="sr">${v === 2 ? "dominant" : "present"}</span>`
+                : `<span class="sr">not applicable</span>`}</td>`).join("")}
+            </tr>`).join("")}
+          </tbody>
+        </table></div>
+        <div class="mxleg">
+          <span><i></i>dominant</span><span><i class="d1"></i>present</span>
+          <span><i style="background:var(--acc)"></i>Market Orientation</span>
+          <span><i style="background:var(--pos)"></i>Dynamic Capabilities</span>
+        </div>
+      </div>
+    </details>
+
+    <details class="d">
+      <summary>Source and limits<span class="cv">▾</span></summary>
+      <div class="bd">
+        <p class="p">The content of the stages comes from Exhibit 5 and Chapter 4 of the dissertation <i>Collab de dentro
+          para fora</i>, by Douglas R. Bocalão, supervised by Prof. Felipe Zambaldi, MPA FGV EAESP, 2026. The evidence
+          base is ten interviews with marketing executives at Brazilian organisations, held between November 2025 and
+          February 2026.</p>
+        <p class="p">This material organises practices observed in ten cases. It has not gone through build and evaluate
+          cycles, so take it as a starting point to adapt to each context. The <b>market examples</b> named under the
+          tools were added by the author and did not come from the research.</p>
+      </div>
+    </details>
+  </div>
+
+</section>`;
+
+/* ------------------------------------------------------------------ etapa */
+const stage = s => `
+<section class="view" id="v-${s.id}">
+  <div class="shead">
+    <div class="kick">
+      <span class="e">Stage ${String(s.id).padStart(2, "0")} of 05</span>
+      ${s.cap.map(c => `<span class="cx ${c[1]}" title="${THEORY[c[1]]}">${esc(c[0].toLowerCase())}</span>`).join("")}
+    </div>
+    <h1 tabindex="-1">${esc(s.nome)}</h1>
+    <p class="foco">${esc(s.foco)}</p>
+  </div>
+
+  <div class="acc">
+    <details open>
+      <summary><span class="ic">01</span>What is done<span class="cv">▾</span></summary>
+      <div class="bd">
+        <p class="lead">${s.resumo}</p>
+        <p class="p">${esc(s.oque)}</p>
+        <div class="pull"><span class="k">watch out</span>${esc(s.tensao)}</div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="ic">02</span>How it is done<span class="ct">${s.frentes.length} fronts</span><span class="cv">▾</span></summary>
+      <div class="bd"><ol class="how">${s.frentes.map(f => `<li>
+        <div><h4>${esc(f.t)}</h4><p>${esc(f.d)}</p></div></li>`).join("")}</ol></div>
+    </details>
+
+    <details>
+      <summary><span class="ic">03</span>Departments involved<span class="ct">${s.quem.length}</span><span class="cv">▾</span></summary>
+      <div class="bd"><div class="areas">${s.quem.map(q => `<div class="area">
+        <b>${esc(q[0])}${q[2] ? '<span class="ld">leads</span>' : ""}</b><span>${esc(q[1])}</span></div>`).join("")}</div></div>
+    </details>
+
+    <details>
+      <summary><span class="ic">04</span>Tools<span class="ct">${s.ferr.length}</span><span class="cv">▾</span></summary>
+      <div class="bd"><div class="tools">${s.ferr.map(f => `<div class="tool">
+        <b>${esc(f[0])}</b><span>${esc(f[1])}</span>
+        ${f[2] && f[2].length ? `<div class="mk"><span class="k">market examples</span>
+          ${f[2].map(t => `<a href="${t[1]}" target="_blank" rel="noopener">${esc(t[0])} ↗</a>`).join("")}</div>` : ""}
+        </div>`).join("")}</div></div>
+    </details>
+
+    <details>
+      <summary><span class="ic">05</span>Materials<span class="ct">${s.mats.length}</span><span class="cv">▾</span></summary>
+      <div class="bd"><div class="mats">${s.mats.map(m => m[1] === "#"
+        ? `<div class="slot"><b>${esc(m[0])}</b><span class="ds">${esc(m[2])}</span></div>`
+        : `<a href="${esc(m[1])}" target="_blank" rel="noopener"><b>${esc(m[0])}<span class="tagr">open ↗</span></b>
+           <span class="ds">${esc(m[2])}</span></a>`).join("")}</div></div>
+    </details>
+
+    <details>
+      <summary><span class="ic">06</span>Checklist<span class="ct" data-count="${s.id}">0/${s.check.length}</span><span class="cv">▾</span></summary>
+      <div class="bd">
+        <div class="clbar"><i data-bar="${s.id}"></i></div>
+        <ul class="cl">${s.check.map((c, j) => `<li><label>
+          <input type="checkbox" data-s="${s.id}" data-j="${j}" ${state[s.id + "." + j] ? "checked" : ""}>
+          <span>${esc(c)}</span></label></li>`).join("")}</ul>
+        <div class="clfoot"><button class="lnk" type="button" data-clear="${s.id}">clear this stage</button></div>
+      </div>
+    </details>
+  </div>
+
+  <div class="gate" data-gate="${s.id}">
+    <div class="k"><span data-gatek="${s.id}">Ready to move on when</span></div>
+    <div class="g">${esc(s.gate)}</div>
+    <div class="s">${s.gateSrc}</div>
+    <button class="pri gonext" type="button" data-v="${s.id === 5 ? "guia" : s.id + 1}" data-gatego="${s.id}" hidden>
+      ${s.id === 5 ? "See the quick guide" : "Go to stage " + (s.id + 1)}</button>
+  </div>
+
+  <div class="pg">
+    <button class="nav" type="button" data-v="${s.id === 1 ? "home" : s.id - 1}">← ${s.id === 1 ? "Home" : "Stage " + (s.id - 1)}</button>
+    <span class="of">stage ${s.id} of 5</span>
+    <button class="nav" type="button" data-v="${s.id === 5 ? "guia" : s.id + 1}">${s.id === 5 ? "Quick guide" : "Stage " + (s.id + 1)} →</button>
+  </div>
+</section>`;
+
+/* ---------------------------------------------------------- guia resumido */
+const guia = `
+<section class="view" id="v-guia">
+  <div class="ghead">
+    <div class="eyebrow">Everything on one page</div>
+    <h1 tabindex="-1">Quick guide</h1>
+    <p class="p">The checklists and tools from all five stages in one place. Use it to print, to take into a meeting or
+      to follow progress without opening one stage at a time. What you tick here also counts inside each stage.</p>
+  </div>
+
+  ${DATA.map(s => `
+  <div class="gblock">
+    <div class="gtitle">
+      <span class="n">${String(s.id).padStart(2, "0")}</span>
+      <h2>${esc(s.nome)}</h2>
+      <span class="gg">moves on when: ${esc(s.gate)}</span>
+    </div>
+    <div class="g2">
+      <div>
+        <div class="k">Checklist <span data-gcount="${s.id}">0/${s.check.length}</span></div>
+        <ul class="cl">${s.check.map((c, j) => `<li><label>
+          <input type="checkbox" data-s="${s.id}" data-j="${j}" ${state[s.id + "." + j] ? "checked" : ""}>
+          <span>${esc(c)}</span></label></li>`).join("")}</ul>
+      </div>
+      <div>
+        <div class="k">Tools</div>
+        <ul class="tlist">${s.ferr.map(f => `<li><b>${esc(f[0])}</b>. ${esc(f[1])}</li>`).join("")}</ul>
+        <div class="k" style="margin-top:16px">Who takes part</div>
+        <ul class="tlist">${s.quem.map(q => `<li>${esc(q[0])}${q[2] ? " (leads)" : ""}</li>`).join("")}</ul>
+      </div>
+    </div>
+  </div>`).join("")}
+
+  <div class="gacts">
+    <button class="pri" id="bExp" type="button">Download checklist</button>
+    <button class="nav" id="bPr" type="button">Print</button>
+    <button class="nav" type="button" data-v="home">Back to home</button>
+  </div>
+</section>`;
+
+/* ------------------------------------------------------------- a pesquisa */
+const pesquisa = `
+<section class="view" id="v-pesquisa">
+  <div class="ghead">
+    <div class="eyebrow">Master's dissertation · FGV EAESP · 2026</div>
+    <h1 tabindex="-1">The research</h1>
+  </div>
+  <div class="prose">
+    <h2>The question</h2>
+    <p>How do the organisations behind large brands organise and run collab projects? The question looks inside the
+      company, at the path that runs from the first conversation about a partnership to whatever learning is left once
+      the campaign is over.</p>
+
+    <h2>Why this subject</h2>
+    <p>Collabs have held a place in the Brazilian market for some years now, and academic work has studied them almost
+      always from the consumer's side: the effect of the partnership on perception and purchase intent. The inside view,
+      the managerial process that makes a collab happen, had little on record. That is the gap this research set out
+      to fill.</p>
+
+    <h2>How it was done</h2>
+    <p>Qualitative research with an interpretivist stance, based on <b>ten semi-structured in-depth interviews</b> with
+      marketing executives who led collabs, among them CMOs, directors, managers and founders. The interviews were held
+      between November 2025 and February 2026, around 50 minutes each, recorded and fully transcribed. Selection
+      favoured diversity of company size, sector and experience with the subject, and closure came by theoretical
+      saturation, observed from the eighth interview onwards.</p>
+    <p>The analysis was thematic and categorical, with a codebook of 13 categories across four dimensions and 366 coded
+      passages. The reading cut across the ten cases: the unit of analysis is the theme, not the individual story of
+      each interviewee.</p>
+
+    <h2>The lenses</h2>
+    <p><b>Market Orientation</b> (Kohli and Jaworski, 1990; Narver and Slater, 1990) looks outward: generating
+      information about the market and about other brands, circulating that information and acting on it.
+      <b>Dynamic Capabilities</b> (Teece, 2007) looks inward: detecting opportunities, seizing them and reconfiguring
+      resources and routines. In collabs both happen between two legally autonomous companies, which stretches the two
+      constructs beyond their original design, built for the single firm.</p>
+
+    <h2>What was concluded</h2>
+    <p>In the organisations studied, a collab is treated as co-creation between companies, different from licensing and
+      from sponsorship by how much joint development is involved. The decision to start is usually guided by <b>fit of
+      purpose and values</b>, ahead of strictly commercial criteria, which remain present in the feasibility
+      assessment. The process organises itself into five recurring phases, which are the stages in this toolkit.</p>
+    <p>The perceived result is above all symbolic: conversation, association between brands and repositioning,
+      sometimes with an effect on other categories in the portfolio, rather than immediate sales. Companies split
+      between using collabs as a continuous platform and as an occasional tool. And in every case the knowledge about
+      running collabs stays tacit, concentrated in few people and barely systematised, large organisations included.
+      Hence stage 5, and the weight this material puts on recording what was learned.</p>
+
+    <h2>Limits</h2>
+    <p>Ten cases, chosen by non-probabilistic criteria, read by a researcher who works in the marketing industry. The
+      findings describe practices observed in those cases and do not hold as a general rule. The framework systematises
+      what was seen in the field and has not gone through build and evaluate cycles, which is left as an agenda for
+      future research.</p>
+  </div>
+  <div class="gacts">
+    <button class="nav" type="button" data-v="1">Go to stage 1</button>
+    <button class="nav" type="button" data-v="home">Back to home</button>
+  </div>
+</section>`;
+
+/* ----------------------------------------------------------------- o autor */
+const autor = `
+<section class="view" id="v-autor">
+  <div class="ghead">
+    <div class="eyebrow">Who made this</div>
+    <h1 tabindex="-1">The author</h1>
+  </div>
+  <div class="bio">
+    <div class="bioid">
+      <div class="mk2">DB</div>
+      <dl>
+        <dt>Name</dt><dd>Douglas R. Bocalão</dd>
+        <dt>Education</dt><dd>Master in Business Administration, FGV EAESP, 2026</dd>
+        <dt>Supervisor</dt><dd>Prof. Felipe Zambaldi</dd>
+        <dt>Contact</dt><dd><a href="mailto:bocalao@gmail.com">bocalao@gmail.com</a></dd>
+      </dl>
+    </div>
+    <div class="prose">
+      <p>Douglas Bocalão works in marketing and communications and holds a master's degree in Business Administration
+        from FGV EAESP, in São Paulo. In 2026 he defended the dissertation <i>Collab de dentro para fora: uma
+        investigação qualitativa sobre como são construídas as collabs entre grandes marcas no Brasil</i> (“Collab from
+        the inside out: a qualitative investigation into how collabs between large brands are built in Brazil”), in the
+        Strategy and Markets line.</p>
+      <p>The subject came out of professional practice. Collabs kept coming up in conversations with clients and in the
+        press, and very little was known about how they are built inside companies. Proximity to the market opened
+        access to ten executives who had led these projects, and the research reconstructed with them how each decision
+        was made.</p>
+      <p>This toolkit is the applied part of that work. It is open to anyone who wants to use it, adapt it or argue
+        with it. Comments and corrections are welcome at the address above.</p>
+    </div>
+  </div>
+  <div class="gacts">
+    <button class="nav" type="button" data-v="pesquisa">Read about the research</button>
+    <button class="nav" type="button" data-v="home">Back to home</button>
+  </div>
+</section>`;
+
+document.getElementById("main").innerHTML = home + DATA.map(stage).join("") + guia + pesquisa + autor;
+
+/* ------------------------------------------------------------------ rotas */
+const VIEWS = ["home", "1", "2", "3", "4", "5", "guia", "pesquisa", "autor"];
+const hashOf = id => id === "home" ? "#inicio" : /^[1-5]$/.test(id) ? "#etapa-" + id : "#" + id;
+function parseHash() {
+  const h = location.hash;
+  const m = /^#etapa-([1-5])$/.exec(h);
+  if (m) return m[1];
+  if (h === "#inicio") return "home";
+  const k = h.replace("#", "");
+  return VIEWS.includes(k) ? k : null;
+}
+function titulo(id) {
+  if (id === "home") return "Home";
+  if (id === "guia") return "Quick guide";
+  if (id === "pesquisa") return "The research";
+  if (id === "autor") return "The author";
+  return "Stage " + id + " of 5, " + DATA[+id - 1].nome;
+}
+function show(v, mode) {
+  const id = String(v);
+  const el = document.getElementById("v-" + id);
+  if (!el) return show("home", "replace");
+  document.querySelectorAll(".view").forEach(x => x.classList.remove("on"));
+  el.classList.add("on");
+  document.querySelectorAll(".seg,.hnav button[data-v]").forEach(b =>
+    b.setAttribute("aria-current", b.dataset.v === id));
+  if (mode === "push" && location.hash !== hashOf(id)) history.pushState({ v: id }, "", hashOf(id));
+  else if (mode !== "silent") history.replaceState({ v: id }, "", hashOf(id));
+  state.last = id; save();
+  const seg = document.querySelector(`.seg[data-v="${id}"]`);
+  if (seg) seg.scrollIntoView({ block: "nearest", inline: "nearest" });
+  window.scrollTo({ top: 0, behavior: "instant" });
+  const hd = el.querySelector("h1");
+  if (hd) hd.focus({ preventScroll: true });
+  document.getElementById("live").textContent = titulo(id);
+}
+window.addEventListener("popstate", () => show(parseHash() || "home", "silent"));
+window.addEventListener("hashchange", () => { const p = parseHash(); if (p) show(p, "silent"); });
+
+/* --------------------------------------------------------------- progresso */
+function refresh() {
+  let done = 0;
+  DATA.forEach(s => {
+    const n = nDone(s), pct = n / s.check.length;
+    done += n;
+    const txt = n + "/" + s.check.length;
+    document.querySelector(`[data-count="${s.id}"]`).textContent = txt;
+    document.querySelector(`[data-gcount="${s.id}"]`).textContent = txt;
+    document.querySelector(`[data-cardn="${s.id}"]`).textContent = txt;
+    document.querySelector(`[data-bar="${s.id}"]`).style.width = pct * 100 + "%";
+    document.querySelector(`[data-card="${s.id}"]`).style.width = pct * 100 + "%";
+    document.querySelector(`[data-fill="${s.id}"]`).style.width = pct * 100 + "%";
+    document.getElementById("seg-" + s.id).classList.toggle("done", pct === 1);
+
+    const pronto = n === s.check.length;
+    document.querySelector(`[data-gate="${s.id}"]`).classList.toggle("ready", pronto);
+    document.querySelector(`[data-gatek="${s.id}"]`).textContent =
+      pronto ? "Ready to move on" : "Ready to move on when";
+    document.querySelector(`[data-gatego="${s.id}"]`).hidden = !pronto;
+  });
+  document.getElementById("hn").textContent = done + "/" + TOTAL;
+  document.getElementById("hn2").textContent = done;
+  document.getElementById("hb").style.width = 100 * done / TOTAL + "%";
+  document.getElementById("bReset").hidden = done === 0;
+
+  const prox = DATA.find(s => nDone(s) < s.check.length);
+  const btn = document.getElementById("goNext");
+  if (prox) {
+    btn.dataset.v = prox.id;
+    btn.textContent = done === 0 ? "Click to start with stage 1" : "Continue with stage " + prox.id;
+  } else {
+    btn.dataset.v = "guia";
+    btn.textContent = "See the quick guide";
+  }
+}
+
+/* ----------------------------------------------------------------- eventos */
+document.addEventListener("click", e => {
+  const clr = e.target.closest("[data-clear]");
+  if (clr) {
+    const id = +clr.dataset.clear;
+    if (!confirm("Clear the items in this stage?")) return;
+    DATA.find(s => s.id === id).check.forEach((_, j) => delete state[id + "." + j]);
+    document.querySelectorAll(`input[data-s="${id}"]`).forEach(i => i.checked = false);
+    save(); refresh(); return;
+  }
+  const b = e.target.closest("button[data-v]");
+  if (b) show(b.dataset.v, "push");
+});
+
+document.getElementById("main").addEventListener("change", e => {
+  const c = e.target;
+  if (!c.matches('input[type="checkbox"]')) return;
+  const k = c.dataset.s + "." + c.dataset.j;
+  state[k] = c.checked;
+  document.querySelectorAll(`input[data-s="${c.dataset.s}"][data-j="${c.dataset.j}"]`)
+    .forEach(i => i.checked = c.checked);
+  save(); refresh();
+});
+
+document.addEventListener("keydown", e => {
+  if (e.target.matches("input, textarea") || e.metaKey || e.ctrlKey) return;
+  const cur = /^[1-5]$/.test(state.last) ? +state.last : 0;
+  if (/^[1-5]$/.test(e.key)) show(e.key, "push");
+  else if (e.key === "0" || e.key === "h" || e.key === "Escape") show("home", "push");
+  else if (e.key === "ArrowRight" && cur && cur < 5) show(String(cur + 1), "push");
+  else if (e.key === "ArrowLeft" && cur) show(cur === 1 ? "home" : String(cur - 1), "push");
+});
+
+document.getElementById("bReset").onclick = () => {
+  if (!confirm("Clear every item in the checklist?")) return;
+  DATA.forEach(s => s.check.forEach((_, j) => delete state[s.id + "." + j]));
+  document.querySelectorAll('input[type="checkbox"]').forEach(i => i.checked = false);
+  save(); refresh();
+};
+
+document.getElementById("bPr").onclick = () => window.print();
+window.addEventListener("beforeprint", () => {
+  document.querySelectorAll("details").forEach(d => { d.dataset.was = d.open ? "1" : ""; d.open = true; });
+});
+window.addEventListener("afterprint", () => {
+  document.querySelectorAll("details").forEach(d => { d.open = d.dataset.was === "1"; });
+});
+
+document.getElementById("bExp").onclick = () => {
+  const L = ["# Collab application checklist", ""];
+  DATA.forEach(s => {
+    L.push("## Stage " + s.id + ". " + s.nome, "_Moves on when: " + s.gate + "_", "");
+    s.check.forEach((c, j) => L.push((state[s.id + "." + j] ? "- [x] " : "- [ ] ") + c));
+    L.push("", "Tools: " + s.ferr.map(f => f[0]).join(", "), "");
+  });
+  L.push("Source: Exhibit 5 of the dissertation by Douglas R. Bocalão, MPA FGV EAESP.");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([L.join("\n")], { type: "text/markdown" }));
+  a.download = "checklist-collab.md"; a.click(); URL.revokeObjectURL(a.href);
+};
+
+show(parseHash() || state.last || "home", "replace");
+refresh();
+</script>
+</body>
+</html>
